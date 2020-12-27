@@ -1,0 +1,54 @@
+.custom-fileinput-dropzone,
+.custom-fileinput-dropzone * {
+    box-sizing: border-box;
+}
+
+.custom-fileinput-dropzone {
+    position: relative;
+}
+
+.custom-fileinput-dropzone .dz-preview {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    margin: 0.5em;
+}
+
+.custom-fileinput-dropzone .dz-preview .dz-progress {
+    display: block;
+    height: 15px;
+    border: 1px solid #aaa;
+}
+
+.custom-fileinput-dropzone .dz-preview .dz-progress .dz-upload {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: green;
+}
+
+.custom-fileinput-dropzone .dz-preview .dz-error-message {
+    color: white;
+		display: none;
+		top: 150px;
+}
+
+.custom-fileinput-dropzone .dz-preview.dz-error .dz-error-message {
+/* .custom-fileinput-dropzone .dz-preview.dz-error .dz-error-mark  */
+		display: block;
+		opacity: 1;
+}
+
+.custom-fileinput-dropzone .dz-preview.dz-success .dz-success-mark {
+    display: block;
+}
+
+.custom-fileinput-dropzone .dz-preview .dz-error-mark,
+.custom-fileinput-dropzone .dz-preview .dz-success-mark {
+    position: absolute;
+    display: none;
+    width: 54px;
+    height: 58px;
+    left: 50%;
+    margin-left: -27px;
+}
