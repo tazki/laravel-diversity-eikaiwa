@@ -35,19 +35,19 @@
                     <li class="menu-item {{ (request()->is('admin/users')) ? 'has-active' : '' }}">
                         <a href="{{ url('admin/users') }}" class="menu-link">
                             <span class="menu-icon fas fa-users"></span>
-                            <span class="menu-text">{{ __('Customers') }}</span>
+                            <span class="menu-text">{{ __('Students') }}</span>
                         </a>
                     </li>
                     <li class="menu-item {{ (request()->is('admin/template') || request()->is('admin/template-task/*')) ? 'has-active' : '' }}">
-                        <a href="{{ url('admin/template') }}" class="menu-link">
-                            <span class="menu-icon fas fa-file-alt"></span>
-                            <span class="menu-text">{{ __('Template') }}</span>
+                        <a href="{{ url('admin/teachers') }}" class="menu-link">
+                            <span class="menu-icon fas fa-user-secret"></span>
+                            <span class="menu-text">{{ __('Teachers') }}</span>
                         </a>
                     </li>
                     <li class="menu-item {{ (request()->is('admin/payment')) ? 'has-active' : '' }}">
                         <a href="{{ url('admin/payment') }}" class="menu-link">
                             <span class="menu-icon fas fa-credit-card"></span>
-                            <span class="menu-text">{{ __('Payment') }}</span>
+                            <span class="menu-text">{{ __('Payments') }}</span>
                         </a>
                     </li>
                 </ul>

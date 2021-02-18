@@ -35,5 +35,5 @@
         <a href="{{ url('/login') }}" class="btn-link">Return to signin</a>
     </div>
 </form>
-<footer class="auth-footer">© 2020 MOSAIQUE PVT LTD.</footer>
+<footer class="auth-footer">© 2021 DIVERSITY EIKAIWA</footer>
 @endsection

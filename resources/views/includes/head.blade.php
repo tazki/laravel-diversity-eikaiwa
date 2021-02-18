@@ -2,7 +2,7 @@
 <meta name="robots" content="noindex,nofollow" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>{{ config('app.name', 'Matome') }}</title>
+<title>{{ config('app.name', 'Diversity Eikaiwa') }}</title>
 <link rel="apple-touch-icon" sizes="144x144" href="{{ secure_asset('images/apple-touch-icon.png') }}">
 <link rel="shortcut icon" href="{{ secure_asset('images/favicon.ico') }}">
 <meta name="theme-color" content="#3063A0">

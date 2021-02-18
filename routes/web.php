@@ -38,6 +38,10 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('admin/users/{id}/update', 'Admin\UserController@update');
     Route::delete('admin/users/{id}/destroy', 'Admin\UserController@destroy');
     Route::get('admin/users/{id}/status/{status_id}', 'Admin\UserController@status');
+    // Teachers
+    Route::get('admin/teachers', 'Admin\TeacherController@index')->name('teachers_list');
+    Route::get('admin/teacher/add', 'Admin\TeacherController@add')->name('teachers_add');
+    Route::post('admin/teacher/add', 'Admin\TeacherController@add')->name('teachers_add');
 });
 
 // User

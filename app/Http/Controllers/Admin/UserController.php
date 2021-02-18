@@ -28,39 +28,47 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('organizations')
-            ->select(
-                'organizations.*',
-                'users.email',
-                DB::raw('DATE_FORMAT(mt_organizations.updated_at, "%M %d, %Y") as updated_at'),
-                DB::raw('CONCAT(mt_organizations.first_name, " ", mt_organizations.last_name) as name'),
-                // DB::raw('IF(mt_organizations.status=1, "Active", "Inactive") as status')
-                DB::raw('IF(mt_organization_payments.service=2, "Business", "Free") as service') //Unlimited
-            )
-            ->leftJoin('users', 'organizations.id', '=', 'users.organization_id') // Query returns all products irrespective of the user
-            ->leftJoin('organization_payments', 'organization_payments.id', '=', 'organizations.id')
-            ->orderByRaw('mt_organizations.created_at DESC')
-            ->get();
+            // $data = DB::table('organizations')
+            // ->select(
+            //     'organizations.*',
+            //     'users.email',
+            //     DB::raw('DATE_FORMAT(mt_organizations.updated_at, "%M %d, %Y") as updated_at'),
+            //     DB::raw('CONCAT(mt_organizations.first_name, " ", mt_organizations.last_name) as name'),
+            //     // DB::raw('IF(mt_organizations.status=1, "Active", "Inactive") as status')
+            //     DB::raw('IF(mt_organization_payments.service=2, "Business", "Free") as service') //Unlimited
+            // )
+            // ->leftJoin('users', 'organizations.id', '=', 'users.organization_id') // Query returns all products irrespective of the user
+            // ->leftJoin('organization_payments', 'organization_payments.id', '=', 'organizations.id')
+            // ->orderByRaw('mt_organizations.created_at DESC')
+            // ->get();
 
-            // if no return data
-            if(empty(sizeof($data))) {
-                $data['data'] = array();
-                return $data;
-            }
+            // // if no return data
+            // if(empty(sizeof($data))) {
+            //     $data['data'] = array();
+            //     return $data;
+            // }
+
+            $data[0]['id'] = 1;
+            $data[0]['name'] = 'Alvin Cruz';
+            $data[0]['mobile_number'] = '123456789';
+            $data[0]['email'] = 'alvin@gmail.com';
+            $data[0]['service'] = 'Silver';
+            $data[0]['updated_at'] = 'January 01, 2021';
+            $data[0]['status'] = 'Active';
 
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('status', function($row) {
-                    $checked = ($row->status==1) ? 'checked="checked"' : '';
-                    return '<div class="switch-wrapper">
-                        <!--div class="d-inline-block mr-2">Inactive</div-->
-                        <label class="js-status-switcher-control switcher-control">
-                            <input type="checkbox" class="switcher-input" value="'.$row->status.'" '.$checked.' onClick="window.ajaxSingle(this)" data-update="'.url('admin/users/'.$row->id.'/status').'" data-disable="switcher-input">
-                            <span class="switcher-indicator"></span>
-                        </label>
-                        <!--div class="d-inline-block ml-2">Active</div-->
-                    </div>';
-                })
+                // ->addColumn('status', function($row) {
+                //     $checked = ($row->status==1) ? 'checked="checked"' : '';
+                //     return '<div class="switch-wrapper">
+                //         <!--div class="d-inline-block mr-2">Inactive</div-->
+                //         <label class="js-status-switcher-control switcher-control">
+                //             <input type="checkbox" class="switcher-input" value="'.$row->status.'" '.$checked.' onClick="window.ajaxSingle(this)" data-update="'.url('admin/users/'.$row->id.'/status').'" data-disable="switcher-input">
+                //             <span class="switcher-indicator"></span>
+                //         </label>
+                //         <!--div class="d-inline-block ml-2">Active</div-->
+                //     </div>';
+                // })
                 // ->addColumn('action', function($row) {
                 //     $btn = '<a class="btn btn-sm btn-icon btn-secondary" onClick="ajaxFetch(this); return false;" title="'.__('Edit Client').'" data-url="'.route('client.edit', $row->id).'" data-update="'.url('/client/'.$row->id.'/update').'" data-toggle="modal" data-target="#clientFormModal"><i class="fa fa-pencil-alt"></i></a>';
                 //     $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="'.route('client.destroy', $row->id).'" href="#"><i class="far fa-trash-alt"></i></a>';

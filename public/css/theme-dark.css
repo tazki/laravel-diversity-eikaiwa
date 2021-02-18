@@ -2183,11 +2183,6 @@ pre code {
   box-shadow: 0 0 0 1px #346CB0;
 }
 
-.form-control::-webkit-input-placeholder {
-  color: #888c9b;
-  opacity: 1;
-}
-
 .form-control::-moz-placeholder {
   color: #888c9b;
   opacity: 1;
@@ -13439,10 +13434,6 @@ input.list-group-item {
   pointer-events: none;
 }
 
-.form-label-group input::-webkit-input-placeholder {
-  color: transparent;
-}
-
 .form-label-group input::-moz-placeholder {
   color: transparent;
 }
@@ -18961,10 +18952,6 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before
   margin-top: 3px;
 }
 
-.select2-container .select2-search--inline .select2-search__field::-webkit-input-placeholder {
-  color: #888c9b;
-}
-
 .select2-container .select2-search--inline .select2-search__field::-moz-placeholder {
   color: #888c9b;
 }
@@ -21597,10 +21584,6 @@ iframe {
   color: #222230;
 }
 
-.app-header-light .top-bar-search .input-group-search:not(.focus) .form-control::-webkit-input-placeholder {
-  color: #a6abbd;
-}
-
 .app-header-light .top-bar-search .input-group-search:not(.focus) .form-control::-moz-placeholder {
   color: #a6abbd;
 }
@@ -21699,10 +21682,6 @@ iframe {
 
 .app-header-dark .top-bar-search .input-group-search .form-control {
   color: #222230;
-}
-
-.app-header-dark .top-bar-search .input-group-search:not(.focus) .form-control::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.6);
 }
 
 .app-header-dark .top-bar-search .input-group-search:not(.focus) .form-control::-moz-placeholder {

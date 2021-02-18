@@ -53,5 +53,5 @@
     {{-- <div class="text-middle-line">or</div>
     <button class="btn btn-lg btn-primary btn-google btn-block" type="submit"><i class="fab fa-google"></i> {{ __('Google') }}</button> --}}
 </form>
-<footer class="auth-footer">© 2020 MOSAIQUE PVT LTD.</footer>
+<footer class="auth-footer">© 2021 DIVERSITY EIKAIWA</footer>
 @endsection

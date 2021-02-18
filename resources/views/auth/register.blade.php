@@ -196,5 +196,5 @@
         </div>
     </div>
 </form>
-<footer class="auth-footer">© 2020 MOSAIQUE PVT LTD</footer>
+<footer class="auth-footer">© 2021 DIVERSITY EIKAIWA</footer>
 @endsection

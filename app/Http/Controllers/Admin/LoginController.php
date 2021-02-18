@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Auth;
 use DB;
-use App\AdminGuard;
+use App\Models\AdminGuard;
 use App\Notifications\AdminResetPasswordNotification;
 
 class LoginController extends Controller

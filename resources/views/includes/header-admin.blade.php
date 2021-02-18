@@ -7,8 +7,8 @@
                     <span class="hamburger-inner"></span>
                 </span>
             </button>
-						<a href="{{ url('admin/dashboard') }}">
-							<img class="header-logo" src="{{ secure_asset('images/matome/matomeru_logo_b.png') }}" alt="">
+            <a href="{{ url('admin/dashboard') }}">
+                Diversity Eikaiwa
             </a>
         </div>
         <div class="top-bar-list">
