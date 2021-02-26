@@ -14,7 +14,7 @@ use DB;
 use App\User;
 use App\UserDetails;
 
-class TeacherController extends Controller
+class StudentController extends Controller
 {
     public function index(Request $request)
     {
@@ -69,7 +69,7 @@ class TeacherController extends Controller
                 ->make(true);
         }
 
-        return view('admin.teacher-list');
+        return view('admin.student-list');
     }
 
     public function add(Request $request)
@@ -77,69 +77,7 @@ class TeacherController extends Controller
         if($request->isMethod('post')) {
             
         }
-        return view('admin.teacher-edit');
-    }
-
-    public function update($id)
-    {
-        $validationSetting = array(
-        // 'first_name' => ['required', 'string', 'max:255'],
-        // 'last_name' => ['required', 'string', 'max:255'],
-        // 'mobile_number' => ['required', 'string', 'max:255'],
-        'phone_number' => ['string', 'max:255'],
-        'date_of_birth' => ['date'],
-        'gender' => ['string', 'max:255'],
-        'address' => ['string', 'max:255'],
-        'about_you' => ['string', 'max:255'],
-        'fields_of_interest' => ['json'],
-        'skills' => ['json'],
-        'language' => ['json'],
-        'qualification' => ['json'],
-        'other' => ['string', 'max:255'],
-        'avatar' => 'mimes:jpg,bmp,png',
-        'resume' => 'mimes:pdf,docx,doc');
-
-        if(!empty(request()->email)) {
-            $emailValidation = array('email' => [
-                'required',
-                'email',
-                'max:255',
-                Rule::unique('users','email')->ignore($id),
-            ]);
-            $validationSetting = array_merge($validationSetting, $emailValidation);
-        }
-        $cleanData = request()->validate($validationSetting);
-
-        if (request()->hasFile('avatar') && !empty(request()->file('avatar'))) {
-            $oldFile = User::findOrFail($id)->avatar;
-            $cleanData['avatar'] = fileUpload('avatar', $oldFile, $id);
-        }
-
-        if (request()->hasFile('resume') && !empty(request()->file('resume'))) {
-            $oldFile = User::findOrFail($id)->resume;
-            $cleanData['resume'] = fileUpload('resume', $oldFile, $id);
-        }
-
-        if(User::findOrFail($id)->update($cleanData)) {
-            $row = User::findOrFail($id);
-            if(!empty($row->avatar)) {
-                $row->avatar = userFile($row->avatar, '', $id);
-            }
-
-            if(!empty($row->resume)) {
-                $row->resume = userFile($row->resume, '', $id);
-            }
-
-            return response()->json([
-                'success' => true,
-                'data' => $row
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'User can not be updated'
-            ], 500);
-        }
+        return view('admin.student-edit');
     }
 
     public function status(Request $request)

@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-<form action="{{ route('teachers_add') }}" method="POST">
+<form action="{{ route('students_add') }}" method="POST">
     @csrf
     <div class="sidebar-section sidebar-section-fill">
-        <h1 class="page-title"><i class="fas fa-chalkboard-teacher text-muted mr-2"></i> {{ __('Add Teacher') }} </h1>
+        <h1 class="page-title"><i class="fas fa-users text-muted mr-2"></i> {{ __('Add Student') }} </h1>
         {{-- <p class="text-muted"> San Francisco, United States </p> --}}
         <div class="nav-scroller border-bottom">
             <!-- .nav-tabs -->
@@ -254,7 +254,7 @@
                     <!-- thead -->
                     <thead>
                         <tr>
-                        <th style="min-width:260px"> Student Name </th>
+                        <th style="min-width:260px"> Teacher Name </th>
                         <th> Schedule </th>
                         <th> Status </th>
                         <th></th>
@@ -343,7 +343,7 @@
                     <!-- thead -->
                     <thead>
                         <tr>
-                        <th style="min-width:260px"> Student Name </th>
+                        <th style="min-width:260px"> Teacher Name </th>
                         <th> Total Hours </th>
                         <th> Date </th>
                         </tr>

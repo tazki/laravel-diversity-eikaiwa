@@ -19,7 +19,7 @@
                 </button>
             </div>
             <div class="top-bar-item top-bar-item-full">
-							<img class="header-logo d-block d-md-none" src="{{ secure_asset('images/matome/matomeru_logo_b.png') }}" alt="Logo">
+                <span class="header-logo d-block d-md-none">Diversity Eikaiwa</span>            
             </div>
             <div class="top-bar-item top-bar-item-right px-0 d-flex">
                 <div class="dropdown d-flex">

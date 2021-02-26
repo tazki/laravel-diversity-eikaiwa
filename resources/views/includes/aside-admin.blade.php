@@ -32,15 +32,15 @@
                             <span class="menu-text">{{ __('Dashboard') }}</span>
                         </a>
                     </li>
-                    <li class="menu-item {{ (request()->is('admin/users')) ? 'has-active' : '' }}">
-                        <a href="{{ url('admin/users') }}" class="menu-link">
+                    <li class="menu-item {{ (request()->is('admin/students') || request()->is('admin/student/*')) ? 'has-active' : '' }}">
+                        <a href="{{ url('admin/students') }}" class="menu-link">
                             <span class="menu-icon fas fa-users"></span>
                             <span class="menu-text">{{ __('Students') }}</span>
                         </a>
                     </li>
-                    <li class="menu-item {{ (request()->is('admin/template') || request()->is('admin/template-task/*')) ? 'has-active' : '' }}">
+                    <li class="menu-item {{ (request()->is('admin/teachers') || request()->is('admin/teacher/*')) ? 'has-active' : '' }}">
                         <a href="{{ url('admin/teachers') }}" class="menu-link">
-                            <span class="menu-icon fas fa-user-secret"></span>
+                            <span class="menu-icon fas fa-chalkboard-teacher"></span>
                             <span class="menu-text">{{ __('Teachers') }}</span>
                         </a>
                     </li>
