@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller; // need to add this line so this file is treated like a controller.
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-// use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Storage;
 // use Illuminate\Support\Facades\File;
 use DataTables;
 use Auth;
 use DB;
-use App\User;
-use App\UserDetails;
+use App\Models\User;
+use App\Models\UserDetails;
 
 class TeacherController extends Controller
 {
@@ -75,71 +75,109 @@ class TeacherController extends Controller
     public function add(Request $request)
     {
         if($request->isMethod('post')) {
-            
+            $validationSetting = array(
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'phone_number' => ['string', 'max:255'],
+                'skype_id' => ['string', 'max:255'],
+                // 'mobile_number' => ['string', 'max:255'],
+                // 'gender' => ['string', 'max:255'],
+                // 'date_of_birth' => ['date'],
+                'avatar' => 'mimes:jpg,bmp,png'
+            );
+            $cleanData = request()->validate($validationSetting);
+            $cleanData['status'] = 1;
+            $cleanData['user_type'] = 'teacher';
+            $cleanData['password'] = Hash::make($cleanData['password']);
+            $user = User::create($cleanData);
+            if(isset($user->id)) {
+                $userID = $user->id;
+
+                if(request()->hasFile('avatar') && !empty(request()->file('avatar'))) {
+                    $oldFile = User::findOrFail($userID)->avatar;
+                    $cleanData['avatar'] = fileUpload('avatar', $oldFile, $userID);
+                    $condition['id'] = $userID;
+                    User::updateOrCreate($condition, $cleanData);
+                }
+
+                if(isset($request->lang) && is_array($request->lang)) {
+                    foreach($request->lang as $language_id => $lang) {
+                        $cleanUserDetails = $lang;
+                        $cleanUserDetails['user_id'] = $userID;
+                        $cleanUserDetails['language_id'] = $language_id;
+                        $user = UserDetails::create($cleanUserDetails);
+                    }
+                }
+
+                return back()->with('success','Data created successfully!');
+            } else {
+                return back()->with('success','Teacher can not be created');
+            }
         }
         return view('admin.teacher-edit');
     }
 
     public function update($id)
     {
-        $validationSetting = array(
-        // 'first_name' => ['required', 'string', 'max:255'],
-        // 'last_name' => ['required', 'string', 'max:255'],
-        // 'mobile_number' => ['required', 'string', 'max:255'],
-        'phone_number' => ['string', 'max:255'],
-        'date_of_birth' => ['date'],
-        'gender' => ['string', 'max:255'],
-        'address' => ['string', 'max:255'],
-        'about_you' => ['string', 'max:255'],
-        'fields_of_interest' => ['json'],
-        'skills' => ['json'],
-        'language' => ['json'],
-        'qualification' => ['json'],
-        'other' => ['string', 'max:255'],
-        'avatar' => 'mimes:jpg,bmp,png',
-        'resume' => 'mimes:pdf,docx,doc');
+        // if($request->isMethod('post')) {
+        //     $validationSetting = array(
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        //     'first_name' => ['required', 'string', 'max:255'],
+        //     'last_name' => ['required', 'string', 'max:255'],
+        //     'mobile_number' => ['string', 'max:255'],
+        //     'phone_number' => ['string', 'max:255'],
+        //     'gender' => ['string', 'max:255'],
+        //     'date_of_birth' => ['date'],
+        //     'skype_id' => ['string', 'max:255'],
+        //     'avatar' => 'mimes:jpg,bmp,png');
+    
+        //     // if(!empty(request()->email)) {
+        //     //     $emailValidation = array('email' => [
+        //     //         'required',
+        //     //         'email',
+        //     //         'max:255',
+        //     //         Rule::unique('users','email')->ignore($id),
+        //     //     ]);
+        //     //     $validationSetting = array_merge($validationSetting, $emailValidation);
+        //     // }
+        //     $cleanData = request()->validate($validationSetting);
+    
+        //     if (request()->hasFile('avatar') && !empty(request()->file('avatar'))) {
+        //         $oldFile = User::findOrFail($id)->avatar;
+        //         $cleanData['avatar'] = fileUpload('avatar', $oldFile, $id);
+        //     }
+            
+        //     $cleanData['user_type'] = 'teacher';
+        //     if(User::findOrFail($id)->update($cleanData)) {
 
-        if(!empty(request()->email)) {
-            $emailValidation = array('email' => [
-                'required',
-                'email',
-                'max:255',
-                Rule::unique('users','email')->ignore($id),
-            ]);
-            $validationSetting = array_merge($validationSetting, $emailValidation);
-        }
-        $cleanData = request()->validate($validationSetting);
+        //         // 'address' => ['string', 'max:255'],
+        //         // 'about_you' => ['string', 'max:255'],
+        //         // 'fields_of_interest' => ['json'],
+        //         // 'skills' => ['json'],
+        //         // 'language' => ['json'],
+        //         // 'qualification' => ['json'],
+        //         // 'other' => ['string', 'max:255'],
 
-        if (request()->hasFile('avatar') && !empty(request()->file('avatar'))) {
-            $oldFile = User::findOrFail($id)->avatar;
-            $cleanData['avatar'] = fileUpload('avatar', $oldFile, $id);
-        }
 
-        if (request()->hasFile('resume') && !empty(request()->file('resume'))) {
-            $oldFile = User::findOrFail($id)->resume;
-            $cleanData['resume'] = fileUpload('resume', $oldFile, $id);
-        }
-
-        if(User::findOrFail($id)->update($cleanData)) {
-            $row = User::findOrFail($id);
-            if(!empty($row->avatar)) {
-                $row->avatar = userFile($row->avatar, '', $id);
-            }
-
-            if(!empty($row->resume)) {
-                $row->resume = userFile($row->resume, '', $id);
-            }
-
-            return response()->json([
-                'success' => true,
-                'data' => $row
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'User can not be updated'
-            ], 500);
-        }
+        //         $row = User::findOrFail($id);
+        //         if(!empty($row->avatar)) {
+        //             $row->avatar = userFile($row->avatar, '', $id);
+        //         }
+    
+        //         // return response()->json([
+        //         //     'success' => true,
+        //         //     'data' => $row
+        //         // ]);
+        //     } else {
+        //         // return response()->json([
+        //         //     'success' => false,
+        //         //     'message' => 'User can not be updated'
+        //         // ], 500);
+        //     }
+        // }
     }
 
     public function status(Request $request)

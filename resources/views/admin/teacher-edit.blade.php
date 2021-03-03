@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<form action="{{ route('teachers_add') }}" method="POST">
+<form enctype="multipart/form-data" action="{{ route('teachers_add') }}" method="POST">
     @csrf
     <div class="sidebar-section sidebar-section-fill">
         <h1 class="page-title"><i class="fas fa-chalkboard-teacher text-muted mr-2"></i> {{ __('Add Teacher') }} </h1>
@@ -12,12 +12,15 @@
                 <li class="nav-item">
                     <a class="nav-link show active" data-toggle="tab" href="#profile">Profile</a>
                 </li>
+
+                @if(isset($row->id))
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#class-schedule">Class Schedule</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#class-taken">Class Taken</a>
                 </li>
+                @endif
             </ul><!-- /.nav-tabs -->
         </div><!-- /.nav-scroller -->
         <!-- .tab-content -->
@@ -32,27 +35,73 @@
                                 <!-- .media -->
                                 <div class="media mb-3">
                                     <!-- avatar -->
-                                    <div class="user-avatar user-avatar-xl fileinput-button">
-                                    <div class="fileinput-button-label"> Change photo </div>
-                                        {{-- <img src="https://uselooper.com/assets/images/avatars/profile.jpg" alt="">  --}}
-                                        <span class="d-block fa fa-user-circle"></span>
-                                        <input id="fileupload-avatar" type="file" name="avatar">
+                                    <div class="js-photo-preview-holder user-avatar user-avatar-xl fileinput-button">
+                                        <div class="fileinput-button-label"> Change photo </div>
+                                        @if(isset($rows['user']->avatar) && !empty($rows['user']->avatar))
+                                            <img src="{{ userFile($rows['user']->avatar) }}" class="js-img-preview" alt="">
+                                        @else
+                                            <img class="js-img-preview" alt="">
+                                            <span class="js-img-placeholder d-block fa fa-user-circle"></span>
+                                        @endif
+                                        <input id="fileupload-avatar" type="file" name="avatar" class="js-photo-preview">
                                     </div><!-- /avatar -->
                                     <!-- .media-body -->
                                     <div class="media-body pl-3">
-                                    <h3 class="card-title"> Avatar </h3>
-                                    <h6 class="card-subtitle text-muted"> Click the current avatar to change your photo. </h6>
-                                    <p class="card-text">
-                                        <small>JPG, GIF or PNG 400x400, &lt; 2 MB.</small>
-                                    </p><!-- The avatar upload progress bar -->
-                                    <div id="progress-avatar" class="progress progress-xs fade">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div><!-- /avatar upload progress bar -->
+                                        <h3 class="card-title"> Avatar </h3>
+                                        <h6 class="card-subtitle text-muted"> Click the current avatar to change your photo. </h6>
+                                        <p class="card-text">
+                                            <small>JPG, GIF or PNG 400x400, &lt; 2 MB.</small>
+                                        </p><!-- The avatar upload progress bar -->
+                                        <div id="progress-avatar" class="progress progress-xs fade">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div><!-- /avatar upload progress bar -->
                                     </div><!-- /.media-body -->
                                 </div><!-- /.media -->
                             </div><!-- /grid column -->
                             <!-- grid column -->
                             <div class="col-lg-8">
+                                <!-- form row -->
+                                <div class="form-row">
+                                    <!-- form column -->
+                                    <label for="email" class="col-md-3">Email</label> <!-- /form column -->
+                                    <!-- form column -->
+                                    <div class="col-md-9 mb-3">
+                                        <input type="text" name="email" id="email" value="{{ old('email') }}" class="@error('email') is-invalid @enderror form-control"  />
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div><!-- /form column -->
+                                </div><!-- /form row -->
+                                <!-- form row -->
+                                <div class="form-row">
+                                    <!-- form column -->
+                                    <label for="password" class="col-md-3">Password</label> <!-- /form column -->
+                                    <!-- form column -->
+                                    <div class="col-md-9 mb-3">
+                                        <input type="password" name="password" id="password" value="{{ old('password') }}" class="@error('password') is-invalid @enderror form-control"  />
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div><!-- /form column -->
+                                </div><!-- /form row -->
+                                <!-- form row -->
+                                <div class="form-row">
+                                    <!-- form column -->
+                                    <label for="password_confirmation" class="col-md-3">Confirm Password</label> <!-- /form column -->
+                                    <!-- form column -->
+                                    <div class="col-md-9 mb-3">
+                                        <input type="password" name="password_confirmation" id="password_confirmation" value="{{ old('password_confirmation') }}" class="@error('password_confirmation') is-invalid @enderror form-control"  />
+                                        @error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div><!-- /form column -->
+                                </div><!-- /form row -->
                                 <!-- form row -->
                                 <div class="form-row">
                                     <!-- form column -->
@@ -84,11 +133,11 @@
                                 <!-- form row -->
                                 <div class="form-row">
                                     <!-- form column -->
-                                    <label for="last_name" class="col-md-3">Email</label> <!-- /form column -->
+                                    <label for="skype_id" class="col-md-3">Skype ID</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="@error('last_name') is-invalid @enderror form-control"  />
-                                        @error('last_name')
+                                        <input type="text" name="skype_id" id="skype_id" value="{{ old('skype_id') }}" class="@error('skype_id') is-invalid @enderror form-control"  />
+                                        @error('skype_id')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                             </span>
@@ -98,25 +147,11 @@
                                 <!-- form row -->
                                 <div class="form-row">
                                     <!-- form column -->
-                                    <label for="last_name" class="col-md-3">Skype ID</label> <!-- /form column -->
+                                    <label for="phone_number" class="col-md-3">Phone Number</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="@error('last_name') is-invalid @enderror form-control"  />
-                                        @error('last_name')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div><!-- /form column -->
-                                </div><!-- /form row -->
-                                <!-- form row -->
-                                <div class="form-row">
-                                    <!-- form column -->
-                                    <label for="last_name" class="col-md-3">Phone Number</label> <!-- /form column -->
-                                    <!-- form column -->
-                                    <div class="col-md-9 mb-3">
-                                        <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="@error('last_name') is-invalid @enderror form-control"  />
-                                        @error('last_name')
+                                        <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="@error('phone_number') is-invalid @enderror form-control"  />
+                                        @error('phone_number')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                             </span>
@@ -142,87 +177,87 @@
                         <!-- form row -->
                         <div class="form-row">
                             <!-- form column -->
-                            <label for="input02" class="col-md-3">Address (English)</label> <!-- /form column -->
+                            <label for="address_en" class="col-md-3">Address (English)</label> <!-- /form column -->
                             <!-- form column -->
                             <div class="col-md-9 mb-3">
-                                <input type="text" class="form-control" id="input02" value="">
+                                <input type="text" name="lang[1][address]" id="address_en" class="form-control"  />
                             </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
                         <div class="form-row">
                             <!-- form column -->
-                            <label for="input02" class="col-md-3">Address (Japanese)</label> <!-- /form column -->
+                            <label for="address_jp" class="col-md-3">Address (Japanese)</label> <!-- /form column -->
                             <!-- form column -->
                             <div class="col-md-9 mb-3">
-                                <input type="text" class="form-control" id="input02" value="">
+                                <input type="text" name="lang[2][address]" id="address_jp" class="form-control"  />
                             </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="input02" class="col-md-3">Hobbies (English)</label> <!-- /form column -->
+                        <label for="hobbies_en" class="col-md-3">Hobbies (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" class="form-control" id="input02" value="">
+                            <input type="text" name="lang[1][hobbies]" id="hobbies_en" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="input02" class="col-md-3">Hobbies (Japanese)</label> <!-- /form column -->
+                        <label for="hobbies_jp" class="col-md-3">Hobbies (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" class="form-control" id="input02" value="">
+                            <input type="text" name="lang[2][hobbies]" id="hobbies_jp" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="input02" class="col-md-3">Interest (English)</label> <!-- /form column -->
+                        <label for="interest_en" class="col-md-3">Interest (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" class="form-control" id="input02" value="">
+                            <input type="text" name="lang[1][fields_of_interest]" id="interest_en" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="input02" class="col-md-3">Interest (Japanese)</label> <!-- /form column -->
+                        <label for="interest_jp" class="col-md-3">Interest (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" class="form-control" id="input02" value="">
+                            <input type="text" name="lang[2][fields_of_interest]" id="interest_jp" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="input02" class="col-md-3">English Level (English)</label> <!-- /form column -->
+                        <label for="english_level_en" class="col-md-3">English Level (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" class="form-control" id="input02" value="">
+                            <input type="text" name="lang[1][english_level]" id="english_level_en" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="input02" class="col-md-3">English Level (Japanese)</label> <!-- /form column -->
+                        <label for="english_level_jp" class="col-md-3">English Level (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" class="form-control" id="input02" value="">
-                        </div><!-- /form column -->
-                        </div><!-- /form row -->
-                        <!-- form row -->
-                        <div class="form-row">
-                        <!-- form column -->
-                        <label for="input03" class="col-md-3">About You (English)</label> <!-- /form column -->
-                        <!-- form column -->
-                        <div class="col-md-9 mb-3">
-                            <textarea class="form-control" id="input03"></textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                            <input type="text" name="lang[2][english_level]" id="english_level_jp" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="input03" class="col-md-3">About You (Japanese)</label> <!-- /form column -->
+                        <label for="about_you_en" class="col-md-3">About You (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <textarea class="form-control" id="input03"></textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                            <textarea name="lang[1][about_you]" class="form-control" id="about_you_en"></textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                        </div><!-- /form column -->
+                        </div><!-- /form row -->
+                        <!-- form row -->
+                        <div class="form-row">
+                        <!-- form column -->
+                        <label for="about_you_jp" class="col-md-3">About You (Japanese)</label> <!-- /form column -->
+                        <!-- form column -->
+                        <div class="col-md-9 mb-3">
+                            <textarea name="lang[2][about_you]" class="form-control" id="about_you_jp"></textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <hr>
