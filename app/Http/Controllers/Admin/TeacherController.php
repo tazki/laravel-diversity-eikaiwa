@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller; // need to add this line so this file is treated like a controller.
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Storage;
 // use Illuminate\Support\Facades\File;
@@ -46,7 +47,7 @@ class TeacherController extends Controller
                 //     </div>';
                 // })
                 ->addColumn('action', function($row) {
-                    $btn = '<a href="'.route('teacher.edit', $row->id).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
+                    $btn = '<a href="'.route('teachers_update', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
                     // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';
                     return $btn;
                 })
@@ -106,8 +107,80 @@ class TeacherController extends Controller
 
     public function update($id)
     {
-        $row = User::findOrFail($id)->first();
-        return view('admin.teacher-edit', compact('row'));
+        $row = User::where('id', $id)->first();
+        if(is_object($row)) {
+            $lang = array();
+            $rows = UserDetails::where('user_id', $id)->get();
+            if(is_object($rows) && sizeof($rows) > 0) {
+                foreach($rows as $key => $val) {
+                    $lang[$val->language_id]['address'] = $val->address;
+                    $lang[$val->language_id]['about_you'] = $val->about_you;
+                    $lang[$val->language_id]['hobbies'] = $val->hobbies;
+                    $lang[$val->language_id]['fields_of_interest'] = $val->fields_of_interest;
+                    $lang[$val->language_id]['english_level'] = $val->english_level;
+                }
+            }
+        }
+
+        if(request()->isMethod('post')) {
+            $validationSetting = array(
+                // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'phone_number' => ['string', 'max:255'],
+                'skype_id' => ['string', 'max:255'],
+                // 'mobile_number' => ['string', 'max:255'],
+                // 'gender' => ['string', 'max:255'],
+                // 'date_of_birth' => ['date'],
+                'avatar' => 'mimes:jpg,bmp,png'
+            );
+            
+            if(!empty(request()->email)) {
+                $emailValidation = array('email' => [
+                    'required',
+                    'email',
+                    'max:255',
+                    Rule::unique('users','email')->ignore($id),
+                ]);
+                $validationSetting = array_merge($validationSetting, $emailValidation);
+            }
+
+            if(!empty(request()->password)) {
+                $passwordValidation = array('password' => ['required', 'string', 'min:8', 'confirmed']);
+                $validationSetting = array_merge($validationSetting, $passwordValidation);
+            }
+            $cleanData = request()->validate($validationSetting);
+
+            if(!empty(request()->password)) {
+                $cleanData['password'] = Hash::make($cleanData['password']);
+            } else {
+                unset($cleanData['password']);
+            }
+            $condition['id'] = $id;
+            if(User::updateOrCreate($condition, $cleanData)) {
+                if(request()->hasFile('avatar') && !empty(request()->file('avatar'))) {
+                    $oldFile = User::findOrFail($id)->avatar;
+                    $cleanData['avatar'] = fileUpload('avatar', $oldFile, $id);
+                    $condition['id'] = $id;
+                    User::updateOrCreate($condition, $cleanData);
+                }
+
+                if(isset(request()->lang) && is_array(request()->lang)) {
+                    foreach(request()->lang as $language_id => $lang) {
+                        UserDetails::where([
+                            ['user_id', '=', $id],
+                            ['language_id', '=', $language_id]
+                        ])->update($lang);
+                    }
+                }
+
+                return back()->with('success','Data updated successfully!');
+            } else {
+                return back()->with('success','Teacher can not be updated');
+            }
+        }
+
+        return view('admin.teacher-edit', compact(['row', 'lang']));
     }
 
     public function status(Request $request)

@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-<form enctype="multipart/form-data" action="{{ route('teachers_add') }}" method="POST">
+<form enctype="multipart/form-data" action="{{ (isset($row->id)) ? route('teachers_update', ['id' => $row->id]) : route('teachers_add') }}" method="POST">
     @csrf
     <div class="sidebar-section sidebar-section-fill">
-        <h1 class="page-title"><i class="fas fa-chalkboard-teacher text-muted mr-2"></i> {{ __('Add Teacher') }} </h1>
+        <h1 class="page-title"><i class="fas fa-chalkboard-teacher text-muted mr-2"></i> {{ (isset($row->id)) ? __('Edit Teacher') : __('Add Teacher') }} </h1>
         {{-- <p class="text-muted"> San Francisco, United States </p> --}}
         <div class="nav-scroller border-bottom">
             <!-- .nav-tabs -->
@@ -37,8 +37,8 @@
                                     <!-- avatar -->
                                     <div class="js-photo-preview-holder user-avatar user-avatar-xl fileinput-button">
                                         <div class="fileinput-button-label"> Change photo </div>
-                                        @if(isset($rows['user']->avatar) && !empty($rows['user']->avatar))
-                                            <img src="{{ userFile($rows['user']->avatar) }}" class="js-img-preview" alt="">
+                                        @if(isset($row->avatar) && !empty($row->avatar))
+                                            <img src="{{ userFile($row->avatar, '', $row->id) }}" class="js-img-preview" alt="">
                                         @else
                                             <img class="js-img-preview" alt="">
                                             <span class="js-img-placeholder d-block fa fa-user-circle"></span>
@@ -66,7 +66,7 @@
                                     <label for="email" class="col-md-3">Email</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="email" id="email" value="{{ old('email') }}" class="@error('email') is-invalid @enderror form-control"  />
+                                        <input type="text" name="email" id="email" value="{{ ($row->email) ? $row->email : old('email') }}" class="@error('email') is-invalid @enderror form-control"  />
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -108,7 +108,7 @@
                                     <label for="first_name" class="col-md-3">First Name</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="@error('first_name') is-invalid @enderror form-control"  />
+                                        <input type="text" name="first_name" id="first_name" value="{{ ($row->first_name) ? $row->first_name : old('first_name') }}" class="@error('first_name') is-invalid @enderror form-control"  />
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -122,7 +122,7 @@
                                     <label for="last_name" class="col-md-3">Last Name</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="@error('last_name') is-invalid @enderror form-control"  />
+                                        <input type="text" name="last_name" id="last_name" value="{{ ($row->last_name) ? $row->last_name : old('last_name') }}" class="@error('last_name') is-invalid @enderror form-control"  />
                                         @error('last_name')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -136,7 +136,7 @@
                                     <label for="skype_id" class="col-md-3">Skype ID</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="skype_id" id="skype_id" value="{{ old('skype_id') }}" class="@error('skype_id') is-invalid @enderror form-control"  />
+                                        <input type="text" name="skype_id" id="skype_id" value="{{ ($row->skype_id) ? $row->skype_id : old('skype_id') }}" class="@error('skype_id') is-invalid @enderror form-control"  />
                                         @error('skype_id')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -150,7 +150,7 @@
                                     <label for="phone_number" class="col-md-3">Phone Number</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="@error('phone_number') is-invalid @enderror form-control"  />
+                                        <input type="text" name="phone_number" id="phone_number" value="{{ ($row->phone_number) ? $row->phone_number : old('phone_number') }}" class="@error('phone_number') is-invalid @enderror form-control"  />
                                         @error('phone_number')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -180,7 +180,7 @@
                             <label for="address_en" class="col-md-3">Address (English)</label> <!-- /form column -->
                             <!-- form column -->
                             <div class="col-md-9 mb-3">
-                                <input type="text" name="lang[1][address]" id="address_en" class="form-control"  />
+                                <input type="text" name="lang[1][address]" id="address_en" value="{{ ($lang[1]['address']) ? $lang[1]['address'] : '' }}" class="form-control"  />
                             </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -189,7 +189,7 @@
                             <label for="address_jp" class="col-md-3">Address (Japanese)</label> <!-- /form column -->
                             <!-- form column -->
                             <div class="col-md-9 mb-3">
-                                <input type="text" name="lang[2][address]" id="address_jp" class="form-control"  />
+                                <input type="text" name="lang[2][address]" id="address_jp" value="{{ ($lang[2]['address']) ? $lang[2]['address'] : '' }}" class="form-control"  />
                             </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -198,7 +198,7 @@
                         <label for="hobbies_en" class="col-md-3">Hobbies (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[1][hobbies]" id="hobbies_en" class="form-control"  />
+                            <input type="text" name="lang[1][hobbies]" id="hobbies_en" value="{{ ($lang[1]['hobbies']) ? $lang[1]['hobbies'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -207,7 +207,7 @@
                         <label for="hobbies_jp" class="col-md-3">Hobbies (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[2][hobbies]" id="hobbies_jp" class="form-control"  />
+                            <input type="text" name="lang[2][hobbies]" id="hobbies_jp" value="{{ ($lang[2]['hobbies']) ? $lang[2]['hobbies'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
@@ -215,7 +215,7 @@
                         <label for="interest_en" class="col-md-3">Interest (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[1][fields_of_interest]" id="interest_en" class="form-control"  />
+                            <input type="text" name="lang[1][fields_of_interest]" id="interest_en" value="{{ ($lang[1]['fields_of_interest']) ? $lang[1]['fields_of_interest'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
@@ -223,7 +223,7 @@
                         <label for="interest_jp" class="col-md-3">Interest (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[2][fields_of_interest]" id="interest_jp" class="form-control"  />
+                            <input type="text" name="lang[2][fields_of_interest]" id="interest_jp" value="{{ ($lang[2]['fields_of_interest']) ? $lang[2]['fields_of_interest'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
@@ -231,7 +231,7 @@
                         <label for="english_level_en" class="col-md-3">English Level (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[1][english_level]" id="english_level_en" class="form-control"  />
+                            <input type="text" name="lang[1][english_level]" id="english_level_en" value="{{ ($lang[1]['english_level']) ? $lang[1]['english_level'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
@@ -239,7 +239,7 @@
                         <label for="english_level_jp" class="col-md-3">English Level (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[2][english_level]" id="english_level_jp" class="form-control"  />
+                            <input type="text" name="lang[2][english_level]" id="english_level_jp" value="{{ ($lang[2]['english_level']) ? $lang[2]['english_level'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -248,7 +248,7 @@
                         <label for="about_you_en" class="col-md-3">About You (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <textarea name="lang[1][about_you]" class="form-control" id="about_you_en"></textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                            <textarea name="lang[1][about_you]" class="form-control" id="about_you_en">{{ ($lang[1]['about_you']) ? $lang[1]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -257,7 +257,7 @@
                         <label for="about_you_jp" class="col-md-3">About You (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <textarea name="lang[2][about_you]" class="form-control" id="about_you_jp"></textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                            <textarea name="lang[2][about_you]" class="form-control" id="about_you_jp">{{ ($lang[2]['about_you']) ? $lang[2]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <hr>

@@ -42,8 +42,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('admin/teachers', 'Admin\TeacherController@index')->name('teachers_list');
     Route::get('admin/teacher/add', 'Admin\TeacherController@add')->name('teachers_add');
     Route::post('admin/teacher/add', 'Admin\TeacherController@add')->name('teachers_add');
-    Route::get('admin/teacher/edit', 'Admin\TeacherController@edit');
-    Route::post('admin/teacher/edit', 'Admin\TeacherController@edit');
+    Route::get('admin/teacher/{id}/update', 'Admin\TeacherController@update')->name('teachers_update');
+    Route::post('admin/teacher/{id}/update', 'Admin\TeacherController@update')->name('teachers_update');
     // Student
     Route::get('admin/students', 'Admin\StudentController@index')->name('students_list');
     Route::get('admin/student/add', 'Admin\StudentController@add')->name('students_add');
