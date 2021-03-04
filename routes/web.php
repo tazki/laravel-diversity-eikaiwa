@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'PageController@index')->name('page_home');
+Route::get('teacher', 'PageController@teacher')->name('page_teacher');
+Route::get('about-us', 'PageController@about')->name('page_about');
+Route::get('pricing', 'PageController@pricing')->name('page_pricing');
+Route::get('contact', 'PageController@contact')->name('page_contact');
 
 // Admin
 Route::get('admin/login', 'Admin\LoginController@index');
