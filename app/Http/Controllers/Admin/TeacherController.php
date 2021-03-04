@@ -47,7 +47,7 @@ class TeacherController extends Controller
                 //     </div>';
                 // })
                 ->addColumn('action', function($row) {
-                    $btn = '<a href="'.route('teachers_update', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
+                    $btn = '<a href="'.route('teachers_edit', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
                     // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';
                     return $btn;
                 })
@@ -124,14 +124,10 @@ class TeacherController extends Controller
 
         if(request()->isMethod('post')) {
             $validationSetting = array(
-                // 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'first_name' => ['required', 'string', 'max:255'],
                 'last_name' => ['required', 'string', 'max:255'],
                 'phone_number' => ['string', 'max:255'],
                 'skype_id' => ['string', 'max:255'],
-                // 'mobile_number' => ['string', 'max:255'],
-                // 'gender' => ['string', 'max:255'],
-                // 'date_of_birth' => ['date'],
                 'avatar' => 'mimes:jpg,bmp,png'
             );
             

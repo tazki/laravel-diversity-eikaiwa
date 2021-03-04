@@ -180,7 +180,7 @@
                             <label for="address_en" class="col-md-3">Address (English)</label> <!-- /form column -->
                             <!-- form column -->
                             <div class="col-md-9 mb-3">
-                                <input type="text" name="lang[1][address]" id="address_en" value="{{ ($lang[1]['address']) ? $lang[1]['address'] : '' }}" class="form-control"  />
+                                <input type="text" name="lang[1][address]" id="address_en" value="{{ (isset($lang[1]['address'])) ? $lang[1]['address'] : '' }}" class="form-control"  />
                             </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -189,7 +189,7 @@
                             <label for="address_jp" class="col-md-3">Address (Japanese)</label> <!-- /form column -->
                             <!-- form column -->
                             <div class="col-md-9 mb-3">
-                                <input type="text" name="lang[2][address]" id="address_jp" value="{{ ($lang[2]['address']) ? $lang[2]['address'] : '' }}" class="form-control"  />
+                                <input type="text" name="lang[2][address]" id="address_jp" value="{{ (isset($lang[2]['address'])) ? $lang[2]['address'] : '' }}" class="form-control"  />
                             </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -198,7 +198,7 @@
                         <label for="hobbies_en" class="col-md-3">Hobbies (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[1][hobbies]" id="hobbies_en" value="{{ ($lang[1]['hobbies']) ? $lang[1]['hobbies'] : '' }}" class="form-control"  />
+                            <input type="text" name="lang[1][hobbies]" id="hobbies_en" value="{{ (isset($lang[1]['hobbies'])) ? $lang[1]['hobbies'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -207,7 +207,7 @@
                         <label for="hobbies_jp" class="col-md-3">Hobbies (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[2][hobbies]" id="hobbies_jp" value="{{ ($lang[2]['hobbies']) ? $lang[2]['hobbies'] : '' }}" class="form-control"  />
+                            <input type="text" name="lang[2][hobbies]" id="hobbies_jp" value="{{ (isset($lang[2]['hobbies'])) ? $lang[2]['hobbies'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
@@ -215,7 +215,7 @@
                         <label for="interest_en" class="col-md-3">Interest (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[1][fields_of_interest]" id="interest_en" value="{{ ($lang[1]['fields_of_interest']) ? $lang[1]['fields_of_interest'] : '' }}" class="form-control"  />
+                            <input type="text" name="lang[1][fields_of_interest]" id="interest_en" value="{{ (isset($lang[1]['fields_of_interest'])) ? $lang[1]['fields_of_interest'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
@@ -223,7 +223,7 @@
                         <label for="interest_jp" class="col-md-3">Interest (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[2][fields_of_interest]" id="interest_jp" value="{{ ($lang[2]['fields_of_interest']) ? $lang[2]['fields_of_interest'] : '' }}" class="form-control"  />
+                            <input type="text" name="lang[2][fields_of_interest]" id="interest_jp" value="{{ (isset($lang[2]['fields_of_interest'])) ? $lang[2]['fields_of_interest'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
@@ -231,7 +231,7 @@
                         <label for="english_level_en" class="col-md-3">English Level (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[1][english_level]" id="english_level_en" value="{{ ($lang[1]['english_level']) ? $lang[1]['english_level'] : '' }}" class="form-control"  />
+                            <input type="text" name="lang[1][english_level]" id="english_level_en" value="{{ (isset($lang[1]['english_level'])) ? $lang[1]['english_level'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <div class="form-row">
@@ -239,7 +239,7 @@
                         <label for="english_level_jp" class="col-md-3">English Level (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <input type="text" name="lang[2][english_level]" id="english_level_jp" value="{{ ($lang[2]['english_level']) ? $lang[2]['english_level'] : '' }}" class="form-control"  />
+                            <input type="text" name="lang[2][english_level]" id="english_level_jp" value="{{ (isset($lang[2]['english_level'])) ? $lang[2]['english_level'] : '' }}" class="form-control"  />
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -248,7 +248,7 @@
                         <label for="about_you_en" class="col-md-3">About You (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <textarea name="lang[1][about_you]" class="form-control" id="about_you_en">{{ ($lang[1]['about_you']) ? $lang[1]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                            <textarea name="lang[1][about_you]" class="form-control" id="about_you_en">{{ (isset($lang[1]['about_you'])) ? $lang[1]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -257,7 +257,7 @@
                         <label for="about_you_jp" class="col-md-3">About You (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <textarea name="lang[2][about_you]" class="form-control" id="about_you_jp">{{ ($lang[2]['about_you']) ? $lang[2]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                            <textarea name="lang[2][about_you]" class="form-control" id="about_you_jp">{{ (isset($lang[2]['about_you'])) ? $lang[2]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <hr>
