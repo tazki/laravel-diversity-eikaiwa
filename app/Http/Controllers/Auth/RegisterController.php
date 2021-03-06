@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
-use App\Organization;
-use App\OrganizationPayment;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -54,7 +52,6 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'company_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -68,37 +65,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $organization = Organization::create([
-            'company_name' => $data['company_name'],
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'mobile_number' => $data['mobile_number'],
-            'building' => $data['building'],
-            'street' => $data['street'],
-            'address' => $data['address'],
-            'city' => $data['city'],
-            'province' => $data['province'],
-            'zipcode' => $data['zipcode'],
-            'country_id' => $data['country_id'],
-            'registration_number' => $data['registration_number'],
-            'gist_number' => $data['gist_number'],
-            'status' => 1
-        ]);
-
-        OrganizationPayment::create([
-            'organization_id' => $organization->id,
-            'service' => 1,//$data['service'],
-            'status' => 1
-        ]);
-
         $user = User::create([
-            'organization_id' => $organization->id,
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'mobile_number' => $data['mobile_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_type' => 'organization',
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'phone_number' => $data['phone_number'],
+            'skype_id' => $data['skype_id'],
+            'user_type' => 'student',
             'status' => 1
         ]);
 

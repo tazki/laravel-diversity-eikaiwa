@@ -35,4 +35,14 @@ class PageController extends Controller
     {
         return view('landing.contact');
     }
+
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+    public function login()
+    {
+        return view('auth.login');
+    }
 }

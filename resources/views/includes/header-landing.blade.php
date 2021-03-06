@@ -42,8 +42,8 @@
                             </ul>
                         </li> -->
                         <li {{ (request()->is('contact')) ? 'class="active"' : '' }}><a href="{{ route('page_contact') }}">Contact</a></li>
-                        <li class="btn-cta"><a href="#"><span>Login</span></a></li>
-                        <li class="btn-cta"><a href="#"><span>Sign Up</span></a></li>
+                        <li class="btn-cta"><a href="{{ route('page_login') }}"><span>Login</span></a></li>
+                        <li class="btn-cta"><a href="{{ route('page_register') }}"><span>Sign Up</span></a></li>
                     </ul>
                 </div>
             </div>

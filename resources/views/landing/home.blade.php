@@ -181,7 +181,7 @@
 							</div>
                      <div class="pricing__price">
                         <span class="pricing__anim pricing__anim--1">
-							<span class="pricing__currency">¥</span>13,3310
+							<span class="pricing__currency">¥</span>13,310
                         </span>
                         <span class="pricing__anim pricing__anim--2">
 							<span class="pricing__period">Tax Included</span>

@@ -1,99 +1,8 @@
 @extends('layouts.auth')
 
 @section('content')
-<form method="POST" action="{{ route('register') }}" class="auth-form">
+<form method="POST" action="{{ route('page_register') }}" class="auth-form">
     @csrf
-    <div class="form-group">
-        <label for="client-companyName">{{ __('Company Name') }} <span class="text-danger">*</span></label>
-        <input type="text" name="company_name" value="{{ old('company_name') }}" class="form-control @error('company_name') is-invalid @enderror" id="client-companyName" required="" autofocus="">
-        @error('company_name')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-
-    <div class="form-row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="client-addressBuilding">{{ __('Address Building') }}</label>
-                <input type="text" name="building" value="{{ old('building') }}" class="form-control" id="client-addressBuilding">
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="client-street">{{ __('Street') }}</label>
-                <input type="text" name="street" value="{{ old('street') }}" class="form-control" id="client-street">
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="client-address">{{ __('Address') }}</label>
-        <input type="text" name="address" value="{{ old('address') }}" class="form-control" id="client-address">
-    </div>
-
-    <div class="form-row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="client-city">{{ __('City') }}</label>
-                <input type="text" name="city" value="{{ old('city') }}" class="form-control" id="client-city">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="client-province">{{ __('Province') }}</label>
-                <input type="text" name="province" value="{{ old('province') }}" class="form-control" id="client-province">
-            </div>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="client-zipcode">{{ __('Zipcode') }}</label>
-                <input type="text" name="zipcode" value="{{ old('zipcode') }}" class="form-control" id="client-zipcode">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="client-country">{{ __('Country') }}</label>
-                <select name="country_id" class="custom-select js-client-country" id="client-country">
-                    <option value=""></option>
-                    @php($countries = countryData())
-                    @if(is_array($countries))
-                        @foreach($countries as $country)
-                            <option value="{{ $country->id }}" data-countrycode="{{ $country->country_code_1 }}"
-                                {{ (old('registration_number')==$country->id) ? 'selected=selected' : '' }}>
-                                {{ $country->country_name }}
-                            </option>
-                        @endforeach
-                    @endif
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="client-register-number">{{ __('Registration Number') }}</label>
-        <input type="text" name="registration_number" value="{{ old('registration_number') }}" class="form-control" id="client-register-number">
-    </div>
-
-    <div class="form-group">
-        <label for="client-GSTnumber">{{ __('GST number') }}</label>
-        <input type="text" name="gist_number" value="{{ old('gist_number') }}" class="form-control" id="client-GSTnumber">
-    </div>
-
-    <div class="form-group">
-        <label for="client-mobilePhone">{{ __('Mobile Phone') }} <span class="text-danger">*</span></label>
-        <input type="text" name="mobile_number" value="{{ old('mobile_number') }}" class="form-control @error('mobile_number') is-invalid @enderror" id="client-mobilePhone" required="">
-        @error('mobile_number')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
 
     <div class="form-row">
         <div class="col-md-6">
@@ -112,6 +21,31 @@
                 <label for="client-last-name">{{ __('Last Name') }} <span class="text-danger">*</span></label>
                 <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control @error('last_name') is-invalid @enderror" id="client-last-name" required="">
                 @error('last_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="client-mobilePhone">{{ __('Phone Number') }} <span class="text-danger">*</span></label>
+                <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="form-control @error('phone_number') is-invalid @enderror" id="client-mobilePhone" required="">
+                @error('phone_number')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="client-skype_id">{{ __('Skype ID') }} <span class="text-danger">*</span></label>
+                <input type="text" name="skype_id" value="{{ old('skype_id') }}" class="form-control @error('skype_id') is-invalid @enderror" id="client-skype_id" required="">
+                @error('skype_id')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -155,10 +89,10 @@
 
     <div class="form-group">
         <label for="client-service">{{ __('Service') }} <span class="text-danger">*</span></label>
-        <select name="service" class="custom-select" id="client-service" data-toggle="select2" data-placeholder="Select service" disabled="disabled">
-            <option value="1">{{ __('Free') }}</option>
-            {{-- <option value="2">{{ __('Business') }}</option>
-            <option value="3">{{ __('Unlimited') }}</option> --}}
+        <select name="service" class="custom-select" id="client-service" data-toggle="select2" data-placeholder="Select service">
+            <option value="1">{{ __('Trial') }}</option>
+            <option value="2">{{ __('Silver') }}</option>
+            <option value="3">{{ __('Gold') }}</option>
         </select>
     </div>
 

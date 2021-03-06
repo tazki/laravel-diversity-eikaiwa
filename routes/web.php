@@ -19,6 +19,13 @@ Route::get('about-us', 'PageController@about')->name('page_about');
 Route::get('pricing', 'PageController@pricing')->name('page_pricing');
 Route::get('contact', 'PageController@contact')->name('page_contact');
 
+Route::get('student/signup', 'PageController@register')->name('page_register');
+Route::post('student/signup', 'CustomSignupController@addUser')->name('page_register');
+Route::get('student/login', 'PageController@login')->name('page_login');
+Route::post('student/login', 'CustomLoginController@loginUser')->name('page_login');
+// Route::post('/login/user', 'CustomLoginController@loginUser');
+// Route::post('/logout/user', 'MemberController@logoutUser');
+
 // Admin
 Route::get('admin/login', 'Admin\LoginController@index');
 Route::post('admin/login', 'Admin\LoginController@loginAdmin')->name('login_admin');
