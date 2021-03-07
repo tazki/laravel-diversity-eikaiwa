@@ -26,46 +26,35 @@
         <div class="aside-menu overflow-hidden">
             <nav id="stacked-menu" class="stacked-menu">
                 <ul class="menu">
-                    <li class="menu-item {{ (request()->is('client-dashboard')) ? 'has-active' : '' }}">
-                        <a href="{{ url('client-dashboard') }}" class="menu-link">
+                    <li class="menu-item {{ (request()->is('s/dashboard')) ? 'has-active' : '' }}">
+                        <a href="{{ url('s/dashboard') }}" class="menu-link">
                             <span class="menu-icon fas fa-home"></span>
-                            <span class="menu-text">Dashboard</span>
+                            <span class="menu-text">{{ __('Dashboard') }}</span>
                         </a>
                     </li>
-
-                    @if(Auth::user()->user_type=='organization')
-                    <li class="menu-item {{ (request()->is('client') || request()->is('folder/c/*') || request()->is('folder/f/*') || request()->is('task/*')) ? 'has-active' : '' }}">
-                        <a href="{{ url('client') }}" class="menu-link">
+                    <li class="menu-item {{ (request()->is('s/students') || request()->is('s/student/*')) ? 'has-active' : '' }}">
+                        <a href="{{ url('s/students') }}" class="menu-link">
                             <span class="menu-icon fas fa-users"></span>
-                            <span class="menu-text">{{ __('Client List') }}</span>
+                            <span class="menu-text">{{ __('Students') }}</span>
                         </a>
                     </li>
-                    @endif
-
-                    <li class="menu-item {{ (request()->is('schedule')) ? 'has-active' : '' }}">
-                        <a href="{{ url('schedule') }}" class="menu-link">
-                            <span class="menu-icon fas fa-calendar-alt"></span>
-                            <span class="menu-text">{{ __('Schedule') }}</span>
+                    <li class="menu-item {{ (request()->is('s/teachers') || request()->is('s/teacher/*')) ? 'has-active' : '' }}">
+                        <a href="{{ url('s/teachers') }}" class="menu-link">
+                            <span class="menu-icon fas fa-chalkboard-teacher"></span>
+                            <span class="menu-text">{{ __('Teachers') }}</span>
                         </a>
                     </li>
-                    <li class="menu-item {{ (request()->is('organization-template') || request()->is('organization-template-task/*')) ? 'has-active' : '' }}">
-                        <a href="{{ url('organization-template') }}" class="menu-link">
-                            <span class="menu-icon fas fa-tasks"></span>
-                            <span class="menu-text">{{ __('Task Template') }}</span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item {{ (request()->is('organization-users')) ? 'has-active' : '' }}">
-                        <a href="{{ url('organization-users') }}" class="menu-link">
-                            <span class="menu-icon fas fa-user-tie"></span>
-                            <span class="menu-text">{{ __('Users') }}</span>
+                    <li class="menu-item {{ (request()->is('s/payment')) ? 'has-active' : '' }}">
+                        <a href="{{ url('s/payment') }}" class="menu-link">
+                            <span class="menu-icon fas fa-credit-card"></span>
+                            <span class="menu-text">{{ __('Payments') }}</span>
                         </a>
                     </li>
                 </ul>
             </nav>
-        </div>
-        <footer class="aside-footer border-top p-2">
-            <span class="text-center d-block">v.1.0.1</span>
-        </footer>
+				</div>
+				<footer class="aside-footer border-top p-2">
+					<span class="text-center d-block">v.1.0.1</span>
+				</footer>
     </div>
 </aside>
