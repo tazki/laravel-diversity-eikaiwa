@@ -22,14 +22,17 @@ Route::get('contact', 'PageController@contact')->name('page_contact');
 // Student
 Route::get('s/signup', 'PageController@register')->name('page_register');
 Route::post('s/signup', 'Student\CustomSignupController@addUser')->name('page_register');
-Route::get('s/login', 'PageController@login')->name('page_login');
+Route::get('s/login', 'Student\CustomLoginController@index')->name('page_login');
 Route::post('s/login', 'Student\CustomLoginController@loginUser')->name('page_login');
 Route::get('s/payment', 'PageController@payment')->name('page_payment');
-Route::post('s/logout', 'Student\CustomLoginController@logoutUser')->name('page_logout');
+Route::post('s/logout', 'Student\StudentController@logout')->name('page_logout');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth']], function() {//['auth','verified']
     // Dashboard
         Route::get('s/dashboard', 'Student\DashboardController@index')->name('student_dashboard');
+        Route::get('s/profile', 'Student\StudentController@profile')->name('student_profile');
+        Route::post('s/profile/update', 'Student\StudentController@profileUpdate')->name('student_profile_update');
+        Route::post('s/profile/password', 'Student\StudentController@profilePassword')->name('student_password');
 });
 
 // Admin

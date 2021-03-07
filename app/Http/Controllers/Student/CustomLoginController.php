@@ -9,6 +9,18 @@ use Auth;
 
 class CustomLoginController extends Controller
 {
+	public function index(Request $request)
+    {
+        $row = array();
+        if(!empty(request()->cookie('student_account'))) {
+            $student_account = base64_decode(request()->cookie('student_account'));
+            $student_account = explode('|', $student_account);
+            $row['email'] = $student_account[0];
+            $row['password'] = $student_account[1];
+        }
+		return view('auth.login', compact('row'));
+	}
+
     public function loginUser(Request $request)
     {
 		$validator = Validator::make($request->all(),
@@ -28,7 +40,7 @@ class CustomLoginController extends Controller
 
     	$email = $request->email;
     	$password = $request->password;
-		$rememberToken = 0;//$request->remember;
+		$rememberToken = $request->remember;
 		if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password])) {
 			$msg = array(
 				'notify' => 'inline',
@@ -36,6 +48,15 @@ class CustomLoginController extends Controller
 				'message' => 'Login Successful',
 				'action' => 'reload'
 			);
+
+			if($request->remember) {
+                $student_account = base64_encode($request->email.'|'.$request->password);
+                return redirect(route('student_dashboard'))
+                    ->withCookie(cookie('student_account', $student_account, time() + (86400 * 30))); // 86400 = 1 day;
+            } else {
+                \Cookie::queue(\Cookie::forget('student_account'));
+            }
+
 			return redirect(route('student_dashboard'));
 		} else {
 			return back()->with('success','Email Address or Password Incorrect!');

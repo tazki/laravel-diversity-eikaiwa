@@ -17,11 +17,11 @@ class LoginController extends Controller
 	public function index(Request $request)
     {
         $row = array();
-        if(!empty(request()->cookie('matome_admin_account'))) {
-            $matome_account = base64_decode(request()->cookie('matome_admin_account'));
-            $matome_account = explode('|', $matome_account);
-            $row['email'] = $matome_account[0];
-            $row['password'] = $matome_account[1];
+        if(!empty(request()->cookie('admin_account'))) {
+            $admin_account = base64_decode(request()->cookie('admin_account'));
+            $admin_account = explode('|', $admin_account);
+            $row['email'] = $admin_account[0];
+            $row['password'] = $admin_account[1];
         }
 		return view('admin.login', compact('row'));
 	}
@@ -52,11 +52,11 @@ class LoginController extends Controller
             );
 
             if($request->remember) {
-                $matome_account = base64_encode($request->email.'|'.$request->password);
+                $admin_account = base64_encode($request->email.'|'.$request->password);
                 return redirect()->intended('admin/dashboard')
-                    ->withCookie(cookie('matome_admin_account', $matome_account, time() + (86400 * 30))); // 86400 = 1 day;
+                    ->withCookie(cookie('admin_account', $admin_account, time() + (86400 * 30))); // 86400 = 1 day;
             } else {
-                \Cookie::queue(\Cookie::forget('matome_admin_account'));
+                \Cookie::queue(\Cookie::forget('admin_account'));
             }
 
             return redirect()->intended('admin/dashboard');
