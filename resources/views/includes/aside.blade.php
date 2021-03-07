@@ -27,13 +27,13 @@
             <nav id="stacked-menu" class="stacked-menu">
                 <ul class="menu">
                     <li class="menu-item {{ (request()->is('s/dashboard')) ? 'has-active' : '' }}">
-                        <a href="{{ url('s/dashboard') }}" class="menu-link">
+                        <a href="{{ route('student_dashboard') }}" class="menu-link">
                             <span class="menu-icon fas fa-home"></span>
                             <span class="menu-text">{{ __('Dashboard') }}</span>
                         </a>
                     </li>
                     <li class="menu-item {{ (request()->is('s/schedule') || request()->is('s/schedule/*')) ? 'has-active' : '' }}">
-                        <a href="{{ url('s/schedule') }}" class="menu-link">
+                        <a href="{{ route('student_schedule') }}" class="menu-link">
                             <span class="menu-icon fas fa-chalkboard-teacher"></span>
                             <span class="menu-text">{{ __('Schedule') }}</span>
                         </a>

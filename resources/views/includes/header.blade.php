@@ -7,7 +7,7 @@
                     <span class="hamburger-inner"></span>
                 </span>
             </button>
-            <a href="{{ url('admin/dashboard') }}">
+            <a href="{{ route('student_dashboard') }}">
                 Diversity Eikaiwa
             </a>
         </div>

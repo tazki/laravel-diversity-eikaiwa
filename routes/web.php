@@ -28,11 +28,14 @@ Route::get('s/payment', 'PageController@payment')->name('page_payment');
 Route::post('s/logout', 'Student\StudentController@logout')->name('page_logout');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth']], function() {//['auth','verified']
-    // Dashboard
-        Route::get('s/dashboard', 'Student\DashboardController@index')->name('student_dashboard');
-        Route::get('s/profile', 'Student\StudentController@profile')->name('student_profile');
-        Route::post('s/profile/update', 'Student\StudentController@profileUpdate')->name('student_profile_update');
-        Route::post('s/profile/password', 'Student\StudentController@profilePassword')->name('student_password');
+    Route::get('s/dashboard', 'Student\DashboardController@index')->name('student_dashboard');
+    Route::get('s/profile', 'Student\StudentController@profile')->name('student_profile');
+    Route::post('s/profile/update', 'Student\StudentController@profileUpdate')->name('student_profile_update');
+    Route::post('s/profile/password', 'Student\StudentController@profilePassword')->name('student_password');
+    Route::get('s/schedule', 'Student\ScheduleController@index')->name('student_schedule');
+    Route::post('s/calendar', 'Student\ScheduleController@calendar')->name('student_schedule_calendar');
+    Route::get('s/schedule_add', 'Student\ScheduleController@add')->name('student_schedule_add');
+    Route::post('s/schedule_add', 'Student\ScheduleController@add')->name('student_schedule_add');
 });
 
 // Admin
