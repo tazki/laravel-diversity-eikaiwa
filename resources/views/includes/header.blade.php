@@ -39,16 +39,16 @@
                         <h6 class="dropdown-header d-none d-md-block d-lg-none">
                             {{ Auth::user()->first_name ?? '' }} {{ Auth::user()->last_name ?? '' }}
                         </h6>
-                        <a class="dropdown-item" href="{{ url('s/profile') }}">
+                        <a class="dropdown-item" href="{{ route('student_profile') }}">
                             <span class="dropdown-icon oi oi-person"></span>
                             {{ __('Profile') }}
                         </a>
-                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
+                        <a href="{{ route('page_logout') }}" class="dropdown-item" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                             <span class="dropdown-icon oi oi-account-logout"></span>
                             {{ __('Logout') }}
                         </a>
-                        <form id="logout-form" action="{{ route('logout_admin') }}" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('page_logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </div>

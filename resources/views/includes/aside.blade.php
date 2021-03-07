@@ -32,24 +32,18 @@
                             <span class="menu-text">{{ __('Dashboard') }}</span>
                         </a>
                     </li>
-                    <li class="menu-item {{ (request()->is('s/students') || request()->is('s/student/*')) ? 'has-active' : '' }}">
-                        <a href="{{ url('s/students') }}" class="menu-link">
-                            <span class="menu-icon fas fa-users"></span>
-                            <span class="menu-text">{{ __('Students') }}</span>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ (request()->is('s/teachers') || request()->is('s/teacher/*')) ? 'has-active' : '' }}">
-                        <a href="{{ url('s/teachers') }}" class="menu-link">
+                    <li class="menu-item {{ (request()->is('s/schedule') || request()->is('s/schedule/*')) ? 'has-active' : '' }}">
+                        <a href="{{ url('s/schedule') }}" class="menu-link">
                             <span class="menu-icon fas fa-chalkboard-teacher"></span>
-                            <span class="menu-text">{{ __('Teachers') }}</span>
+                            <span class="menu-text">{{ __('Schedule') }}</span>
                         </a>
                     </li>
-                    <li class="menu-item {{ (request()->is('s/payment')) ? 'has-active' : '' }}">
-                        <a href="{{ url('s/payment') }}" class="menu-link">
+                    {{-- <li class="menu-item {{ (request()->is('s/subscription')) ? 'has-active' : '' }}">
+                        <a href="{{ url('s/subscription') }}" class="menu-link">
                             <span class="menu-icon fas fa-credit-card"></span>
                             <span class="menu-text">{{ __('Payments') }}</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </nav>
 				</div>

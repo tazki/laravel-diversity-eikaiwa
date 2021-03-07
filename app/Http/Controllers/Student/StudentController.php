@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 use Auth;
 use DB;
-use App\User;
+use App\Models\User;
 
 class StudentController extends Controller
 {
@@ -22,18 +22,18 @@ class StudentController extends Controller
      */
     public function __construct()
     {
-        $this->middleware("auth:auth")->except('logoutStudent');
+        $this->middleware("auth:web")->except('logoutStudent');
     }
 
     public static function studentdata()
     {
-        return auth()->guard('auth')->user();
+        return auth()->guard('web')->user();
     }
 
-    public function logoutStudent()
+    public function logout()
     {
-    	Auth::guard('web')->logout();
-    	return redirect('student/login');
+    	Auth::logout();
+    	return redirect('s/login');
     }
 
     public function index()
@@ -82,7 +82,7 @@ class StudentController extends Controller
         $userRow = User::find(Auth::user()->id);
         $avatar = $userRow->avatar; 
         if ($request->hasFile('avatar') && !empty($request->file('avatar'))) {
-            $avatar = fileUpload('avatar', $request);
+            $avatar = fileUpload('avatar', $avatar, Auth::user()->id);
         }
 
         $rowUserData = [
