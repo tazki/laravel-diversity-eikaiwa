@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <div class="wrapper">
@@ -17,6 +17,8 @@
 									aria-controls="profile" aria-selected="true">{{ __('Details') }}</a>
 								<a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab"
 									aria-controls="password" aria-selected="false">{{ __('Password') }}</a>
+                                <a class="nav-link" id="subscription-tab" data-toggle="tab" href="#subscription" role="tab"
+                                    aria-controls="subscription" aria-selected="false">{{ __('Subscription') }}</a>
 							</nav>
 						</div>
 					</div>
@@ -158,6 +160,13 @@
 									</div>
 								</form>
 							</div>
+							<div class="tab-pane fade" id="subscription" role="tabpanel"
+                            aria-labelledby="profile-tab">
+                                <form method="POST" action="{{ route('student_password') }}" class="auth-form is-fullwidth">
+                                    @csrf
+                                    Page Under Construction
+                                </form>
+                            </div>
 						</div>
 					</div>
 				</div>
