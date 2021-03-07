@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\CustomClass\KomojuApi;
 
 class PageController extends Controller
 {
@@ -44,5 +45,11 @@ class PageController extends Controller
     public function login()
     {
         return view('auth.login');
+    }
+
+
+    public function payment()
+    {
+        $shop = KomojuApi::accessToken();
     }
 }
