@@ -26,7 +26,7 @@
                     <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <span class="user-avatar user-avatar-md">
-                            {!! (Auth::user()->avatar) ? '<img src="'.userFile(Auth::user()->avatar).'" alt="">' : '<span class="d-block fa fa-user-circle"></span>' !!}
+                            {!! (Auth::user()->avatar) ? '<img src="'.userFile(Auth::user()->avatar, '', Auth::user()->id).'" alt="">' : '<span class="d-block fa fa-user-circle"></span>' !!}
                         </span>
                         <span class="account-summary pr-lg-4 d-none d-lg-block">
                             <span class="account-name">{{ Auth::user()->first_name ?? '' }}

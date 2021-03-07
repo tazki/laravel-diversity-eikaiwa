@@ -19,12 +19,18 @@ Route::get('about-us', 'PageController@about')->name('page_about');
 Route::get('pricing', 'PageController@pricing')->name('page_pricing');
 Route::get('contact', 'PageController@contact')->name('page_contact');
 
-Route::get('student/signup', 'PageController@register')->name('page_register');
-Route::post('student/signup', 'CustomSignupController@addUser')->name('page_register');
-Route::get('student/login', 'PageController@login')->name('page_login');
-Route::post('student/login', 'CustomLoginController@loginUser')->name('page_login');
-// Route::post('/login/user', 'CustomLoginController@loginUser');
-// Route::post('/logout/user', 'MemberController@logoutUser');
+// Student
+Route::get('s/signup', 'PageController@register')->name('page_register');
+Route::post('s/signup', 'Student\CustomSignupController@addUser')->name('page_register');
+Route::get('s/login', 'PageController@login')->name('page_login');
+Route::post('s/login', 'Student\CustomLoginController@loginUser')->name('page_login');
+Route::get('s/payment', 'PageController@payment')->name('page_payment');
+Route::post('s/logout', 'Student\CustomLoginController@logoutUser')->name('page_logout');
+Auth::routes(['verify' => true]);
+Route::group(['middleware' => ['auth']], function() {//['auth','verified']
+    // Dashboard
+        Route::get('s/dashboard', 'Student\DashboardController@index')->name('student_dashboard');
+});
 
 // Admin
 Route::get('admin/login', 'Admin\LoginController@index');
@@ -59,9 +65,3 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('admin/student/add', 'Admin\StudentController@add')->name('students_add');
 });
 
-// User
-Auth::routes(['verify' => true]);
-Route::group(['middleware' => ['auth','verified']], function() {//['auth','verified']
-    // Dashboard
-        Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-});

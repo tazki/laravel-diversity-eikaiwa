@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 use Auth;
 use DB;
-use App\User;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -82,7 +82,7 @@ class AdminController extends Controller
         $userRow = User::find(Auth::user()->id);
         $avatar = $userRow->avatar; 
         if ($request->hasFile('avatar') && !empty($request->file('avatar'))) {
-            $avatar = fileUpload('avatar', $request);
+            $avatar = fileUpload('avatar', $avatar, Auth::user()->id);
         }
 
         $rowUserData = [
