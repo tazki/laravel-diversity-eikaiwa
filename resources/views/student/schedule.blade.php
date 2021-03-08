@@ -29,7 +29,7 @@
 
     <a href="#" class="js-btn-add fab btn btn-primary btn-floated"
         data-tooltip="tooltip"
-        data-title="{{ __('Create Booking') }}"
+        data-title="{{ __('Create Class Booking') }}"
         data-create="{{ route('student_schedule_add') }}"
         data-toggle="modal"
         data-target="#studentScheduleFormModal">
