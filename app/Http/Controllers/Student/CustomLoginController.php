@@ -41,7 +41,7 @@ class CustomLoginController extends Controller
     	$email = $request->email;
     	$password = $request->password;
 		$rememberToken = $request->remember;
-		if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password])) {
+		if (Auth::guard('web')->attempt(['email' => $email, 'password' => $password, 'user_type' => 'student'])) {
 			$msg = array(
 				'notify' => 'inline',
 				'status'  => 'success',
