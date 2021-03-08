@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller; // need to add this line so this file is treated like a controller.
 use Illuminate\Http\Request;
@@ -26,20 +26,20 @@ class ScheduleController extends Controller
             ])->select('*', DB::raw('CONCAT(mt_users.first_name, " ", mt_users.last_name) as name'))
             ->get();
 
-        return view('student.schedule', compact('rows'));
+        return view('teacher.schedule', compact('rows'));
     }
 
     public function calendar(Request $request)
     {
-        $query[] = array('user_bookings.student_id', '=', Auth::user()->id);
+        $query[] = array('user_bookings.teacher_id', '=', TeacherController::teacherdata()->id);
         $data = DB::table('user_bookings')
             ->select(
                 'user_bookings.*',
                 DB::raw('DATE_FORMAT(mt_user_bookings.booking_date, "%Y-%m-%d") as ymd_booking_date'),
                 DB::raw('DATE_FORMAT(mt_user_bookings.booking_date, "%M %d, %Y %H:%i") as label_booking_date'),
-                DB::raw('CONCAT(mt_users.first_name, " ", mt_users.last_name) as teacher_name'),
+                DB::raw('CONCAT(mt_users.first_name, " ", mt_users.last_name) as student_name'),
             )
-            ->leftJoin('users', 'users.id', '=', 'user_bookings.teacher_id')
+            ->leftJoin('users', 'users.id', '=', 'user_bookings.student_id')
             ->where($query)
             ->orderByRaw('mt_user_bookings.created_at DESC')
             ->get();
@@ -51,8 +51,7 @@ class ScheduleController extends Controller
                     $booking_end_date = Carbon::parse($item->ymd_booking_date)->addHour();
 
                     $rows[$count]['id'] = $item->id;
-                    $rows[$count]['teacher_id'] = $item->teacher_id;
-                    $rows[$count]['title'] = $item->teacher_name.' sensei';
+                    $rows[$count]['title'] = $item->student_name;
                     $rows[$count]['label_booking_date'] = $item->label_booking_date;
                     // $rows[$count]['description'] = $item->task_description;
                     // $rows[$count]['url'] = $item->id;
@@ -71,7 +70,7 @@ class ScheduleController extends Controller
                             $className = 'task-schedule-progress';
                         break;
                         // case 1:
-                            // $rows[$count]['status'] = __('Open');
+                        //     $rows[$count]['status'] = __('Open');
                         // break;
                     }
 
@@ -109,13 +108,12 @@ class ScheduleController extends Controller
         }
     }
 
-    public function add(Request $request)
+    public function update(Request $request)
     {
         if ($request->ajax()) {
             $validator = Validator::make($request->all(),
                 [
-                    'teacher_id' => 'required',
-                    'booking_date' => 'required'
+                    'status' => 'required'
                 ]
             );
 
@@ -127,18 +125,6 @@ class ScheduleController extends Controller
                 ]);
             }
 
-            $bookedSlots = UserBookings::where([
-                ['booking_date', '=', $request->booking_date.':00'],
-                ['teacher_id', '=', $request->teacher_id]
-            ])->first();
-            if(is_object($bookedSlots) && isset($bookedSlots->id)) {
-                return response()->json([
-                    'notify' => 'inline',
-                    'status' => 'danger',
-                    'message' => __('Date is not available')
-                ]);
-            }
-
             if($request->confirm_first) {
                 return response()->json([
                     'notify' => 'inline',
@@ -147,12 +133,11 @@ class ScheduleController extends Controller
                 ]);
             }            
 
-            $row = UserBookings::create([
-                'teacher_id' => $request->teacher_id,
-                'student_id' => Auth::user()->id,
-                'booking_date' => $request->booking_date,
-                'status' => 1
-            ]);
+            $rowUserData = [
+                'status' => $request->status
+            ];
+            $condition['id'] = $request->id;
+            $rowId = UserBookings::updateOrCreate($condition, $rowUserData);
 
             $msg = array(
                 'notify' => 'inline',

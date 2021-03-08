@@ -18,6 +18,7 @@ class CustomLoginController extends Controller
             $row['email'] = $student_account[0];
             $row['password'] = $student_account[1];
         }
+		$row['login_url'] = route('page_login');
 		return view('auth.login', compact('row'));
 	}
 

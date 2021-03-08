@@ -46,9 +46,9 @@
                     </li> --}}
                 </ul>
             </nav>
-				</div>
-				<footer class="aside-footer border-top p-2">
-					<span class="text-center d-block">v.1.0.1</span>
-				</footer>
+        </div>
+        <footer class="aside-footer border-top p-2">
+            <span class="text-center d-block">v.1.0.1</span>
+        </footer>
     </div>
 </aside>

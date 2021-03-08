@@ -38,6 +38,21 @@ Route::group(['middleware' => ['auth']], function() {//['auth','verified']
     Route::post('s/schedule_add', 'Student\ScheduleController@add')->name('student_schedule_add');
 });
 
+// Teacher
+Route::get('t/login', 'Teacher\TeacherLoginController@index')->name('teacher_login');
+Route::post('t/login', 'Teacher\TeacherLoginController@loginUser')->name('teacher_login');
+Route::post('t/logout', 'Teacher\TeacherController@logout')->name('teacher_logout');
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('t/dashboard', 'Teacher\DashboardController@index')->name('teacher_dashboard');
+    Route::get('t/profile', 'Teacher\TeacherController@profile')->name('teacher_profile');
+    Route::post('t/profile/update', 'Teacher\TeacherController@profileUpdate')->name('teacher_profile_update');
+    Route::post('t/profile/password', 'Teacher\TeacherController@profilePassword')->name('teacher_password');
+    Route::get('t/schedule', 'Teacher\ScheduleController@index')->name('teacher_schedule');
+    Route::post('t/calendar', 'Teacher\ScheduleController@calendar')->name('teacher_schedule_calendar');
+    // Route::get('t/schedule_add', 'Teacher\ScheduleController@add')->name('teacher_schedule_add');
+    Route::post('t/schedule/update', 'Teacher\ScheduleController@update')->name('teacher_schedule_update');
+});
+
 // Admin
 Route::get('admin/login', 'Admin\LoginController@index');
 Route::post('admin/login', 'Admin\LoginController@loginAdmin')->name('login_admin');

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.teacher')
 
 @section('content')
 <div class="page schedule has-sidebar has-sidebar-fixed has-sidebar-expand-xl">
@@ -27,22 +27,21 @@
         </div>
     </div> --}}
 
-    <a href="#" class="js-btn-add fab btn btn-primary btn-floated"
+    {{-- <a href="#" class="js-btn-add fab btn btn-primary btn-floated"
         data-tooltip="tooltip"
         data-title="{{ __('Create Class Booking') }}"
-        data-create="{{ route('student_schedule_add') }}"
+        data-create="{{ route('teacher_schedule_add') }}"
         data-toggle="modal"
         data-target="#studentScheduleFormModal">
             <span class="fa fa-plus"></span>
-    </a>
+    </a> --}}
     {{-- <a href="" class="js-btn-add btn btn-primary btn-floated"
         title="{{ __('Create Booking') }}">
         <span class="fa fa-plus"></span> --}}
     {{-- </a> --}}
 </div>
 
-@include('modals.schedule')
-@include('modals.schedule-view')
+@include('modals.teacher-schedule')
 <link rel="stylesheet" href="{{ secure_asset('vendor/fullcalendar/fullcalendar.min.css') }}">
 <script src="{{ secure_asset('vendor/moment/min/moment.min.js') }}"></script>
 <script src="{{ secure_asset('vendor/fullcalendar/fullcalendar.min.js') }}"></script>
@@ -94,7 +93,7 @@
         LooperCalendarTheme.prototype.iconOverrideCustomButtonOption = 'fontAwesome';
         LooperCalendarTheme.prototype.iconOverridePrefix = 'fa-';
         FullCalendar.defineThemeSystem('looper', LooperCalendarTheme);
-        loadCalendar("{{ route('student_schedule_calendar') }}", '');
+        loadCalendar("{{ route('teacher_schedule_calendar') }}", '');
         $('#js-calendar-client').on('change', function () {
             let view = $('#js-schedule-calendar').fullCalendar('getView');
             console.log(view);
@@ -132,13 +131,13 @@
             },
             eventClick: function (calEvent, jsEvent, view) {
                 console.log(calEvent);
-                // console.log(jsEvent);
-                // console.log(view);
-                $('#studentScheduleViewModal #js-booking-id').val(calEvent.id);
-                $('#studentScheduleViewModal #js-booking-date').val(calEvent.label_booking_date);
-                $('#studentScheduleViewModal #js-booking-teacher option[value=' + calEvent.teacher_id + ']').attr('selected','selected');
-                $('#studentScheduleViewModal #js-booking-status option[value=' + calEvent.status + ']').attr('selected','selected');
-                $('#studentScheduleViewModal').modal('show');
+                console.log(jsEvent);
+                console.log(view);
+                $('#teacherScheduleFormModal #js-booking-id').val(calEvent.id);
+                $('#teacherScheduleFormModal #js-booking-student').val(calEvent.title);
+                $('#teacherScheduleFormModal #js-booking-date').val(calEvent.label_booking_date);
+                $('#teacherScheduleFormModal #js-booking-status option[value=' + calEvent.status + ']').attr('selected','selected');
+                $('#teacherScheduleFormModal').modal('show');
             },
         });
     }

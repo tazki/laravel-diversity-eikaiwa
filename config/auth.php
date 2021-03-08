@@ -46,6 +46,11 @@ return [
             'provider' => 'admins',
         ],
 
+        'teacher' => [
+            'driver' => 'session',
+            'provider' => 'teachers',
+        ],
+
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
@@ -78,6 +83,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\AdminGuard::class,
+        ],
+
+        'teachers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\TeacherGuard::class,
         ],
 
         // 'users' => [

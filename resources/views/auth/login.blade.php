@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<form method="POST" action="{{ route('page_login') }}" class="auth-form">
+<form method="POST" action="{{ $row['login_url'] }}" class="auth-form">
     @csrf
     @include('includes.flash-messages')
     <div class="form-group">
