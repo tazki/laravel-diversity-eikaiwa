@@ -21,7 +21,7 @@
 																		<h2 class="metric-label"> {{ __('Total Number of Students') }} </h2>
 																		<p class="metric-value h3">
 																				<sub><i class="oi oi-people"></i></sub> <span
-																						class="value">{{ $rows['total_number_of_customers'] }}</span>
+																						class="value">{{ $rows['total_number_of_user'] }}</span>
 																		</p>
 																</a>
 														</div>
@@ -30,7 +30,7 @@
 																		<h2 class="metric-label"> {{ __('Total Number of Class') }} </h2>
 																		<p class="metric-value h3">
 																				<sub><i class="oi oi-fork"></i></sub> <span
-																						class="value">{{ $rows['total_number_of_user'] }}</span>
+																						class="value">{{ $rows['total_number_of_class'] }}</span>
 																		</p>
 																</a>
 														</div>

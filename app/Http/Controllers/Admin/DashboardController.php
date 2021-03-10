@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller; // need to add this line so this file is tr
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
-use App\Client;
+use App\Models\User;
+use App\Models\UserBookings;
 
 class DashboardController extends Controller
 {
@@ -27,12 +28,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // $total_number_of_customers = Organization::get();
-        $rows['total_number_of_customers'] = 64;//$total_number_of_customers->count();
-        // $total_number_of_user = Client::get();
-        $rows['total_number_of_user'] = 100;//$total_number_of_user->count();
+        $total_number_of_user = User::where('user_type', 'student')->get();
+        $rows['total_number_of_user'] = $total_number_of_user->count();
         // $total_number_of_active_customers = Organization::where('status', '=', 1)->get();
-        $rows['total_number_of_active_customers'] = 50;//$total_number_of_active_customers->count();
+        $rows['total_number_of_active_customers'] = $total_number_of_user->count();//$total_number_of_active_customers->count();
+
+        $total_number_of_class = UserBookings::get();
+        $rows['total_number_of_class'] = $total_number_of_class->count();
         // $new_customer_registration = DB::table('organizations')
         //     ->select(
         //         DB::raw('DATE_FORMAT(mt_organizations.created_at, "%d %b") as created_at')
