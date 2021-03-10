@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PageController@index')->name('page_home');
-Route::get('teacher', 'PageController@teacher')->name('page_teacher');
-Route::get('about-us', 'PageController@about')->name('page_about');
-Route::get('pricing', 'PageController@pricing')->name('page_pricing');
-Route::get('contact', 'PageController@contact')->name('page_contact');
+Route::get('setlocale/{locale}',function($lang) 
+{
+    \Session::put('locale',$lang);
+    return redirect()->back();   
+});
+
+Route::group(['middleware'=>'language'],function ()
+{
+    Route::get('/', 'PageController@index')->name('page_home');
+    Route::get('teacher', 'PageController@teacher')->name('page_teacher');
+    Route::get('about-us', 'PageController@about')->name('page_about');
+    Route::get('pricing', 'PageController@pricing')->name('page_pricing');
+    Route::get('contact', 'PageController@contact')->name('page_contact');
+});
 
 // Student
 Route::get('s/signup', 'PageController@register')->name('page_register');
