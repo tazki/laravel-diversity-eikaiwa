@@ -93,11 +93,11 @@
 									</div>
 
 									<div class="form-group">
-										<label for="client-mobilePhone">{{ __('Mobile Phone') }} <span lass="text-danger">*</span></label>
-										<input type="text" name="mobile_number" value="{{ ($rows['user']->mobile_number) ? $rows['user']->mobile_number :  old('mobile_number') }}"
-											class="form-control @error('mobile_number') is-invalid @enderror"
+										<label for="client-mobilePhone">{{ __('Phone Number') }} <span lass="text-danger">*</span></label>
+										<input type="text" name="phone_number" value="{{ ($rows['user']->phone_number) ? $rows['user']->phone_number :  old('phone_number') }}"
+											class="form-control @error('phone_number') is-invalid @enderror"
 											id="client-mobilePhone" required="">
-										@error('mobile_number')
+										@error('phone_number')
 											<span class="invalid-feedback" role="alert">
 												<strong>{{ $message }}</strong>
 											</span>
