@@ -11,41 +11,26 @@ use Illuminate\Support\Facades\Validator;
 use DataTables;
 use Auth;
 use DB;
-use App\User;
-use App\UserDetails;
+use App\Models\User;
+use App\Models\UserDetails;
 
 class StudentController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            // $data = DB::table('organizations')
-            // ->select(
-            //     'organizations.*',
-            //     'users.email',
-            //     DB::raw('DATE_FORMAT(mt_organizations.updated_at, "%M %d, %Y") as updated_at'),
-            //     DB::raw('CONCAT(mt_organizations.first_name, " ", mt_organizations.last_name) as name'),
-            //     // DB::raw('IF(mt_organizations.status=1, "Active", "Inactive") as status')
-            //     DB::raw('IF(mt_organization_payments.service=2, "Business", "Free") as service') //Unlimited
-            // )
-            // ->leftJoin('users', 'organizations.id', '=', 'users.organization_id') // Query returns all products irrespective of the user
-            // ->leftJoin('organization_payments', 'organization_payments.id', '=', 'organizations.id')
-            // ->orderByRaw('mt_organizations.created_at DESC')
-            // ->get();
+            $data = User::where('user_type', 'student')
+            ->select('*', 
+                DB::raw('CONCAT(first_name, " ", last_name) as name'),
+                DB::raw('DATE_FORMAT(updated_at, "%M %d, %Y") as updated_at'))
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
-            // // if no return data
-            // if(empty(sizeof($data))) {
-            //     $data['data'] = array();
-            //     return $data;
-            // }
-
-            $data[0]['id'] = 1;
-            $data[0]['name'] = 'Rossel Sensei';
-            $data[0]['mobile_number'] = '123456789';
-            $data[0]['email'] = 'rossel@gmail.com';
-            $data[0]['service'] = '100';
-            $data[0]['updated_at'] = 'January 01, 2021';
-            $data[0]['status'] = 'Active';
+            // if no return data
+            if(empty(sizeof($data))) {
+                $data['data'] = array();
+                return $data;
+            }
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -60,12 +45,12 @@ class StudentController extends Controller
                 //         <!--div class="d-inline-block ml-2">Active</div-->
                 //     </div>';
                 // })
-                // ->addColumn('action', function($row) {
-                //     $btn = '<a class="btn btn-sm btn-icon btn-secondary" onClick="ajaxFetch(this); return false;" title="'.__('Edit Client').'" data-url="'.route('client.edit', $row->id).'" data-update="'.url('/client/'.$row->id.'/update').'" data-toggle="modal" data-target="#clientFormModal"><i class="fa fa-pencil-alt"></i></a>';
-                //     $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="'.route('client.destroy', $row->id).'" href="#"><i class="far fa-trash-alt"></i></a>';
-                //     return $btn;
-                // })
-                // ->rawColumns(['action'])
+                ->addColumn('action', function($row) {
+                    // $btn = '<a href="'.route('teachers_edit', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
+                    // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';
+                    // return $btn;
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
 

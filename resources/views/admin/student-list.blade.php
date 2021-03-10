@@ -25,19 +25,19 @@
     </div>
 </div>
 <script type="text/javascript">
-$(function () {
-  window.dataTableSet = [
-    // {title: "{{ __('ID') }}", data: 'id', name: 'id'},
-    {title: "{{ __('Name') }}", data: 'name', name: 'name'},
-    {title: "{{ __('Mobile Number') }}", data: 'mobile_number', name: 'mobile_number'},
-    {title: "{{ __('Email') }}", data: 'email', name: 'email'},
-    {title: "{{ __('Total Class Hours') }}", data: 'service', name: 'service'},
-    {title: "{{ __('Last Update') }}", data: 'updated_at', name: 'updated_at'},
-    {title: "{{ __('Status') }}", data: 'status', name: 'status'},
-    // {title: "{{ __('Action') }}", data: 'action', name: 'action', orderable: false, searchable: false},
-  ];
-});
-</script>
+  $(function () {
+    window.dataTableSet = [
+      // {title: "{{ __('ID') }}", data: 'id', name: 'id'},
+      {title: "{{ __('Name') }}", data: 'name', name: 'name'},
+      {title: "{{ __('Phone Number') }}", data: 'phone_number', name: 'phone_number'},
+      {title: "{{ __('Email') }}", data: 'email', name: 'email'},
+      // {title: "{{ __('Total Class Hours') }}", data: 'service', name: 'service'},
+      {title: "{{ __('Last Update') }}", data: 'updated_at', name: 'updated_at'},
+      // {title: "{{ __('Status') }}", data: 'status', name: 'status'},
+      {title: "{{ __('Action') }}", data: 'action', name: 'action', orderable: false, searchable: false},
+    ];
+  });
+  </script>
 {{-- window.dataSet need to be place above datatables includes --}}
 @include('includes.datatables')
 @endsection
