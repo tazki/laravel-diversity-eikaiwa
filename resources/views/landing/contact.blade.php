@@ -15,7 +15,7 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1 class="heading-section">Contact us</h1>
+			   					<h1 class="heading-section">{{ __('Contact Us') }}</h1>
 								<h2>Diversity Eikaiwa</h2>
 			   				</div>
 			   			</div>
@@ -32,17 +32,16 @@
 				<div class="col-md-5 col-md-push-1 animate-box">
 					
 					<div class="fh5co-contact-info">
-						<h3>Contact Information</h3>
+						<h3>{{ __('Contact Information') }}</h3>
 						<ul>
-							<li class="address">198 West 21th Street, <br> Suite 721 New York NY 10016</li>
-							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
-							<li class="email"><a href="mailto:info@diversityeikaiwa.com">info@diversityeikaiwa.com</a></li>
+							{{-- <li class="address">198 West 21th Street, <br> Suite 721 New York NY 10016</li>
+							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li> --}}
+							<li class="email"><a href="mailto:diversityeikaiwa2021@gmail.com">diversityeikaiwa2021@gmail.com</a></li>
 							<li class="url"><a href="{{ route('page_home') }}">diversityeikaiwa.com</a></li>
 						</ul>
 					</div>
-
 				</div>
-				<div class="col-md-6 animate-box">
+				{{-- <div class="col-md-6 animate-box">
 					<h3>Get In Touch</h3>
 					<form action="#">
 						<div class="row form-group">
@@ -81,27 +80,14 @@
 						</div>
 
 					</form>		
-				</div>
+				</div> --}}
 			</div>
 			
 		</div>
 	</div>
 	{{-- <div id="map" class="fh5co-map"></div> --}}
 
-	<div id="fh5co-register" style="background-image: url({{ secure_asset('site/images/img_bg_2.jpg') }}">
-		<div class="overlay"></div>
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 animate-box">
-				<div class="date-counter text-center">
-					<h2>Register now and have a free trial lesson</h2>
-					<div class="simply-countdown simply-countdown-one"></div>
-					<p><strong>Limited Offer, Hurry Up!</strong></p>
-					<p><a href="#" class="btn btn-primary btn-lg btn-reg">Register Now!</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	@include('includes.register-banner')
     @include('includes.footer-landing')
 </div>
 @endsection

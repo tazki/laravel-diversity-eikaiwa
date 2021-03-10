@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xs-12 text-right">
                     <p class="site">www.diversityeikaiwa.com</p>
-                    <p class="num">Call: +01 123 456 7890</p>
+                    {{-- <p class="num">Call: +01 123 456 7890</p> --}}
                     <ul class="fh5co-social">
                         <li><a href="#"><i class="icon-facebook2"></i></a></li>
                         <li><a href="#"><i class="icon-twitter2"></i></a></li>
@@ -28,10 +28,10 @@
                 </div>
                 <div class="col-xs-8 text-right menu-1">
                     <ul>
-                        <li><a href="{{ route('page_home') }}">Home</a></li>
-                        <li {{ (request()->is('teacher')) ? 'class="active"' : '' }}><a href="{{ route('page_teacher') }}">Teacher</a></li>
-                        <li {{ (request()->is('about-us')) ? 'class="active"' : '' }}><a href="{{ route('page_about') }}">About</a></li>
-                        <li {{ (request()->is('pricing')) ? 'class="active"' : '' }}><a href="{{ route('page_pricing') }}">Pricing</a></li>
+                        <li><a href="{{ route('page_home') }}">{{ __('Home') }}</a></li>
+                        <li {{ (request()->is('teacher')) ? 'class="active"' : '' }}><a href="{{ route('page_teacher') }}">{{ __('Teacher') }}</a></li>
+                        <li {{ (request()->is('about-us')) ? 'class="active"' : '' }}><a href="{{ route('page_about') }}">{{ __('About Us') }}</a></li>
+                        <li {{ (request()->is('pricing')) ? 'class="active"' : '' }}><a href="{{ route('page_pricing') }}">{{ __('Pricing') }}</a></li>
                         <!-- <li class="has-dropdown">
                             <a href="blog.html">Blog</a>
                             <ul class="dropdown">
@@ -41,9 +41,9 @@
                                 <li><a href="#">API</a></li>
                             </ul>
                         </li> -->
-                        <li {{ (request()->is('contact')) ? 'class="active"' : '' }}><a href="{{ route('page_contact') }}">Contact</a></li>
-                        <li class="btn-cta"><a href="{{ route('page_login') }}"><span>Login</span></a></li>
-                        <li class="btn-cta"><a href="{{ route('page_register') }}"><span>Sign Up</span></a></li>
+                        <li {{ (request()->is('contact')) ? 'class="active"' : '' }}><a href="{{ route('page_contact') }}">{{ __('Contact') }}</a></li>
+                        <li class="btn-cta"><a href="{{ route('page_login') }}"><span>{{ __('Login') }}</span></a></li>
+                        <li class="btn-cta"><a href="{{ route('page_register') }}"><span>{{ __('Sign Up') }}</span></a></li>
                     </ul>
                 </div>
             </div>
