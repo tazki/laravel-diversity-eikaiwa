@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function() {//['auth','verified']
 Route::get('t/login', 'Teacher\TeacherLoginController@index')->name('teacher_login');
 Route::post('t/login', 'Teacher\TeacherLoginController@loginUser')->name('teacher_login');
 Route::post('t/logout', 'Teacher\TeacherController@logout')->name('teacher_logout');
-Route::group(['middleware' => ['auth']], function() {
+Route::middleware('auth:teacher')->group(function () {
     Route::get('t/dashboard', 'Teacher\DashboardController@index')->name('teacher_dashboard');
     Route::get('t/profile', 'Teacher\TeacherController@profile')->name('teacher_profile');
     Route::post('t/profile/update', 'Teacher\TeacherController@profileUpdate')->name('teacher_profile_update');

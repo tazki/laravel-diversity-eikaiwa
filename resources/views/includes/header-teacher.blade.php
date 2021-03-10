@@ -43,12 +43,12 @@
                             <span class="dropdown-icon oi oi-person"></span>
                             {{ __('Profile') }}
                         </a>
-                        <a href="{{ route('page_logout') }}" class="dropdown-item" onclick="event.preventDefault();
+                        <a href="{{ route('teacher_logout') }}" class="dropdown-item" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                             <span class="dropdown-icon oi oi-account-logout"></span>
                             {{ __('Logout') }}
                         </a>
-                        <form id="logout-form" action="{{ route('page_logout') }}" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('teacher_logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </div>

@@ -22,7 +22,7 @@ class TeacherController extends Controller
      */
     public function __construct()
     {
-        $this->middleware("auth:web")->except('logoutTeacher');
+        $this->middleware("auth:teacher")->except('logoutTeacher');
     }
 
     public static function teacherdata()
