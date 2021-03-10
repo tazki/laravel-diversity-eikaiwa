@@ -53,13 +53,13 @@ class LoginController extends Controller
 
             if($request->remember) {
                 $admin_account = base64_encode($request->email.'|'.$request->password);
-                return redirect()->intended('admin/dashboard')
+                return redirect(route('admin_dashboard'))
                     ->withCookie(cookie('admin_account', $admin_account, time() + (86400 * 30))); // 86400 = 1 day;
             } else {
                 \Cookie::queue(\Cookie::forget('admin_account'));
             }
 
-            return redirect()->intended('admin/dashboard');
+            return redirect(route('admin_dashboard'));
 		} else {
 			return back()->withInput($request->only('email', 'remember'))->with('error','Email Address or Password Incorrect!');
 		}
