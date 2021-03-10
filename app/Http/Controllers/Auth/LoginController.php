@@ -50,7 +50,8 @@ class LoginController extends Controller
             $row['password'] = $matome_account[1];
             $row['role'] = $matome_account[2];
         }
-        return view('auth.login', compact('row'));
+        $row['login_url'] = route('page_login');
+		return view('auth.login', compact('row'));
     }
 
     public function login(Request $request)
