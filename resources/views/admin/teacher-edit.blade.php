@@ -66,7 +66,7 @@
                                     <label for="email" class="col-md-3">Email</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="email" id="email" value="{{ ($row->email) ? $row->email : old('email') }}" class="@error('email') is-invalid @enderror form-control"  />
+                                        <input type="text" name="email" id="email" value="{{ (isset($row->email)) ? $row->email : old('email') }}" class="@error('email') is-invalid @enderror form-control"  />
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -108,7 +108,7 @@
                                     <label for="first_name" class="col-md-3">First Name</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="first_name" id="first_name" value="{{ ($row->first_name) ? $row->first_name : old('first_name') }}" class="@error('first_name') is-invalid @enderror form-control"  />
+                                        <input type="text" name="first_name" id="first_name" value="{{ (isset($row->first_name)) ? $row->first_name : old('first_name') }}" class="@error('first_name') is-invalid @enderror form-control"  />
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -122,7 +122,7 @@
                                     <label for="last_name" class="col-md-3">Last Name</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="last_name" id="last_name" value="{{ ($row->last_name) ? $row->last_name : old('last_name') }}" class="@error('last_name') is-invalid @enderror form-control"  />
+                                        <input type="text" name="last_name" id="last_name" value="{{ (isset($row->last_name)) ? $row->last_name : old('last_name') }}" class="@error('last_name') is-invalid @enderror form-control"  />
                                         @error('last_name')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -136,7 +136,7 @@
                                     <label for="skype_id" class="col-md-3">Skype ID</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="skype_id" id="skype_id" value="{{ ($row->skype_id) ? $row->skype_id : old('skype_id') }}" class="@error('skype_id') is-invalid @enderror form-control"  />
+                                        <input type="text" name="skype_id" id="skype_id" value="{{ (isset($row->skype_id)) ? $row->skype_id : old('skype_id') }}" class="@error('skype_id') is-invalid @enderror form-control"  />
                                         @error('skype_id')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -150,7 +150,7 @@
                                     <label for="phone_number" class="col-md-3">Phone Number</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="phone_number" id="phone_number" value="{{ ($row->phone_number) ? $row->phone_number : old('phone_number') }}" class="@error('phone_number') is-invalid @enderror form-control"  />
+                                        <input type="text" name="phone_number" id="phone_number" value="{{ (isset($row->phone_number)) ? $row->phone_number : old('phone_number') }}" class="@error('phone_number') is-invalid @enderror form-control"  />
                                         @error('phone_number')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
