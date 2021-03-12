@@ -32,11 +32,7 @@ class TeacherLoginController extends Controller
 		);
 
 		if($validator->fails()) {
-			return response()->json([
-				'notify' => 'inline',
-				'status' => 'danger',
-				'message' => $validator->errors()->all()
-			]);
+			return back()->withInput($request->only('email', 'remember'))->withErrors($validator);
 		}
 
     	if (Auth::guard('teacher')->attempt(['email' => $request->email, 'password' => $request->password, 'user_type' => 'teacher'])) {
