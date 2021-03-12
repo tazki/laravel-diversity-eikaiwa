@@ -1,0 +1,883 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Matching Apps API",
+        "description": "Implementation of Swagger in Laravel with Passport Auth Documentation",
+        "contact": {
+            "email": "mark@mosaique.link"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Register"
+                ],
+                "summary": "Register",
+                "operationId": "register",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_type",
+                        "in": "query",
+                        "description": "Accepted Value: individual & corporate",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Login",
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/{id}/accomplishments": {
+            "post": {
+                "tags": [
+                    "User Accomplishments"
+                ],
+                "summary": "Fetch User Accomplishments",
+                "description": "{id} is the User Accomplishments ID from user_accomplishments table",
+                "operationId": "fetch",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/list/accomplishments": {
+            "post": {
+                "tags": [
+                    "User Accomplishments"
+                ],
+                "summary": "List User Accomplishments",
+                "description": "{id} is the User ID from users table",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/store/accomplishments": {
+            "post": {
+                "tags": [
+                    "User Accomplishments"
+                ],
+                "summary": "Store User Accomplishments",
+                "description": "{id} is the User ID from users table",
+                "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "project_name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "project_detail",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_contribution",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/update/accomplishments": {
+            "post": {
+                "tags": [
+                    "User Accomplishments"
+                ],
+                "summary": "Update User Accomplishments",
+                "description": "{id} is the User Accomplishments ID from user_accomplishments table",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "project_name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "project_detail",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_contribution",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/update": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update",
+                "description": "{id} is the User ID from users table",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "mobile_number",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "date_of_birth",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "about_you",
+                        "in": "query",
+                        "schema": {
+                            "type": "text"
+                        }
+                    },
+                    {
+                        "name": "fields_of_interest",
+                        "in": "query",
+                        "description": "Array of Interest and use json_encode",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    {
+                        "name": "skills",
+                        "in": "query",
+                        "description": "Array of Skills and use json_encode",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Array of Language and use json_encode",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    {
+                        "name": "qualification",
+                        "in": "query",
+                        "description": "Array of Qualification and use json_encode",
+                        "schema": {
+                            "type": "json"
+                        }
+                    },
+                    {
+                        "name": "other",
+                        "in": "query",
+                        "schema": {
+                            "type": "text"
+                        }
+                    },
+                    {
+                        "name": "avatar",
+                        "in": "query",
+                        "description": "this should be image upload",
+                        "schema": {
+                            "type": "image"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/education": {
+            "post": {
+                "tags": [
+                    "User Education"
+                ],
+                "summary": "Fetch User Education",
+                "description": "{id} is the User Education ID from user_education table",
+                "operationId": "fetch",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/list/education": {
+            "post": {
+                "tags": [
+                    "User Education"
+                ],
+                "summary": "List User Education",
+                "description": "{id} is the User ID from users table",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/store/education": {
+            "post": {
+                "tags": [
+                    "User Education"
+                ],
+                "summary": "Store User Education",
+                "description": "{id} is the User ID from users table",
+                "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "school_name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "course",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/update/education": {
+            "post": {
+                "tags": [
+                    "User Education"
+                ],
+                "summary": "Update User Education",
+                "description": "{id} is the User Education ID from user_education table",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "school_name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "course",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/projects": {
+            "post": {
+                "tags": [
+                    "User Projects"
+                ],
+                "summary": "Fetch User Projects",
+                "description": "{id} is the User Projects ID from user_projects table",
+                "operationId": "fetch",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/list/projects": {
+            "post": {
+                "tags": [
+                    "User Projects"
+                ],
+                "summary": "List User Projects",
+                "description": "{id} is the User ID from users table",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/store/projects": {
+            "post": {
+                "tags": [
+                    "User Projects"
+                ],
+                "summary": "Store User Projects",
+                "description": "{id} is the User ID from users table",
+                "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "project_name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "project_detail",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_contribution",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/update/projects": {
+            "post": {
+                "tags": [
+                    "User Projects"
+                ],
+                "summary": "Update User Projects",
+                "description": "{id} is the User Projects ID from user_projects table",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "project_name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "project_detail",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "user_contribution",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/work-experience": {
+            "post": {
+                "tags": [
+                    "User Work Experience"
+                ],
+                "summary": "Fetch Work Experience",
+                "description": "{id} is the Work Experience ID from user_work_experience table",
+                "operationId": "fetch",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/list/work-experience": {
+            "post": {
+                "tags": [
+                    "User Work Experience"
+                ],
+                "summary": "List Work Experience",
+                "description": "{id} is the User ID from users table",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/store/work-experience": {
+            "post": {
+                "tags": [
+                    "User Work Experience"
+                ],
+                "summary": "Store Work Experience",
+                "description": "{id} is the User ID from users table",
+                "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "job_title",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "company_name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "salary",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "project_detail",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "is_still_working_with_company",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "employment_type",
+                        "in": "query",
+                        "description": "Accepted Value: full_time, part_time, freelance",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/update/work-experience": {
+            "post": {
+                "tags": [
+                    "User Work Experience"
+                ],
+                "summary": "Update Work Experience",
+                "description": "{id} is the Work Experience ID from user_work_experience table",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "job_title",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "company_name",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "salary",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "project_detail",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "is_still_working_with_company",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "employment_type",
+                        "in": "query",
+                        "description": "Accepted Value: full_time, part_time, freelance",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            },
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "https://matching-apps.test/oauth/authorize",
+                        "tokenUrl": "https://matching-apps.test/oauth/token",
+                        "refreshUrl": "https://matching-apps.test/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

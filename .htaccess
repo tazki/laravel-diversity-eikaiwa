@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^laravel_prod
+RewriteRule ^(.*)$ laravel_prod/$1 [L]
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(.*)$ laravel_prod/public/$1 [L]
+</IfModule>
