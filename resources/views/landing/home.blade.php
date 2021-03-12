@@ -150,7 +150,7 @@
 						<div class="pricing__item">
 							<div class="wrap-price">
 								<!-- <div class="icon icon-store"></div> -->
-	                     <h3 class="pricing__title">Silver</h3>
+	                     <h3 class="pricing__title">Plan A</h3>
 	                     <!-- <p class="pricing__sentence">Up to 5 users</p> -->
 							</div>
                      <div class="pricing__price">
@@ -175,7 +175,7 @@
                   <div class="pricing__item">
                   	<div class="wrap-price">
                   		<!-- <div class="icon icon-home2"></div> -->
-	                     <h3 class="pricing__title">Gold</h3>
+	                     <h3 class="pricing__title">Plan B</h3>
 	                     <!-- <p class="pricing__sentence">Unlimited users</p> -->
 							</div>
                      <div class="pricing__price">

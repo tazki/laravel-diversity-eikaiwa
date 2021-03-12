@@ -29,21 +29,21 @@
 	<div id="fh5co-staff">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3 text-center">
-					<div class="staff">
-						<div class="staff-img" style="background-image: url({{ secure_asset('site/images/staff-1.jpg') }} );">
-							<!-- <ul class="fh5co-social">
-								<li><a href="#"><i class="icon-facebook2"></i></a></li>
-								<li><a href="#"><i class="icon-twitter2"></i></a></li>
-								<li><a href="#"><i class="icon-dribbble2"></i></a></li>
-								<li><a href="#"><i class="icon-github"></i></a></li>
-							</ul> -->
+				@if(isset($rows) && is_object($rows))
+					@foreach($rows as $item)
+					<div class="col-md-3 text-center">
+						<div class="staff">
+							@if(isset($item->avatar) && !empty($item->avatar))
+								<div class="staff-img" style="background-image: url({{ userFile($item->avatar, '', $item->id) }});"></div>
+							@endif
+							<span>{{ __('English Teacher') }}</span>
+							<h3>{{ $item->name }}</h3>
+							{{-- <h3><a href="#">{{ $item->name }}</a></h3> --}}
+							{{-- <p>{{ __('Hello! Welcome to Diversity! Learning English doesn’t need to be stiff and strict. Talking and communicating with a teacher on a relax and enjoyable environment helps you learn English on a natural way. That being said, as a person who learned English as an official second language, I can give you advices and tips that are useful not just academically but in daily lives. As a teacher with 5 years teaching experience and current English teacher in Junior High School, I’m confident that I will be able to assist and support you in your learning.') }}</p> --}}
 						</div>
-						<span>{{ __('English Teacher') }}</span>
-						<h3><a href="#">{{ __('Rossel Sensei') }}</a></h3>
-						<p>{{ __('Hello! Welcome to Diversity! Learning English doesn’t need to be stiff and strict. Talking and communicating with a teacher on a relax and enjoyable environment helps you learn English on a natural way. That being said, as a person who learned English as an official second language, I can give you advices and tips that are useful not just academically but in daily lives. As a teacher with 5 years teaching experience and current English teacher in Junior High School, I’m confident that I will be able to assist and support you in your learning.') }}</p>
 					</div>
-				</div>
+					@endforeach
+				@endif
 			</div>
 		</div>
 	</div>
