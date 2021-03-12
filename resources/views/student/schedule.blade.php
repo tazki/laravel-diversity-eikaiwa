@@ -27,14 +27,16 @@
         </div>
     </div> --}}
 
-    <a href="#" class="js-btn-add fab btn btn-primary btn-floated"
-        data-tooltip="tooltip"
-        data-title="{{ __('Create Class Booking') }}"
-        data-create="{{ route('student_schedule_add') }}"
-        data-toggle="modal"
-        data-target="#studentScheduleFormModal">
-            <span class="fa fa-plus"></span>
-    </a>
+    @if(isset($rows['show_booking']) && $rows['show_booking'] == 1)
+        <a href="#" class="js-btn-add fab btn btn-primary btn-floated"
+            data-tooltip="tooltip"
+            data-title="{{ __('Create Class Booking') }}"
+            data-create="{{ route('student_schedule_add') }}"
+            data-toggle="modal"
+            data-target="#studentScheduleFormModal">
+                <span class="fa fa-plus"></span>
+        </a>
+    @endif
     {{-- <a href="" class="js-btn-add btn btn-primary btn-floated"
         title="{{ __('Create Booking') }}">
         <span class="fa fa-plus"></span> --}}

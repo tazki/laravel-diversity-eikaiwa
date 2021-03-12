@@ -25,6 +25,10 @@ class ScheduleController extends Controller
                 ['status', '=', 1]
             ])->select('*', DB::raw('CONCAT(mt_users.first_name, " ", mt_users.last_name) as name'))
             ->get();
+        
+        $studentBooking = UserBookings::where('user_bookings.student_id', '=', Auth::user()->id)->get();
+        $bookingCount = $studentBooking->count();
+        $rows['show_booking'] = (empty($bookingCount)) ? 1 : 0;
 
         return view('student.schedule', compact('rows'));
     }
