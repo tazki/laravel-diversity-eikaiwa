@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('includes.head')
+    <script src="https://www.google.com/recaptcha/api.js?render=6Le0aXwaAAAAAMU26ErEOUj1qyMZu76472Fd0r-_"></script>
 </head>
 <body>
     <main class="auth">
@@ -14,10 +15,10 @@
                     <h1 class="text-left" style="line-height:82px;">Diversity Eikaiwa</h1>
                 </div>
             </div>
-            @if(request()->is('student/login') || request()->is('/'))
+            @if(request()->is('s/login') || request()->is('/'))
                 <p>{{ __('Don’t have an account yet?') }} <a href="{{ route('page_register') }}">{{ __('Create One') }}</a></p>
             @endif
-            @if(request()->is('student/signup') || request()->is('/'))
+            @if(request()->is('s/signup') || request()->is('/'))
                 <p>{{ __('Have an account?') }} <a href="{{ route('page_login') }}">{{ __('Login') }}</a></p>
             @endif
         </header>

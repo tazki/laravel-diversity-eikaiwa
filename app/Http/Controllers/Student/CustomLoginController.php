@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Ixudra\Curl\Facades\Curl;
 use Auth;
 
 class CustomLoginController extends Controller
@@ -20,6 +21,20 @@ class CustomLoginController extends Controller
         }
 		$row['login_url'] = route('page_login');
 		return view('auth.login', compact('row'));
+	}
+
+	public function recaptcha(Request $request)
+	{
+		$params = array(
+			'secret' => '6Le0aXwaAAAAANuh7J2adyFLE5HLZniUnckvOk32',
+			'response' => $request->token
+		);
+
+		$response = Curl::to('https://www.google.com/recaptcha/api/siteverify')
+		->withData($params)
+		->post();
+		$responseObject = json_decode($response);
+		return $response;
 	}
 
     public function loginUser(Request $request)

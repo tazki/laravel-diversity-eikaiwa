@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<form method="POST" action="{{ route('page_register') }}" class="auth-form">
+<form method="POST" id="registerForm" action="{{ route('page_register') }}" class="auth-form">
     @csrf
 
     <div class="form-row">
@@ -111,7 +111,7 @@
     </div>
 
     <div class="form-group">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">{{ __('Sign Up') }}</button>
+        <button type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm();">{{ __('Sign Up') }}</button>
     </div>
 
     {{-- DISPLAY THIS ON CONFIRMATION AFTER SIGNUP --}}
@@ -125,10 +125,32 @@
 
         <div class="col-md-6">
             <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">{{ __('Confirm') }}</button>
+                <button class="btn btn-lg btn-primary btn-block">{{ __('Confirm') }}</button>
             </div>
         </div>
     </div>
 </form>
+<script>
+function validateForm() {
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6Le0aXwaAAAAAMU26ErEOUj1qyMZu76472Fd0r-_', {action: 'submit'}).then(function(token) {
+            $.ajax({
+                url: "{{ route('page_recaptcha') }}",
+                type: "POST",
+                dataType: 'json',
+                data : {"_token":"{{ csrf_token() }}", "token":token}
+            }).done(function (data) {
+                console.log(data);
+                if(data.success == true) {
+                    document.getElementById("registerForm").submit();
+                } else {
+                    alert('Robots detected need to reload page');
+                    location.reload();
+                }
+            });
+        });
+    });
+}
+</script>
 <footer class="auth-footer">© 2021 DIVERSITY EIKAIWA</footer>
 @endsection
