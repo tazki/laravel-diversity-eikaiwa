@@ -47,15 +47,7 @@ class CustomLoginController extends Controller
 		);
 
 		if($validator->fails()) {
-<<<<<<< HEAD
-			return response()->json([
-				'notify' => 'inline',
-				'status' => 'danger',
-				'message' => $validator->errors()->all()
-			]);
-=======
 			return back()->withInput($request->only('email', 'remember'))->withErrors($validator);
->>>>>>> 9ad8db5629d3b8ab576de851b59962ab12b6b652
 		}
 
     	$email = $request->email;
