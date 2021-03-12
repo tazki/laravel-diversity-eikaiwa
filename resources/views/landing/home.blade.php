@@ -98,6 +98,19 @@
 		</div>
 	</div> --}}
 
+	<div id="fh5co-about">
+		<div class="container">
+			<div class="col-md-6 animate-box">
+				<h2>{{ __('Why choose us?') }}</h2>
+				<p>{{ __('At Diversity, we are focusing on developing our teachers, materials and understanding our students needs which is the foundation of our teaching method. One of the advantages of Diversity is that all teachers are living in Japan or had lived in Japan which makes them understand the culture and how they can teach English to the Japanese people.') }}</p>
+				<p>{{ __('In addition, we will provide exclusive seminars for our students which other English service provider don’t give. These seminars will focus on building your confidence and other skills that you can use for a lifetime.') }}</p>
+			</div>
+			<div class="col-md-6">
+				<img class="img-responsive" src="{{ secure_asset('site/images/whychooseus.jpg') }}" alt="Diversity Eikaiwa">
+			</div>
+		</div>
+	</div>
+
 	<div id="fh5co-pricing" class="fh5co-bg-section">
 		<div class="container">
 			<div class="row animate-box">

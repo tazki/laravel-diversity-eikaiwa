@@ -39,6 +39,18 @@
 		</div>
 	</div>
 
+	{{-- <div id="fh5co-about">
+		<div class="container">
+			<div class="col-md-6 animate-box">
+				<h2>{{ __('What is Diversity way?') }}</h2>
+				<p>{{ __('Diversity way, is a way of learning not just from your teacher but also from your peers such as your classmates. At Diversity, we encourage our students to be more pro-active in sharing their experience and knowledge.') }}</p>
+			</div>
+			<div class="col-md-6">
+				<img class="img-responsive" src="{{ secure_asset('site/images/whychooseus.jpg') }}" alt="Diversity Eikaiwa">
+			</div>
+		</div>
+	</div> --}}
+
 	{{-- <div id="fh5co-gallery" class="fh5co-bg-section">
 		<div class="row text-center">
 			<h2><span>Instagram Gallery</span></h2>
