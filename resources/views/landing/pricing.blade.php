@@ -57,7 +57,7 @@
 	                        <li class="pricing__feature">Max of 1 student</li>
 	                        <li class="pricing__feature">45 minutes duration</li>
 	                     </ul>
-	                     <button class="pricing__action">Choose plan</button>
+	                     <a href="{{ route('page_register') }}" class="pricing__action">Choose plan</a>
                      </div>
                   </div>
 					</div>
@@ -82,7 +82,7 @@
 	                        <li class="pricing__feature">Max of 2 students</li>
 	                        <li class="pricing__feature">45 minutes per lesson</li>
 	                     </ul>
-	                     <button class="pricing__action">Choose plan</button>
+	                     <a class="pricing__action" disabled>Coming Soon</a>
                      </div>
                  </div>
 					</div>
@@ -107,7 +107,7 @@
 	                        <li class="pricing__feature">Max of 2 students</li>
 	                        <li class="pricing__feature">45 minutes per lesson</li>
 	                     </ul>
-	                     <button class="pricing__action">Choose plan</button>
+	                     <a class="pricing__action" disabled>Coming Soon</a>
                      </div>
                   </div>
                </div>

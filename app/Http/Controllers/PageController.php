@@ -37,6 +37,11 @@ class PageController extends Controller
         return view('landing.contact');
     }
 
+    public function termsCondition()
+    {
+        return view('landing.terms-condition');
+    }
+
     public function register()
     {
         return view('auth.register');

@@ -15,15 +15,15 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>The Roots of Education are Bitter, But the Fruit is Sweet</h1>
-								<h2>Brought to you by <a href="" target="_blank">diversity eikaiwa</a></h2>
-								<p><a class="btn btn-primary btn-lg" href="#">Start Learning Now!</a></p>
+			   					<h1>At Diversity Eikaiwa, we prioritize our Teachers and Students</h1>
+								{{-- <h2>Brought to you by <a href="" target="_blank">diversity eikaiwa</a></h2> --}}
+								<p><a class="btn btn-primary btn-lg" href="{{ route('page_register') }}">Start Learning Now!</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
 		   		</div>
 		   	</li>
-		   	<li style="background-image: url({{ secure_asset('site/images/img_bg_2.jpg') }} );">
+		   	{{-- <li style="background-image: url({{ secure_asset('site/images/img_bg_2.jpg') }} );">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="row">
@@ -36,26 +36,12 @@
 			   			</div>
 			   		</div>
 		   		</div>
-		   	</li>
-		   	<li style="background-image: url({{ secure_asset('site/images/img_bg_3.jpg') }} );">
-		   		<div class="overlay-gradient"></div>
-		   		<div class="container">
-		   			<div class="row">
-			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
-			   				<div class="slider-text-inner">
-			   					<h1>We Help You to Learn New Things</h1>
-									<h2>Brought to you by <a href="" target="_blank">diversity eikaiwa</a></h2>
-									<p><a class="btn btn-primary btn-lg btn-learn" href="#">Start Learning Now!</a></p>
-			   				</div>
-			   			</div>
-			   		</div>
-		   		</div>
-		   	</li>		   	
+		   	</li> --}}
 		  	</ul>
 	  	</div>
 	</aside>
 
-	<div id="fh5co-course">
+	{{-- <div id="fh5co-course">
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
@@ -110,7 +96,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
 	<div id="fh5co-pricing" class="fh5co-bg-section">
 		<div class="container">
@@ -143,7 +129,7 @@
 	                        <li class="pricing__feature">Max of 1 student</li>
 	                        <li class="pricing__feature">45 minutes duration</li>
 	                     </ul>
-	                     <button class="pricing__action">Choose plan</button>
+	                     <a href="{{ route('page_register') }}" class="pricing__action">Choose plan</a>
                      </div>
                   </div>
 					</div>
@@ -168,7 +154,7 @@
 	                        <li class="pricing__feature">Max of 2 students</li>
 	                        <li class="pricing__feature">45 minutes per lesson</li>
 	                     </ul>
-	                     <button class="pricing__action">Choose plan</button>
+	                     <a class="pricing__action" disabled>Coming Soon</a>
                      </div>
                  </div>
 					</div>
@@ -193,7 +179,7 @@
 	                        <li class="pricing__feature">Max of 2 students</li>
 	                        <li class="pricing__feature">45 minutes per lesson</li>
 	                     </ul>
-	                     <button class="pricing__action">Choose plan</button>
+	                     <a class="pricing__action" disabled>Coming Soon</a>
                      </div>
                   </div>
                </div>

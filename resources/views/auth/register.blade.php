@@ -101,7 +101,7 @@
             <input type="checkbox" name="agree" class="custom-control-input js-accept-checkbox" id="client-aggrement" required="">
             <label class="custom-control-label" for="client-aggrement">
                 <p class="text-center text-muted mb-0">
-                    By creating an account you agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+                    By creating an account you agree to the <a href="{{ route('page_terms') }}" target="_blank">Terms and Condition</a>.
                 </p>
             </label>
             <div class="invalid-feedback">

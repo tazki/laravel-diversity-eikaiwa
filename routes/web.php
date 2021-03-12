@@ -27,6 +27,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('about-us', 'PageController@about')->name('page_about');
     Route::get('pricing', 'PageController@pricing')->name('page_pricing');
     Route::get('contact', 'PageController@contact')->name('page_contact');
+    Route::get('terms-and-conditions', 'PageController@termsCondition')->name('page_terms');
 });
 
 // Student
