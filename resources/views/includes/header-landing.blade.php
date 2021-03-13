@@ -44,6 +44,7 @@
                         <li {{ (request()->is('contact')) ? 'class="active"' : '' }}><a href="{{ route('page_contact') }}">{{ __('Contact') }}</a></li>
                         <li class="btn-cta"><a href="{{ route('page_login') }}"><span>{{ __('Login') }}</span></a></li>
                         <li class="btn-cta"><a href="{{ route('page_register') }}"><span>{{ __('Sign Up') }}</span></a></li>
+                        <li {{ (request()->is('contact')) ? 'class="active"' : '' }}><a href="{{ route('page_language', (App::isLocale('en')) ? 'jp' : 'en') }}">{{ (App::isLocale('en')) ? __('Japanese') : __('English') }}</a></li>
                     </ul>
                 </div>
             </div>

@@ -98,15 +98,17 @@
 
     <div class="form-group">
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" name="agree" class="custom-control-input js-accept-checkbox" id="client-aggrement" required="">
+            <input type="checkbox" name="agree" value="1" class="custom-control-input js-accept-checkbox @error('agree') is-invalid @enderror" id="client-aggrement" required="">
             <label class="custom-control-label" for="client-aggrement">
                 <p class="text-center text-muted mb-0">
-                    By creating an account you agree to the <a href="{{ route('page_terms') }}" target="_blank">Terms and Condition</a>.
+                    {{ __('By creating an account you agree to the') }} <a href="{{ route('page_terms') }}" target="_blank">{{ __('Terms and Condition') }}</a>.
                 </p>
             </label>
-            <div class="invalid-feedback">
-                {{ __('Accept our terms of use and privacy policy') }}
-            </div>
+            @error('agree')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ __('Accept our terms of use and privacy policy') }}</strong>
+                </span>
+            @enderror
         </div>
     </div>
 

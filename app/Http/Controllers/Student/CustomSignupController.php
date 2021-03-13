@@ -13,6 +13,7 @@ class CustomSignupController extends Controller
     public function addUser(Request $request)
     {
         $validationSetting = array(
+            'agree' => ['required', 'integer'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'first_name' => ['required', 'string', 'max:255'],

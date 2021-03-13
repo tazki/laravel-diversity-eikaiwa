@@ -5,7 +5,7 @@
     @csrf
     @include('includes.flash-messages')
     <div class="form-group">
-        <label for="signin-email">{{ __('E-Mail Address') }} <span class="text-danger">*</span></label>
+        <label for="signin-email">{{ __('Email') }} <span class="text-danger">*</span></label>
         <input id="signin-email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ (!empty($row['email'])) ? $row['email'] : old('email') }}" required autocomplete="email" autofocus>
         @error('email')
             <span class="invalid-feedback" role="alert">

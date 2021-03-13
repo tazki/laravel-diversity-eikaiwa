@@ -18,7 +18,7 @@ Route::get('setlocale/{locale}',function($lang)
 {
     \Session::put('locale',$lang);
     return redirect()->back();   
-});
+})->name('page_language');
 
 Route::group(['middleware'=>'language'],function ()
 {
@@ -28,13 +28,14 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('pricing', 'PageController@pricing')->name('page_pricing');
     Route::get('contact', 'PageController@contact')->name('page_contact');
     Route::get('terms-and-conditions', 'PageController@termsCondition')->name('page_terms');
+
+    Route::get('s/signup', 'PageController@register')->name('page_register');
+    Route::post('s/signup', 'Student\CustomSignupController@addUser')->name('page_register');
+    Route::get('s/login', 'Student\CustomLoginController@index')->name('page_login');
+    Route::post('s/login', 'Student\CustomLoginController@loginUser')->name('page_login');
 });
 
 // Student
-Route::get('s/signup', 'PageController@register')->name('page_register');
-Route::post('s/signup', 'Student\CustomSignupController@addUser')->name('page_register');
-Route::get('s/login', 'Student\CustomLoginController@index')->name('page_login');
-Route::post('s/login', 'Student\CustomLoginController@loginUser')->name('page_login');
 Route::post('s/recaptcha', 'Student\CustomLoginController@recaptcha')->name('page_recaptcha');
 Route::get('s/payment', 'PageController@payment')->name('page_payment');
 Route::post('s/logout', 'Student\StudentController@logout')->name('page_logout');
