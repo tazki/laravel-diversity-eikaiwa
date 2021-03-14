@@ -25,7 +25,7 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
-                        <li class="pricing__feature" style="height:118px;">{{ __('Free trial Lesson') }}</li>
+                        <li class="pricing__feature" style="height:91px;">{{ __('Free trial Lesson') }}</li>
                      </ul>
                      <a href="{{ route('page_register') }}" class="pricing__action">{{ __('Choose plan') }}</a>
                  </div>
