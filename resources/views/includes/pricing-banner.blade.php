@@ -49,7 +49,7 @@
                     <div class="wrap-price">
                         <ul class="pricing__feature-list">
                             <li class="pricing__feature">{{ __('4 lessons per month (Max of 2 students)') }}</li>
-                            <li class="pricing__feature">{{ __('45 minutes lesson 6,800 yen (7,480 with tax) without tax.') }}</li>
+                            <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
                         </ul>
                         <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a>
                     </div>
@@ -73,7 +73,7 @@
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
                         <li class="pricing__feature">{{ __('8 lessons per month (Max of 2 students)') }}</li>
-                        <li class="pricing__feature">{{ __('45 minutes lesson 12,100 yen (13,3310 with tax) (Save 1,500 yen).') }}</li>
+                        <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
                      </ul>
                      <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a>
                  </div>
