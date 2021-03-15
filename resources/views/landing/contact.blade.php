@@ -30,12 +30,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5 col-md-push-1 animate-box">
-					
 					<div class="fh5co-contact-info">
 						<h3>{{ __('Contact Information') }}</h3>
 						<ul>
-							{{-- <li class="address">198 West 21th Street, <br> Suite 721 New York NY 10016</li>
-							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li> --}}
+							<li class="address">Tokyo Koto ku shin ohashi <br />2-15-5 201</li>
+							<li class="phone"><a href="tel://080-1128-1815">080-1128-1815</a></li>
 							<li class="email"><a href="mailto:diversityeikaiwa2021@gmail.com">diversityeikaiwa2021@gmail.com</a></li>
 							<li class="url"><a href="{{ route('page_home') }}">diversityeikaiwa.com</a></li>
 						</ul>
@@ -82,7 +81,6 @@
 					</form>		
 				</div> --}}
 			</div>
-			
 		</div>
 	</div>
 	{{-- <div id="map" class="fh5co-map"></div> --}}
