@@ -48,7 +48,7 @@
 						<ul>
 							<li><strong>{{ __('Company Name') }}:</strong> DiversityEikaiwa</li>
 							<li><strong>{{ __('Postal Code') }}:</strong> 103-0023</li>
-							<li><strong>{{ __('Address') }}:</strong> {{ __('Level 7, Wakamatsu Building, 3-3-6 Nihonbashi-Honcho, Chuo-Ku, Tokyo 103-0023 Japan') }}</li>
+							<li style="width:80%;"><strong>{{ __('Address') }}:</strong> {{ __('Level 7, Wakamatsu Building, 3-3-6 Nihonbashi-Honcho, Chuo-Ku, Tokyo 103-0023 Japan') }}</li>
 							<li><strong>{{ __('President CEO') }}:</strong> Oliver Rivera</li>
 							<li><strong>{{ __('Phone') }}:</strong> <a href="tel://03-6202-7083">03 6202 7083</a></li>
 							<li><strong>{{ __('Company URL') }}:</strong> <a href="{{ route('page_home') }}">https://diversityeikaiwa.com</a></li>
