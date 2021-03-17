@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('includes.head')
-    <script src="https://www.google.com/recaptcha/api.js?render=6Le0aXwaAAAAAMU26ErEOUj1qyMZu76472Fd0r-_"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={!! env('RECAPTCHA_SITE_KEY') !!}"></script>
 </head>
 <body>
     <main class="auth">

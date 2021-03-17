@@ -135,7 +135,7 @@
 <script>
 function validateForm() {
     grecaptcha.ready(function() {
-        grecaptcha.execute('6Le0aXwaAAAAAMU26ErEOUj1qyMZu76472Fd0r-_', {action: 'submit'}).then(function(token) {
+        grecaptcha.execute("{!! env('RECAPTCHA_SITE_KEY') !!}", {action: 'submit'}).then(function(token) {
             $.ajax({
                 url: "{{ route('page_recaptcha') }}",
                 type: "POST",

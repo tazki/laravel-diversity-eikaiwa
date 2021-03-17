@@ -26,7 +26,7 @@ class CustomLoginController extends Controller
 	public function recaptcha(Request $request)
 	{
 		$params = array(
-			'secret' => '6Le0aXwaAAAAANuh7J2adyFLE5HLZniUnckvOk32',
+			'secret' => env('RECAPTCHA_SECRET'),
 			'response' => $request->token
 		);
 

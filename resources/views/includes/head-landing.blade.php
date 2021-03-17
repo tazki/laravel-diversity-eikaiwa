@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="robots" content="noindex,nofollow" />
+<meta name="robots" content="{{ env('APP_ROBOTS') ? 'index,follow' : 'noindex,nofollow' }}" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="shortcut icon" href="{{ secure_asset('images/favicon.ico') }}">
@@ -76,3 +76,4 @@ $('#simply-countdown-losange').simplyCountdown({
     enableUtc: false
 });
 </script>
+<script src="https://www.google.com/recaptcha/api.js?render={!! env('RECAPTCHA_SITE_KEY') !!}"></script>
