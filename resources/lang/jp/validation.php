@@ -14,13 +14,13 @@ return [
 
     'custom' => [
         'email' => [
-            'required' => 'The email field is required.',
+            'required' => 'メールアドレス (必須)',
         ],
         'subject' => [
-            'required' => 'The subject field is required.',
+            'required' => '件名(必須)',
         ],
         'message' => [
-            'required' => 'The message field is required.',
+            'required' => '内容(必須',
         ],
     ],
 
