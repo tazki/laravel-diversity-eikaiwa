@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\CustomClass\KomojuApi;
 use App\Models\User;
 use App\Models\UserDetails;
@@ -43,8 +44,24 @@ class PageController extends Controller
         return view('landing.pricing');
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
+        if($request->isMethod('post')) {
+            $validator = Validator::make($request->all(),
+                [
+                    'email' => 'required|email',
+                    // 'first_name' => 'required|string',
+                    // 'last_name' => 'required|string',
+                    'subject' => 'required|string',
+                    'message' => 'required|string'
+                ]
+            );
+
+            if($validator->fails()) {
+                return back()->withInput($request->only('email', 'first_name', 'last_name', 'subject', 'message'))->withErrors($validator);
+            }
+        }
+
         return view('landing.contact');
     }
 
