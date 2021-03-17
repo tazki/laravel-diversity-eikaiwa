@@ -42,6 +42,12 @@
 				</div>
 				<div class="col-md-5 animate-box">
 					<h3>{{ __('Get In Touch') }}</h3>
+					@if ($message = Session::get('success'))
+					<div class="alert alert-info alert-dismissible show">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<strong>{{ $message }}</strong>
+					</div>
+					@endif
 					<form method="POST" id="contactForm" action="{{ route('page_contact') }}" class="auth-form">
 						@csrf
 						<div class="row form-group">
