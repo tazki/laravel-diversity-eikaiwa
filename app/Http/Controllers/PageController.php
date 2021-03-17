@@ -63,7 +63,8 @@ class PageController extends Controller
             }
 
             $to_name = 'Oliver Rivera';
-            $to_email = 'oliverrivera09@gmail.com';
+            // $to_email = 'oliverrivera09@gmail.com';
+            $to_email = 'tazki04@gmail.com';
             $name = $request->first_name.' '.$request->last_name;
             
             $body = '<strong>Name:</strong> '. $name.'<br />';
