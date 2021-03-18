@@ -62,20 +62,20 @@ class PageController extends Controller
                 return back()->withInput($request->only('email', 'first_name', 'last_name', 'subject', 'message'))->withErrors($validator);
             }
 
-            $to_name = 'Oliver Rivera';
-            $to_email = 'oliverrivera09@gmail.com';
-            $name = $request->first_name.' '.$request->last_name;
+            // $to_name = 'Oliver Rivera';
+            // $to_email = 'oliverrivera09@gmail.com';
+            // $name = $request->first_name.' '.$request->last_name;
             
-            $body = '<strong>Name:</strong> '. $name.'<br />';
-            $body .= '<strong>Email:</strong> '. $request->email.'<br />';
-            $body .= '<strong>Subject:</strong> '. $request->subject.'<br />';
-            $body .= '<strong>Message:</strong> '. $request->message;
-            $data['body'] = $body;
-            $data['name'] = $name;
-            Mail::send('emails.contact', $data, function($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Contact Form');
-                $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
-            });
+            // $body = '<strong>Name:</strong> '. $name.'<br />';
+            // $body .= '<strong>Email:</strong> '. $request->email.'<br />';
+            // $body .= '<strong>Subject:</strong> '. $request->subject.'<br />';
+            // $body .= '<strong>Message:</strong> '. $request->message;
+            // $data['body'] = $body;
+            // $data['name'] = $name;
+            // Mail::send('emails.contact', $data, function($message) use ($to_name, $to_email) {
+            //     $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Contact Form');
+            //     $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
+            // });
 
             return back()->with('success', __('Message Sent Successful!'));
         }
