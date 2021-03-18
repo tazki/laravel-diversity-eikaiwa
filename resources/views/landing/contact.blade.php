@@ -40,7 +40,7 @@
 						</ul>
 					</div>
 				</div>
-				{{-- <div class="col-md-5 animate-box">
+				<div class="col-md-5 animate-box">
 					<h3>{{ __('Get In Touch') }}</h3>
 					@if ($message = Session::get('success'))
 					<div class="alert alert-info alert-dismissible show">
@@ -132,7 +132,7 @@
 						});
 					}
 					</script>
-				</div> --}}
+				</div>
 			</div>
 		</div>
 	</div>
