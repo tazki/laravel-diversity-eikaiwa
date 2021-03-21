@@ -99,5 +99,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('admin/students', 'Admin\StudentController@index')->name('students_list');
     Route::get('admin/student/add', 'Admin\StudentController@add')->name('students_add');
     Route::post('admin/student/add', 'Admin\StudentController@add')->name('students_add');
+    // Contact Form
+    Route::get('admin/contact-form', 'Admin\ContactFormController@index')->name('contact_form');
+    
 });
 

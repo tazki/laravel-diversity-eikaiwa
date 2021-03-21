@@ -8,6 +8,7 @@ use App\Http\CustomClass\KomojuApi;
 use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\UserPayments;
+use App\Models\ContactForms;
 use Mail;
 use DB;
 
@@ -93,7 +94,12 @@ class PageController extends Controller
             //     $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Contact Form');
             //     $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
             // });
-
+            $data['first_name'] = $request->first_name;
+            $data['last_name'] = $request->last_name;
+            $data['email'] = $request->email;
+            $data['subject'] = $request->subject;
+            $data['message'] = $request->message;
+            ContactForms::create($data);
             return back()->with('success', __('Message Sent Successful!'));
         }
 

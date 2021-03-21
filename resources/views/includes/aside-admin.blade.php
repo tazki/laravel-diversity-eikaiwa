@@ -44,6 +44,12 @@
                             <span class="menu-text">{{ __('Teachers') }}</span>
                         </a>
                     </li>
+                    <li class="menu-item {{ (request()->is('admin/contact-form') || request()->is('admin/contact-form/*')) ? 'has-active' : '' }}">
+                        <a href="{{ url('admin/contact-form') }}" class="menu-link">
+                            <span class="menu-icon fas fa-comment"></span>
+                            <span class="menu-text">{{ __('Contact Form') }}</span>
+                        </a>
+                    </li>
                     <li class="menu-item {{ (request()->is('admin/payment')) ? 'has-active' : '' }}">
                         <a href="{{ url('admin/payment') }}" class="menu-link">
                             <span class="menu-icon fas fa-credit-card"></span>
