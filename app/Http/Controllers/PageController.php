@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\CustomClass\KomojuApi;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\UserPayments;
 use Mail;
 use DB;
 
@@ -17,8 +18,24 @@ class PageController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('session_id') && !empty($request->session_id)) {
+            $komojuData = KomojuApi::sessionGet($request->session_id);
+            if(isset($komojuData->status) && !empty($komojuData->status)) {
+                switch($komojuData->status) {
+                    case 'completed':
+                        $rowPaymentData['status'] = 2;
+                    break;
+                    case 'cancelled':
+                        $rowPaymentData['status'] = 1;
+                    break;
+                }
+
+                $condition['komoju_session_id'] = $request->session_id;
+                UserPayments::updateOrCreate($condition, $rowPaymentData);
+            }
+        }
         return view('landing.home');
     }
 
@@ -88,13 +105,38 @@ class PageController extends Controller
         return view('landing.terms-condition');
     }
 
-    public function register()
+    public function register(Request $request)
     {
-        return view('auth.register');
+        $row['service'] = $request->service;
+        return view('auth.register', compact('row'));
     }
 
-    public function payment()
+    public function payment(Request $request)
     {
-        $shop = KomojuApi::accessToken();
+        if($request->has('id') && !empty($request->id)) {
+            $id = explode('|', urldecode(base64_decode($request->id)));
+            $row = User::where('id', '=', $id)->first();
+            $rowPayment = UserPayments::where([
+                ['user_id', '=', $id[0]],
+                ['service_id', '=', $id[1]],
+                ['status', '=', 0]
+            ])->first();
+            $orderNumber = 'DE'.$rowPayment->id;
+            $data['price'] = $rowPayment->service_price;
+            $data['id'] = $row->id;
+            $data['email'] = $row->email;
+            $data['name'] = $row->first_name.' '.$row->last_name;
+            $data['external_order_num'] = $orderNumber;
+
+            $komojuData = KomojuApi::hostedPage($data);
+            if(isset($komojuData->session_url) && !empty($komojuData->session_url)) {
+                $rowPaymentData['order_number'] = $orderNumber;
+                $rowPaymentData['payment_data'] = json_encode($komojuData);
+                $rowPaymentData['komoju_session_id'] = $komojuData->id;
+                $condition['id'] = $rowPayment->id;
+                UserPayments::updateOrCreate($condition, $rowPaymentData);
+                return redirect($komojuData->session_url);
+            }
+        }
     }
 }

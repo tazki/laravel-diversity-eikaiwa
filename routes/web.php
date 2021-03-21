@@ -34,11 +34,12 @@ Route::group(['middleware'=>'language'],function ()
     Route::post('s/signup', 'Student\CustomSignupController@addUser')->name('page_register');
     Route::get('s/login', 'Student\CustomLoginController@index')->name('page_login');
     Route::post('s/login', 'Student\CustomLoginController@loginUser')->name('page_login');
+
+    Route::get('s/payment', 'PageController@payment')->name('page_payment');
 });
 
 // Student
 Route::post('s/recaptcha', 'Student\CustomLoginController@recaptcha')->name('page_recaptcha');
-Route::get('s/payment', 'PageController@payment')->name('page_payment');
 Route::post('s/logout', 'Student\StudentController@logout')->name('page_logout');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth']], function() {//['auth','verified']

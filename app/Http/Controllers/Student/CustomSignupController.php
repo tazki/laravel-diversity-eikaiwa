@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\UserPayments;
 
 class CustomSignupController extends Controller
 {
@@ -22,21 +23,41 @@ class CustomSignupController extends Controller
             'skype_id' => ['string', 'max:255']
         );
         $cleanData = request()->validate($validationSetting);
+        $cleanData['status'] = 1;
+        $cleanData['user_type'] = 'student';
+        $cleanData['password'] = Hash::make($cleanData['password']);
+        unset($cleanData['agree']);
+        $user = User::create($cleanData);
+        if(isset($user->id)) {
+            switch(request()->service) {
+                case 3:
+                    $points = 8;
+                    $price = 13310;
+                break;
+                case 2:
+                    $points = 4;
+                    $price = 7480;
+                break;
+                default:
+                    $points = 1;
+                    $price = 0;
+                    $paymentData['status'] = 2;
+                break;
+            }
 
-        if(request()->service == 1) {
-            $cleanData['status'] = 1;
-            $cleanData['user_type'] = 'student';
-            $cleanData['password'] = Hash::make($cleanData['password']);
-            $user = User::create($cleanData);
-            if(isset($user->id)) {
+            $paymentData['user_id'] = $user->id;
+            $paymentData['service_id'] = request()->service;
+            $paymentData['service_price'] = $price;
+            $paymentData['service_points'] = $points;
+            UserPayments::create($paymentData);
+            if(request()->service == 1) {
                 // return back()->with('success','Student registered successfully!');
                 return redirect(route('page_login'));
-            } else {
-                return back()->with('success','Failed to register this time.');
+            } elseif(in_array(request()->service, array(2,3))) {
+                return redirect(route('page_payment').'?id='.urlencode(base64_encode($user->id.'|'.request()->service)));
             }
-        } elseif(request()->service == 2) {
-
+        } else {
+            return back()->with('success','Failed to register this time.');
         }
-        
     }
 }
