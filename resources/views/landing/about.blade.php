@@ -50,6 +50,8 @@
 							<li><strong>{{ __('Postal Code') }}:</strong> 103-0023</li>
 							<li style="width:80%;"><strong>{{ __('Address') }}:</strong> {{ __('Level 7, Wakamatsu Building, 3-3-6 Nihonbashi-Honcho, Chuo-Ku, Tokyo 103-0023 Japan') }}</li>
 							<li><strong>{{ __('Phone') }}:</strong> <a href="tel://03-6202-7083">03 6202 7083</a></li>
+							<li><strong>{{ __('Service start time') }}:</strong> {{ __('9:00 -17:00 (Monday -Friday)') }}</li>
+							<li><strong>{{ __('Other costs besides lesson charges') }}:</strong> {{ __('none') }}</li>
 						</ul>
 					</div>
 				</div>
@@ -61,6 +63,7 @@
 							<li><strong>{{ __('Company URL') }}:</strong> <a href="{{ route('page_home') }}">https://diversityeikaiwa.com</a></li>
 							<li><strong>{{ __('Content of Company Business') }}:</strong> {{ __('E-learning') }}</li>
 							<li><strong>{{ __('Type of Business') }}:</strong> {{ __('Education') }}</li>
+							<li><strong>{{ __('Return policies') }}:</strong> <a href="{{ route('page_terms') }}" target="_blank">{{ __('Terms and Condition') }}</a></li>
 							{{-- <li><strong>{{ __('Number of Employees') }}:</strong> 5</li>
 							<li><strong>{{ __('Recent Annual Sales') }}:</strong> 0 yen</li>
 							<li><strong>{{ __('Company Foundation Date') }}:</strong> 2021/03/01</li>
