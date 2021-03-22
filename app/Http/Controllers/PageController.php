@@ -10,6 +10,7 @@ use App\Models\UserDetails;
 use App\Models\UserPayments;
 use App\Models\ContactForms;
 use Mail;
+use Auth;
 use DB;
 
 class PageController extends Controller
@@ -34,7 +35,13 @@ class PageController extends Controller
                 }
 
                 $condition['komoju_session_id'] = $request->session_id;
-                UserPayments::updateOrCreate($condition, $rowPaymentData);
+                $row = UserPayments::updateOrCreate($condition, $rowPaymentData);
+                if(isset($row->user_id) && !empty($row->user_id)) {
+                    $user = User::find($row->user_id);
+                    // Login User with User Instance
+                    Auth::login($user);
+                    return redirect(route('student_profile').'?service=1');
+                }
             }
         }
         return view('landing.home');

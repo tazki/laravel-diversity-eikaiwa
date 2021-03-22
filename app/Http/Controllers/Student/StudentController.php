@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
 use Auth;
 use DB;
 use App\Models\User;
+use App\Models\UserPayments;
 
 class StudentController extends Controller
 {
@@ -44,6 +45,52 @@ class StudentController extends Controller
     public function profile()
     {
         $rows['user'] = User::where('id', '=', Auth::user()->id)->first();
+        $rowPayment = UserPayments::where('user_id', '=', Auth::user()->id)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        if(isset($rowPayment[0]) && isset($rowPayment[0]->service_id)) {
+            switch($rowPayment[0]->service_id) {
+                case 3:
+                    $rows['payment']['price'] = 13310;
+                    $rows['payment']['price_label'] = '¥13,310';
+                    $rows['payment']['points'] = 8;
+                    $rows['payment']['service'] = __('Plan B');
+                break;
+                case 2:
+                    $rows['payment']['price'] = 7480;
+                    $rows['payment']['price_label'] = '¥7,480';
+                    $rows['payment']['points'] = 4;
+                    $rows['payment']['service'] = __('Plan A');
+                break;
+                default:
+                    $rows['payment']['price'] = 0;
+                    $rows['payment']['price_label'] = '¥0';
+                    $rows['payment']['points'] = 1;
+                    $rows['payment']['service'] = __('Trial');
+                break;
+            }
+
+            switch($rowPayment[0]->status) {
+                case 2:
+                    $rows['payment']['status'] = __('Completed');
+                break;
+                case 1:
+                    $rows['payment']['status'] = __('Cancelled');
+                break;
+                default:
+                    $rows['payment']['status'] = __('Pending');
+                break;
+            }
+
+            if(!empty($rowPayment[0]->payment_data)) {
+                $payment_data = json_decode($rowPayment[0]->payment_data);
+                if($rowPayment[0]->status == 0) {
+                    $rows['payment']['session_url'] = $payment_data->session_url;
+                }
+            }
+        }
+        $rows['tab'] = (isset(request()->service)) ? 'subscription' : '';
         return view('student.profile', compact('rows'));
     }
     
