@@ -36,6 +36,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::post('s/login', 'Student\CustomLoginController@loginUser')->name('page_login');
 
     Route::get('s/payment', 'PageController@payment')->name('page_payment');
+    Route::get('s/subscribe', 'PageController@subscribe')->name('page_subscribe');
 });
 
 // Student

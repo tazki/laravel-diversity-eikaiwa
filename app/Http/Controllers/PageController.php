@@ -44,6 +44,7 @@ class PageController extends Controller
                 }
             }
         }
+
         return view('landing.home');
     }
 
@@ -124,32 +125,101 @@ class PageController extends Controller
         return view('auth.register', compact('row'));
     }
 
+    public function subscribe(Request $request)
+    {
+        // $data['email'] = 'tazki041@gmail.com';
+        // $data['last_name'] = 'Bautista';
+        // $data['first_name'] = 'Mark';
+        // $data['month'] = 1;
+        // $data['year'] = 26;
+        // $data['number'] = '4111111111111111';
+        // $komojuData = KomojuApi::createCustomer($data);
+        // pr($komojuData);
+        // $data['customer_id'] = '5mhr6yeplhw0rocp1wjhk60az';
+        // $data['amount'] = 26;
+        // $komojuData = KomojuApi::createSubscriptions($data);
+        // pr($komojuData);
+        // komoju_customer_id
+        if($request->has('komojuToken') && !empty($request->komojuToken)) {
+            $id = explode('|', urldecode(base64_decode($request->id)));
+            $user_id = $id[0];
+            $service_id = $id[1];
+            // echo $request->komojuToken;
+            // pr($id);
+            // die;
+            $row = User::where('id', '=', $user_id)->first();
+            $rowPayment = UserPayments::where([
+                ['user_id', '=', $user_id],
+                ['service_id', '=', $service_id],
+                ['status', '=', 0]
+            ])->first();
+            $customerData['email'] = $row->email;
+            $customerData['komojuToken'] = $request->komojuToken;
+            $komojuData = KomojuApi::createCustomer($customerData);
+            // pr($komojuData);
+            $subscribeData['customer_id'] = $komojuData->id;
+            $subscribeData['amount'] = $rowPayment->service_price;
+            $komojuData = KomojuApi::createSubscriptions($subscribeData);
+            // pr($komojuData);
+
+            $rowPaymentData['payment_data'] = json_encode($komojuData);
+            $rowPaymentData['komoju_session_id'] = $komojuData->id; //subscription ID
+            switch($komojuData->status) {
+                case 'active':
+                    $rowPaymentData['status'] = 2;
+                break;
+                case 'suspended':
+                    $rowPaymentData['status'] = 1;
+                break;
+                // 0:pending	Initialized and ready to capture first payment.
+                // 2:active	Captured previous payment and waiting for next interval.
+                // 3:retrying	Failed to capture payment for interval.
+                // 1:suspended	Suspended due to too many payment failures.
+                // 4:deleted	Deleted by merchant.
+            }
+            $condition['id'] = $rowPayment->id;
+            $row = UserPayments::updateOrCreate($condition, $rowPaymentData);
+            $rowUserData['komoju_customer_id'] = $komojuData->customer->uuid;
+            $condition['id'] = $user_id;
+            $row = User::updateOrCreate($condition, $rowUserData);
+            $user = User::find($user_id);
+            // Login User with User Instance
+            Auth::login($user);
+            return redirect(route('student_profile').'?service=1');
+        }
+    }
     public function payment(Request $request)
     {
         if($request->has('id') && !empty($request->id)) {
             $id = explode('|', urldecode(base64_decode($request->id)));
-            $row = User::where('id', '=', $id)->first();
-            $rowPayment = UserPayments::where([
-                ['user_id', '=', $id[0]],
-                ['service_id', '=', $id[1]],
-                ['status', '=', 0]
-            ])->first();
-            $orderNumber = 'DE'.$rowPayment->id;
-            $data['price'] = $rowPayment->service_price;
-            $data['id'] = $row->id;
-            $data['email'] = $row->email;
-            $data['name'] = $row->first_name.' '.$row->last_name;
-            $data['external_order_num'] = $orderNumber;
+            $user_id = $id[0];
+            $service_id = $id[1];
+            // $row = User::where('id', '=', $id)->first();
+            // $rowPayment = UserPayments::where([
+            //     ['user_id', '=', $id[0]],
+            //     ['service_id', '=', $id[1]],
+            //     ['status', '=', 0]
+            // ])->first();
+            // $orderNumber = 'DE'.$rowPayment->id;
+            // $data['price'] = $rowPayment->service_price;
+            // $data['id'] = $row->id;
+            // $data['email'] = $row->email;
+            // $data['name'] = $row->first_name.' '.$row->last_name;
+            // $data['external_order_num'] = $orderNumber;
 
-            $komojuData = KomojuApi::hostedPage($data);
-            if(isset($komojuData->session_url) && !empty($komojuData->session_url)) {
-                $rowPaymentData['order_number'] = $orderNumber;
-                $rowPaymentData['payment_data'] = json_encode($komojuData);
-                $rowPaymentData['komoju_session_id'] = $komojuData->id;
-                $condition['id'] = $rowPayment->id;
-                UserPayments::updateOrCreate($condition, $rowPaymentData);
-                return redirect($komojuData->session_url);
-            }
+            // $komojuData = KomojuApi::hostedPage($data);
+            // if(isset($komojuData->session_url) && !empty($komojuData->session_url)) {
+            //     $rowPaymentData['order_number'] = $orderNumber;
+            //     $rowPaymentData['payment_data'] = json_encode($komojuData);
+            //     $rowPaymentData['komoju_session_id'] = $komojuData->id;
+            //     $condition['id'] = $rowPayment->id;
+            //     UserPayments::updateOrCreate($condition, $rowPaymentData);
+            //     return redirect($komojuData->session_url);
+            // }
+
+            $row['id'] = $request->id;
+            $row['service_id'] = $service_id;
+            return view('landing.payment', compact('row'));
         }
     }
 }
