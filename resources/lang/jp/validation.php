@@ -20,7 +20,7 @@ return [
             'required' => '件名(必須)',
         ],
         'message' => [
-            'required' => '内容(必須',
+            'required' => '内容(必須)',
         ],
     ],
 
