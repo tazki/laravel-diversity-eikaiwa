@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <label for="task-due-date">{{ __('Booking Date') }} <span class="text-danger">*</span></label>
-                        <input type="text" name="booking_date" id="js-client-task-due-date" class="js-input-flatpickr form-control" placeholder="Select Date">
+                        <input type="text" name="booking_date" id="jsBookingDate" class="form-control" placeholder="Select Date">
                     </div>
                     <div class="modal-footer px-0">
                         {{-- @if(isset($rows['client']->id))
@@ -44,8 +44,10 @@
 </div>
 
 <script src="{{ secure_asset('vendor/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ secure_asset('vendor/flatpickr/l10n/ja.js') }}"></script>
 <script>
-	    $("#js-client-task-due-date").flatpickr({
+    $("#jsBookingDate").flatpickr({
+        locale: "ja",
         disableMobile: "true",
         altInput: true,
         altFormat: "F j, Y H:i",
