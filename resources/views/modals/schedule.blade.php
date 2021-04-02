@@ -47,7 +47,7 @@
 <script src="{{ secure_asset('vendor/flatpickr/l10n/ja.js') }}"></script>
 <script>
     $("#jsBookingDate").flatpickr({
-        locale: "ja",
+        // locale: "ja",
         disableMobile: "true",
         altInput: true,
         altFormat: "F j, Y H:i",
@@ -60,13 +60,14 @@
         minuteIncrement: "60",
         // defaultDate: "13:45" // preloading time
         // disable: ["2021-03-10", "2021-03-11", "2021-03-12", "2021-03-31"], // disable specific date
-        // disable: [ //disables Saturdays and Sundays.
-        //     function(date) {
-        //         // return true to disable
-        //         return (date.getDay() === 0 || date.getDay() === 6);
+        disable: [ //disables Saturdays and Sundays.
+            function(date) {
+                // return true to disable
+                return (date.getDay() === 0 || date.getDay() === 6);
 
-        //     }
-        // ],
+            }
+        ],
+        // enable: ["2021-04-04", "2021-04-05"]
     });
     $(".js-task-assign").select2({
         width: '100%',
