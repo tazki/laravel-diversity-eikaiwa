@@ -101,7 +101,7 @@
             <input type="checkbox" name="agree" value="1" class="custom-control-input js-accept-checkbox @error('agree') is-invalid @enderror" id="client-aggrement" required="">
             <label class="custom-control-label" for="client-aggrement">
                 <p class="text-center text-muted mb-0">
-                    {{ __('I have read the') }} <a href="{{ route('page_terms') }}" target="_blank">{{ __('Terms of Service') }}</a> {{ __('and order the above service') }}
+                    {{ __('I have read the Terms of Service and order the above service') }} <a href="{{ route('page_terms') }}" target="_blank">({{ __('Terms and Condition') }})</a>
                 </p>
             </label>
             @error('agree')
