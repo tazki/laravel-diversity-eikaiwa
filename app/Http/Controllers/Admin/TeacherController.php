@@ -14,6 +14,7 @@ use Auth;
 use DB;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\TeacherAvailability;
 
 class TeacherController extends Controller
 {
@@ -205,5 +206,24 @@ class TeacherController extends Controller
             'message' => __('Status updated successfully!')
         );
         return response()->json($msg);
+    }
+
+    public function addAvailability(Request $request)
+    {
+        if($request->isMethod('post')) {
+            $validationSetting = array(
+                'day' => ['required', 'string', 'max:255'],
+                'start_time' => ['required', 'string', 'max:255'],
+                'end_time' => ['string', 'max:255']
+            );
+            $cleanData = request()->validate($validationSetting);
+            $cleanData['status'] = 1;
+            $user = TeacherAvailability::create($cleanData);
+            if(isset($user->id)) {
+                return back()->with('success','Data created successfully!');
+            } else {
+                return back()->with('success','Availability can not be created');
+            }
+        }
     }
 }
