@@ -32,6 +32,31 @@
     <div class="form-row">
         <div class="col-md-6">
             <div class="form-group">
+                <label for="client-address">{{ __('Address') }} <span class="text-danger">*</span></label>
+                <input type="text" name="address" value="{{ old('address') }}" class="form-control @error('address') is-invalid @enderror" id="client-address" required="">
+                @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="client-postal_code">{{ __('Postal Code') }} <span class="text-danger">*</span></label>
+                <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control @error('postal_code') is-invalid @enderror" id="client-postal_code" required="">
+                @error('postal_code')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
                 <label for="client-mobilePhone">{{ __('Phone Number') }} <span class="text-danger">*</span></label>
                 <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="form-control @error('phone_number') is-invalid @enderror" id="client-mobilePhone" required="">
                 @error('phone_number')

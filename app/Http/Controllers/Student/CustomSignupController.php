@@ -19,6 +19,8 @@ class CustomSignupController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'postal_code' => ['required', 'string', 'max:255'],
             'phone_number' => ['string', 'max:255'],
             'skype_id' => ['string', 'max:255']
         );
