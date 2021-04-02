@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="{{ secure_asset('vendor/fullcalendar/fullcalendar.min.css') }}">
 <script src="{{ secure_asset('vendor/moment/min/moment.min.js') }}"></script>
 <script src="{{ secure_asset('vendor/fullcalendar/fullcalendar.min.js') }}"></script>
+<script src="{{ secure_asset('vendor/fullcalendar/locale/ja.js') }}"></script>
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
     $('#js-calendar-client').select2({
@@ -97,17 +98,18 @@
         LooperCalendarTheme.prototype.iconOverridePrefix = 'fa-';
         FullCalendar.defineThemeSystem('looper', LooperCalendarTheme);
         loadCalendar("{{ route('student_schedule_calendar') }}", '');
-        $('#js-calendar-client').on('change', function () {
-            let view = $('#js-schedule-calendar').fullCalendar('getView');
-            console.log(view);
-            var clientId = $(this).val();
-            $('#js-schedule-calendar-client').fullCalendar('destroy');
-            loadCalendar("{{ url('client/schedule/calendar') }}", clientId, view.name);
-        });
+        // $('#js-calendar-client').on('change', function () {
+        //     let view = $('#js-schedule-calendar').fullCalendar('getView');
+        //     console.log(view);
+        //     var clientId = $(this).val();
+        //     $('#js-schedule-calendar-client').fullCalendar('destroy');
+        //     loadCalendar("{{ url('client/schedule/calendar') }}", clientId, view.name);
+        // });
     });
 
     function loadCalendar(ajaxUrl, clientId, viewName="month") {
         $('#js-schedule-calendar-client').fullCalendar({
+            lang: 'ja',
             themeSystem: 'looper',
             header: {
                 left: 'prev,next today',

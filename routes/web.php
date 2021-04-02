@@ -34,11 +34,13 @@ Route::group(['middleware'=>'language'],function ()
     Route::post('s/signup', 'Student\CustomSignupController@addUser')->name('page_register');
     Route::get('s/login', 'Student\CustomLoginController@index')->name('page_login');
     Route::post('s/login', 'Student\CustomLoginController@loginUser')->name('page_login');
+
+    Route::get('s/payment', 'PageController@payment')->name('page_payment');
+    Route::get('s/subscribe', 'PageController@subscribe')->name('page_subscribe');
 });
 
 // Student
 Route::post('s/recaptcha', 'Student\CustomLoginController@recaptcha')->name('page_recaptcha');
-Route::get('s/payment', 'PageController@payment')->name('page_payment');
 Route::post('s/logout', 'Student\StudentController@logout')->name('page_logout');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth']], function() {//['auth','verified']
@@ -98,5 +100,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('admin/students', 'Admin\StudentController@index')->name('students_list');
     Route::get('admin/student/add', 'Admin\StudentController@add')->name('students_add');
     Route::post('admin/student/add', 'Admin\StudentController@add')->name('students_add');
+    // Contact Form
+    Route::get('admin/contact-form', 'Admin\ContactFormController@index')->name('contact_form');
+    
 });
 

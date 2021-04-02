@@ -13,18 +13,18 @@
 						<div class="card card-fluid">
 							<h6 class="card-header">{{ __('Profile') }}</h6>
 							<nav class="nav nav-tabs flex-column border-0" id="nav-tab" role="tablist">
-								<a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+								<a class="nav-link {!! (empty($rows['tab'])) ? 'active' : '' !!}" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
 									aria-controls="profile" aria-selected="true">{{ __('Details') }}</a>
 								<a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab"
 									aria-controls="password" aria-selected="false">{{ __('Password') }}</a>
-                                <a class="nav-link" id="subscription-tab" data-toggle="tab" href="#subscription" role="tab"
+                                <a class="nav-link {!! ($rows['tab']=='subscription') ? 'active' : '' !!}" id="subscription-tab" data-toggle="tab" href="#subscription" role="tab"
                                     aria-controls="subscription" aria-selected="false">{{ __('Subscription') }}</a>
 							</nav>
 						</div>
 					</div>
 					<div class="col-lg-8">
 						<div class="tab-content" id="nav-tabContent">
-							<div class="tab-pane fade show active" id="profile" role="tabpanel"
+							<div class="tab-pane fade {!! (empty($rows['tab'])) ? 'show active' : '' !!}" id="profile" role="tabpanel"
 								aria-labelledby="profile-tab">
 								<form enctype="multipart/form-data" method="POST" action="{{ route('student_profile_update') }}" class="auth-form is-fullwidth">
 									@csrf
@@ -160,12 +160,37 @@
 									</div>
 								</form>
 							</div>
-							<div class="tab-pane fade" id="subscription" role="tabpanel"
+							<div class="tab-pane fade {!! ($rows['tab']=='subscription') ? 'show active' : '' !!}" id="subscription" role="tabpanel"
                             aria-labelledby="profile-tab">
-                                <form method="POST" action="{{ route('student_password') }}" class="auth-form is-fullwidth">
-                                    @csrf
-                                    Page Under Construction
-                                </form>
+                                <div class="auth-form is-fullwidth">
+                                    @if(isset($rows['payment']) && isset($rows['payment']['service']))
+										<div class="form-group">
+											<label class="col-md-4">{{ __('Current Service') }}:</label>
+											{{ $rows['payment']['service'] }}
+										</div>
+										<div class="form-group">
+											<label class="col-md-4">{{ __('Points') }}:</label>
+											{{ $rows['payment']['points'] }}
+										</div>
+										<div class="form-group">
+											<label class="col-md-4">{{ __('Price') }}:</label>
+											{{ $rows['payment']['price_label'] }}
+										</div>
+										<div class="form-group">
+											<label class="col-md-4">{{ __('Status') }}:</label>
+											{{ $rows['payment']['status'] }}
+										</div>
+
+										@if(isset($rows['payment']['session_url']))
+										<div class="form-group">
+											<label class="col-md-4">&nbsp;</label>
+											<a href="{{ $rows['payment']['session_url'] }}" target="_blank">
+												<span class="menu-icon fas fa-credit-card"></span> {{ __('Complete Payment') }}
+											</a>
+										</div>
+										@endif
+									@endif
+								</div>
                             </div>
 						</div>
 					</div>

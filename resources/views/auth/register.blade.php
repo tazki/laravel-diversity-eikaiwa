@@ -91,8 +91,8 @@
         <label for="client-service">{{ __('Service') }} <span class="text-danger">*</span></label>
         <select name="service" class="custom-select" id="client-service" data-toggle="select2" data-placeholder="Select service">
             <option value="1">{{ __('Trial') }}</option>
-            {{-- <option value="2">{{ __('Silver') }}</option>
-            <option value="3">{{ __('Gold') }}</option> --}}
+            {{-- <option value="2" {!! (isset($row['service']) && $row['service']==2) ? 'selected="selected"' : '' !!}>{{ __('Plan A') }}</option>
+            <option value="3" {!! (isset($row['service']) && $row['service']==3) ? 'selected="selected"' : '' !!}>{{ __('Plan B') }}</option> --}}
         </select>
     </div>
 
@@ -101,7 +101,7 @@
             <input type="checkbox" name="agree" value="1" class="custom-control-input js-accept-checkbox @error('agree') is-invalid @enderror" id="client-aggrement" required="">
             <label class="custom-control-label" for="client-aggrement">
                 <p class="text-center text-muted mb-0">
-                    {{ __('By creating an account you agree to the') }} <a href="{{ route('page_terms') }}" target="_blank">{{ __('Terms and Condition') }}</a>.
+                    {{ __('I have read the Terms of Service and order the above service') }} <a href="{{ route('page_terms') }}" target="_blank">({{ __('Terms and Condition') }})</a>
                 </p>
             </label>
             @error('agree')
@@ -112,8 +112,17 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <button type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm();">{{ __('Sign Up') }}</button>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <a href="{{ route('page_home') }}" class="btn btn-lg btn-secondary btn-block">{{ __('Cancel') }}</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <button type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm();">{{ __('Sign Up') }}</button>
+            </div>
+        </div>
     </div>
 
     {{-- DISPLAY THIS ON CONFIRMATION AFTER SIGNUP --}}

@@ -3,7 +3,7 @@
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
                 <h2>{{ __('Plan & Pricing') }}</h2>
-                <p>{{ __('50% off if you register on the same day after trial lesson.') }}</p>
+                {{-- <p>{{ __('50% off if you register on the same day after trial lesson.') }}</p> --}}
             </div>
         </div>
         <div class="row">
@@ -51,6 +51,7 @@
                             <li class="pricing__feature">{{ __('4 lessons per month (Max of 2 students)') }}</li>
                             <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
                         </ul>
+                        {{-- <a href="{{ route('page_register').'?service=2' }}" class="pricing__action">{{ __('Choose plan') }}</a> --}}
                         <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a>
                     </div>
              </div>
@@ -75,6 +76,7 @@
                         <li class="pricing__feature">{{ __('8 lessons per month (Max of 2 students)') }}</li>
                         <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
                      </ul>
+                     {{-- <a href="{{ route('page_register').'?service=3' }}" class="pricing__action">{{ __('Choose plan') }}</a> --}}
                      <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a>
                  </div>
               </div>
