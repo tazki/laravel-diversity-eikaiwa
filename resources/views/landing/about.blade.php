@@ -84,10 +84,10 @@
 					<div class="company-info">
 						<h3>{{ __('Payment Methods') }}</h3>
 						<ul>
-							<li>{{ __('Bank Transfer') }}</li>
+							{{-- <li>{{ __('Bank Transfer') }}</li> --}}
 							<li>{{ __('Credit Card') }}</li>
-							<li>{{ __('Konbini') }}</li>
-							<li>{{ __('Pay Easy') }}</li>
+							{{-- <li>{{ __('Konbini') }}</li> --}}
+							{{-- <li>{{ __('Pay Easy') }}</li> --}}
 						</ul>
 					</div>
 				</div>
