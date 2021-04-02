@@ -112,8 +112,17 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <button type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm();">{{ __('Sign Up') }}</button>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <button type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm();">{{ __('Sign Up') }}</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <a href="{{ route('page_home') }}" class="btn btn-lg btn-secondary btn-block">{{ __('Cancel') }}</a>
+            </div>
+        </div>
     </div>
 
     {{-- DISPLAY THIS ON CONFIRMATION AFTER SIGNUP --}}
