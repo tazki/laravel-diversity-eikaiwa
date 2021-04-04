@@ -18,7 +18,7 @@ class CreateUserBookingsTable extends Migration
             $table->bigInteger('student_id')->default(0);
             $table->bigInteger('teacher_id')->default(0);
             $table->timestamp('booking_date')->nullable();
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(0); // 1:pending / 2:approved / 3:completed / 4:cancel by student / 5:cancel by teacher
             $table->timestamps();
         });
     }

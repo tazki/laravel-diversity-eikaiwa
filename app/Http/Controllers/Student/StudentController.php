@@ -13,6 +13,7 @@ use Auth;
 use DB;
 use App\Models\User;
 use App\Models\UserPayments;
+use App\Models\UserBookings;
 
 class StudentController extends Controller
 {
@@ -90,6 +91,8 @@ class StudentController extends Controller
                 }
             }
         }
+
+        $rows['activePoints'] = studentActivePoints();
         $rows['tab'] = (isset(request()->service)) ? 'subscription' : '';
         return view('student.profile', compact('rows'));
     }

@@ -165,6 +165,11 @@
                                 <div class="auth-form is-fullwidth">
                                     @if(isset($rows['payment']) && isset($rows['payment']['service']))
 										<div class="form-group">
+											<label class="col-md-4">{{ __('Usable Points to take Class') }}:</label>
+											{{ $rows['activePoints'] }}
+										</div>	
+										<hr>
+										<div class="form-group">
 											<label class="col-md-4">{{ __('Current Service') }}:</label>
 											{{ $rows['payment']['service'] }}
 										</div>

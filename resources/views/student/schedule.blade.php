@@ -27,7 +27,7 @@
         </div>
     </div> --}}
 
-    @if(isset($rows['show_booking']) && $rows['show_booking'] == 1)
+    @if(studentActivePoints() > 0)
         <a href="#" class="js-btn-add fab btn btn-primary btn-floated"
             data-tooltip="tooltip"
             data-title="{{ __('Create Class Booking') }}"

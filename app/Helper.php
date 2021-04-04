@@ -2,6 +2,34 @@
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Hashids\Hashids;
+use App\Models\UserPayments;
+use App\Models\UserBookings;
+
+if(!function_exists('studentActivePoints')) {
+    function studentActivePoints() {
+        $rowCompletedPayment = UserPayments::where([
+                ['user_id', '=', Auth::user()->id],
+                ['status', '=', 2]
+            ])
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        $totalPoints = 0;
+        if(is_object($rowCompletedPayment)) {
+            foreach($rowCompletedPayment as $item) {
+                $totalPoints += $item->service_points;
+            }
+        }
+
+        $rowCompletedClass = UserBookings::where('student_id', '=', Auth::user()->id)
+            ->whereIN('status', array(1,2,3))
+            ->count();
+
+        // echo 'activePoints:'.$activePoints.' totalPoints:'.$totalPoints.' rowCompletedClass:'.$rowCompletedClass;
+        // die;
+        return $totalPoints - $rowCompletedClass;
+    }
+}
+
 
 if(!function_exists('countryData')) {
     function countryData() {
