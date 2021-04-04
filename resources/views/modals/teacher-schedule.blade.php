@@ -25,6 +25,8 @@
                             <option value="1">{{ __('Request Class Schedule') }}</option>
                             <option value="2">{{ __('Accept Class Schedule') }}</option>
                             <option value="3">{{ __('Class Done') }}</option>
+                            <option value="4">{{ __('Class Cancel By Student') }}</option>
+                            <option value="5">{{ __('Cancel Class') }}</option>
                         </select>
                     </div>
                     <div class="modal-footer px-0">

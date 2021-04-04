@@ -133,6 +133,16 @@
                 console.log(calEvent);
                 console.log(jsEvent);
                 console.log(view);
+                $('#teacherScheduleFormModal').find('.modal-footer').show();
+                $('#teacherScheduleFormModal #js-booking-status option[value=4]').hide();
+                $('#teacherScheduleFormModal').find('#js-booking-status').removeAttr('disabled');
+                if(calEvent.status == 4) {
+                    $('#teacherScheduleFormModal').find('.modal-footer').hide();
+                    $('#teacherScheduleFormModal #js-booking-status option[value=4]').show();
+                    $('#teacherScheduleFormModal').find('#js-booking-status').attr('disabled', 'disabled');
+                }
+
+                $('#teacherScheduleFormModal #js-booking-status option').removeAttr('selected');
                 $('#teacherScheduleFormModal #js-booking-id').val(calEvent.id);
                 $('#teacherScheduleFormModal #js-booking-student').val(calEvent.title);
                 $('#teacherScheduleFormModal #js-booking-date').val(calEvent.label_booking_date);

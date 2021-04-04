@@ -32,10 +32,13 @@
                             <option value="1">{{ __('Request Class Schedule') }}</option>
                             <option value="2">{{ __('Accept Class Schedule') }}</option>
                             <option value="3">{{ __('Class Done') }}</option>
+                            <option value="4">{{ __('Class Cancel By Student') }}</option>
+                            <option value="5">{{ __('Class Cancel By Teacher') }}</option>
                         </select>
                     </div>
                     <div class="modal-footer px-0">
-                        <button type="button" class="js-btn-cancel btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
+                        <a class="js-btn-delete btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#">Cancel Class</a>
+                        <button type="button" class="js-btn-cancel btn btn-primary" data-dismiss="modal">{{ __('Close') }}</button>
                     </div>
                 </form>
             </div>

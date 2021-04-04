@@ -54,6 +54,7 @@ class ScheduleController extends Controller
                 if(!empty($item->booking_date)) {
                     $booking_end_date = Carbon::parse($item->ymd_booking_date)->addHour();
 
+                    $rows[$count]['deleteurl'] = route('student_schedule_cancel_class', ['id' => $item->id]);
                     $rows[$count]['id'] = $item->id;
                     $rows[$count]['teacher_id'] = $item->teacher_id;
                     $rows[$count]['title'] = $item->teacher_name.' sensei';
@@ -64,8 +65,13 @@ class ScheduleController extends Controller
                     $rows[$count]['end'] = $booking_end_date;
                     // $rows[$count]['chat_url'] = '<a href="#" class="js-btn-add" onClick="window.ajaxFetchTemplate(this); return false;" data-title="'.$item->task_name.' '.__('Chat').'" data-url="'.url('client/task/'.$item->id.'/chat').'" data-update="'.url('client/task/'.$item->id.'/chat').'" data-toggle="modal" data-target="#clientTaskChatFormModal"><span><i class="far fa-fw fa-comment-alt"></i> '.__('Chat').'</span></a>';
 
+                    $className = '';
                     $rows[$count]['status'] = $item->status;
                     switch($item->status) {
+                        case 5:
+                        case 4:
+                            $className = 'task-schedule-overdue';
+                        break;
                         case 3:
                             // $rows[$count]['status'] = __('Close');
                             $className = 'task-schedule-done';
@@ -74,17 +80,12 @@ class ScheduleController extends Controller
                             // $rows[$count]['status'] = __('In Progress');
                             $className = 'task-schedule-progress';
                         break;
-                        // case 1:
-                            // $rows[$count]['status'] = __('Open');
-                        // break;
                     }
-
-                    $className = '';
-                    $booking_date = Carbon::parse($item->ymd_booking_date);
-                    $now = Carbon::today()->format('Y-m-d');
-                    if($booking_date->lessThan($now) || Carbon::today()->format('Y-m-d') == $item->ymd_booking_date) {
-                        $className = 'task-schedule-overdue';
-                    }
+                    // $booking_date = Carbon::parse($item->ymd_booking_date);
+                    // $now = Carbon::today()->format('Y-m-d');
+                    // if($booking_date->lessThan($now) || Carbon::today()->format('Y-m-d') == $item->ymd_booking_date) {
+                    //     $className = 'task-schedule-overdue';
+                    // }
 
                     // if($booking_date->floatDiffInDays($now) > 7) {
                     //     $className = 'task-schedule-week-ago';
@@ -166,5 +167,16 @@ class ScheduleController extends Controller
             );
             return response()->json($msg);
         }
+    }
+
+    public function cancelClass()
+    {
+        $rowUserData = [
+            'status' => 4
+        ];
+        $condition['student_id'] = Auth::user()->id;
+        $rowId = UserBookings::updateOrCreate($condition, $rowUserData);
+
+        return back()->with('success','Class Cancel successfully!');
     }
 }

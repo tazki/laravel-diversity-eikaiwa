@@ -142,6 +142,7 @@
                 $('#studentScheduleViewModal #js-booking-date').val(calEvent.label_booking_date);
                 $('#studentScheduleViewModal #js-booking-teacher option[value=' + calEvent.teacher_id + ']').attr('selected','selected');
                 $('#studentScheduleViewModal #js-booking-status option[value=' + calEvent.status + ']').attr('selected','selected');
+                $('#studentScheduleViewModal .js-btn-delete').data('deleteurl', calEvent.deleteurl);
                 $('#studentScheduleViewModal').modal('show');
             },
         });
