@@ -9,12 +9,12 @@
         <!-- .nav-tabs -->
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link show active" data-toggle="tab" href="#profile">Profile</a>
+                <a class="nav-link {!! (!$show_tab == 'availability') ? 'show active' : '' !!}" data-toggle="tab" href="#profile">Profile</a>
             </li>
 
             @if(isset($row->id))
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#class-availability">Availability</a>
+                <a class="nav-link {!! ($show_tab == 'availability') ? 'show active' : '' !!}" data-toggle="tab" href="#class-availability">Availability</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#class-schedule">Class Schedule</a>
@@ -28,7 +28,7 @@
     <!-- .tab-content -->
     <div class="tab-content pt-4" id="clientDetailsTabs">
         <!-- .tab-pane -->
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade {!! (!$show_tab) ? 'active show' : '' !!}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <form enctype="multipart/form-data" action="{{ (isset($row->id)) ? route('teachers_update', ['id' => $row->id]) : route('teachers_add') }}" method="POST">
                 @csrf
                 <div class="card card-fluid">
@@ -274,47 +274,26 @@
             </form>
         </div><!-- /.tab-pane -->
         <!-- .tab-pane -->
-        <div class="tab-pane fade active show" id="class-availability" role="tabpanel" aria-labelledby="class-availability-tab">
+        <div class="tab-pane fade {!! ($show_tab == 'availability') ? 'active show' : '' !!}" id="class-availability" role="tabpanel" aria-labelledby="class-availability-tab">
             <div class="row">
                 <div class="col-12 col-lg-12 col-xl-7">
                     <div class="card card-fluid">
                         <div class="card-body">
                             <!-- .table-responsive -->
                             <div class="table-responsive">
-                                <!-- .table -->
-                                <table class="table">
-                                <!-- thead -->
-                                <thead>
-                                    <tr>
-                                    <th style="min-width:260px"> Day </th>
-                                    <th> Start Time </th>
-                                    <th> End Time </th>
-                                    <th></th>
-                                    </tr>
-                                </thead><!-- /thead -->
-                                <!-- tbody -->
-                                <tbody>
-                                    <!-- tr -->
-                                    <tr>
-                                    <td class="align-middle text-truncate">
-                                        Monday
-                                    </td>
-                                    <td class="align-middle"> 04/10/2021 </td>
-                                    <td class="align-middle"> 04/10/2021 </td>
-                                    {{-- <td class="align-middle">
-                                        <span class="badge badge-primary">Upcoming</span>
-                                    </td> --}}
-                                    <td class="align-middle text-right">
-                                        <div class="dropdown">
-                                        <button type="button" class="btn btn-sm btn-icon btn-secondary" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><i class="fa fa-ellipsis-h"></i> <span class="sr-only">Actions</span></button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <div class="dropdown-arrow mr-n1"></div><button class="dropdown-item" type="button">Edit</button> <button class="dropdown-item" type="button">Delete</button>
-                                        </div>
-                                        </div>
-                                    </td>
-                                    </tr><!-- /tr -->
-                                </tbody><!-- /tbody -->
-                                </table><!-- /.table -->
+                                <table id="dataTableIndex" data-ajaxurl="{{ route('teachers_list_availability', ['id' => $row->id]) }}" class="table dt-responsive w-100"></table>
+                                <script type="text/javascript">
+                                    $(function () {
+                                    window.dataTableSet = [
+                                        {title: "{{ __('Day') }}", data: 'day', name: 'day'},
+                                        {title: "{{ __('Start Time') }}", data: 'start_time', name: 'start_time'},
+                                        {title: "{{ __('End Time') }}", data: 'end_time', name: 'end_time'},
+                                        {title: "{{ __('Action') }}", data: 'action', name: 'action', orderable: false, searchable: false},
+                                    ];
+                                    });
+                                    </script>
+                                    {{-- window.dataSet need to be place above datatables includes --}}
+                                    @include('includes.datatables')
                             </div><!-- /.table-responsive -->
                         </div>
                     </div>
@@ -322,7 +301,7 @@
                 <div class="col-12 col-lg-6 col-xl-5">
                     <div class="card card-fluid">
                         <div class="card-body">
-                            <form enctype="multipart/form-data" action="{{ (isset($row->id)) ? route('teachers_add_availability', ['id' => $row->id]) : route('teachers_add_availability') }}" method="POST">
+                            <form enctype="multipart/form-data" action="{{ (isset($row_availability->id)) ? route('teachers_update_availability', ['id' => $row_availability->id]) : route('teachers_add_availability', ['id' => $row->id]) }}" method="POST">
                                 @csrf
                                 <!-- form row -->
                                 <div class="form-row">
@@ -331,14 +310,11 @@
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
                                         <select name="day" class="@error('day') is-invalid @enderror form-control">
-                                            <option value="0">Sunday</option>
-                                            <option value="1">Monday</option>
-                                            <option value="2">Tuesday</option>
-                                            <option value="3">Wenesday</option>
-                                            <option value="4">Thursday</option>
-                                            <option value="5">Friday</option>
-                                            <option value="6">Saturday</option>
+                                            @foreach($day_list as $key => $item)
+                                                <option value="{{ $key }}" {!! ((isset($row_availability->day) && $row_availability->day!=$key) || (!isset($row_availability->day) && in_array($key, $day_selected))) ? 'disabled' : '' !!}>{{ $item }}</option>
+                                            @endforeach
                                         </select>
+                                        {{--  &&  --}}
                                         @error('day')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -352,7 +328,7 @@
                                     <label for="start_time" class="col-md-3">Start Time</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="start_time" id="start_time" value="{{ (isset($row->start_time)) ? $row->start_time : old('start_time') }}" class="@error('start_time') is-invalid @enderror form-control js-time-only"  />
+                                        <input type="text" name="start_time" id="start_time" value="{{ (isset($row_availability->start_time)) ? $row_availability->start_time : old('start_time') }}" class="@error('start_time') is-invalid @enderror form-control js-time-only"  />
                                         @error('start_time')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -366,7 +342,7 @@
                                     <label for="end_time" class="col-md-3">End Time</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">
-                                        <input type="text" name="end_time" id="end_time" value="{{ (isset($row->end_time)) ? $row->end_time : old('end_time') }}" class="@error('end_time') is-invalid @enderror form-control js-time-only"  />
+                                        <input type="text" name="end_time" id="end_time" value="{{ (isset($row_availability->end_time)) ? $row_availability->end_time : old('end_time') }}" class="@error('end_time') is-invalid @enderror form-control js-time-only"  />
                                         @error('end_time')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -378,6 +354,7 @@
                                 <hr>
                                 <!-- .form-actions -->
                                 <div class="form-actions">
+                                    <a href="{{ route('teachers_view_availability', ['id' => $row->id, 'show_tab' => 'availability']) }}" class="btn btn-secondary">{{ __('Cancel') }}</a>    
                                     <button type="submit" class="btn btn-primary ml-auto">{{ __('Save') }}</button>
                                 </div><!-- /.form-actions -->
                             </form>

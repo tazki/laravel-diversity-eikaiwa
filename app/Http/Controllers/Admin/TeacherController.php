@@ -18,6 +18,8 @@ use App\Models\TeacherAvailability;
 
 class TeacherController extends Controller
 {
+    private $day = array('Sunday', 'Monday', 'Tuesday', 'Wenesday', 'Thursday', 'Friday', 'Saturday');
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -121,6 +123,16 @@ class TeacherController extends Controller
                     $lang[$val->language_id]['english_level'] = $val->english_level;
                 }
             }
+
+            $day_selected = array();
+            $rows_availability = TeacherAvailability::where('teacher_id', $id)
+                ->select('day')
+                ->get();
+            if(is_object($rows_availability)) {
+                foreach($rows_availability as $key => $item) {
+                    $day_selected[$key] = $item->day;
+                }
+            }
         }
 
         if(request()->isMethod('post')) {
@@ -177,7 +189,14 @@ class TeacherController extends Controller
             }
         }
 
-        return view('admin.teacher-edit', compact(['row', 'lang']));
+        $row_availability = array();
+        if(isset(request()->availability_id))
+        {
+            $row_availability = TeacherAvailability::where('id', request()->availability_id)->first();
+        }
+        $show_tab = request()->show_tab;
+        $day_list = $this->day;
+        return view('admin.teacher-edit', compact(['row', 'lang', 'row_availability', 'show_tab', 'day_list', 'day_selected']));
     }
 
     public function status(Request $request)
@@ -208,22 +227,64 @@ class TeacherController extends Controller
         return response()->json($msg);
     }
 
+    public function listAvailability($id)
+    {
+        $data = TeacherAvailability::where('teacher_id', $id)
+            ->select('*')
+            ->orderBy('day', 'asc')
+            ->get();
+
+        // if no return data
+        if(empty(sizeof($data))) {
+            $data['data'] = array();
+            return $data;
+        }
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('day', function($row) {
+                return $this->day[$row->day];
+            })
+            ->addColumn('action', function($row) {
+                $btn = '<a href="'.route('teachers_edit_availability', ['id' => request()->id, 'show_tab' => 'availability', 'availability_id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
+                // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
     public function addAvailability(Request $request)
     {
         if($request->isMethod('post')) {
             $validationSetting = array(
                 'day' => ['required', 'string', 'max:255'],
                 'start_time' => ['required', 'string', 'max:255'],
-                'end_time' => ['string', 'max:255']
+                'end_time' => ['string', 'max:255', 'after:start_time']
             );
             $cleanData = request()->validate($validationSetting);
+            $cleanData['teacher_id'] = $request->id;
             $cleanData['status'] = 1;
-            $user = TeacherAvailability::create($cleanData);
-            if(isset($user->id)) {
-                return back()->with('success','Data created successfully!');
+            $row = TeacherAvailability::create($cleanData);
+            if(isset($row->id)) {
+                return redirect(route('teachers_view_availability', ['id' => $request->id, 'show_tab' => 'availability']))->with('success','Data created successfully!');
             } else {
                 return back()->with('success','Availability can not be created');
             }
+        }
+    }
+
+    public function updateAvailability($id)
+    {
+        $validationSetting = array(
+            'day' => ['required', 'string', 'max:255'],
+            'start_time' => ['required', 'string', 'max:255'],
+            'end_time' => ['string', 'max:255', 'after:start_time']
+        );
+        $cleanData = request()->validate($validationSetting);
+        $condition['id'] = $id;
+        if($row = TeacherAvailability::updateOrCreate($condition, $cleanData)) {
+            return redirect(route('teachers_view_availability', ['id' => $row->teacher_id, 'show_tab' => 'availability']))->with('success','Data updated successfully!');
         }
     }
 }

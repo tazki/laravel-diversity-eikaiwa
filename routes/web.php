@@ -96,7 +96,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('admin/teacher/add', 'Admin\TeacherController@add')->name('teachers_add');
     Route::get('admin/teacher/{id}/edit', 'Admin\TeacherController@update')->name('teachers_edit');
     Route::post('admin/teacher/{id}/update', 'Admin\TeacherController@update')->name('teachers_update');
+    Route::get('admin/teacher/{id}/edit/{show_tab}/{availability_id}', 'Admin\TeacherController@update')->name('teachers_edit_availability');
+    Route::get('admin/teacher/{id}/edit/{show_tab}', 'Admin\TeacherController@update')->name('teachers_view_availability');
+    Route::get('admin/teacher/{id}/availability', 'Admin\TeacherController@listAvailability')->name('teachers_list_availability');
     Route::post('admin/teacher/{id}/add-availability', 'Admin\TeacherController@addAvailability')->name('teachers_add_availability');
+    Route::post('admin/teacher/{id}/update-availability', 'Admin\TeacherController@updateAvailability')->name('teachers_update_availability');
     // Student
     Route::get('admin/students', 'Admin\StudentController@index')->name('students_list');
     Route::get('admin/student/add', 'Admin\StudentController@add')->name('students_add');
