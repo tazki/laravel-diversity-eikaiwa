@@ -51,7 +51,7 @@
 							<li><strong>{{ __('Phone number') }}</strong><br /> <a href="tel://03-6202-7083">03 6202 7083</a></li>
 							<li><strong>{{ __('E-mail ') }}</strong><br /> <a href="mail:diversityeikaiwa2021@gmail.com">diversityeikaiwa2021@gmail.com</a></li>
 							<li><strong>{{ __('Business Representative') }}</strong><br /> Oliver Rivera</li>
-							<li><strong>{{ __('Price') }}</strong><br /> {{ __('Please check the price here:') }} <a href="{{ route('page_pricing') }}">{{ route('page_pricing') }}</a></li>
+							<li><strong>{{ __('Price') }}</strong><br /> {{ __('Please check the price here:') }} <br /><a href="{{ route('page_pricing') }}">{{ route('page_pricing') }}</a></li>
 							<li><strong>{{ __('Business Format') }}</strong><br /> {{ __('E-learning') }}</li>
 							<li><strong>{{ __('Mode of Payment') }}</strong><br /> {{ __('Credit card payment') }}</li>
 
