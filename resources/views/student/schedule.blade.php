@@ -138,6 +138,13 @@
                 console.log(calEvent);
                 // console.log(jsEvent);
                 // console.log(view);
+
+                $('#studentScheduleViewModal .js-btn-delete').show();
+                if(calEvent.status == 4 || calEvent.status == 5) {
+                    $('#studentScheduleViewModal .js-btn-delete').hide();
+                }
+                
+                $('#studentScheduleViewModal #js-booking-status option').removeAttr('selected');
                 $('#studentScheduleViewModal #js-booking-id').val(calEvent.id);
                 $('#studentScheduleViewModal #js-booking-date').val(calEvent.label_booking_date);
                 $('#studentScheduleViewModal #js-booking-teacher option[value=' + calEvent.teacher_id + ']').attr('selected','selected');
