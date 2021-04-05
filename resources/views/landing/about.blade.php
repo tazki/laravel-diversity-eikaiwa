@@ -44,7 +44,7 @@
 			<div class="row">
 				<div class="col-md-6 col-md-push-1 animate-box">
 					<div class="company-info">
-						<h3>{{ __('Company Details') }}</h3>
+						<h3>{{ __('Display based on the Specified Commercial Transactions Law') }}</h3>
 						<ul>
 							<li><strong>{{ __('Business name') }}</strong><br /> DiversityEikaiwa</li>
 							<li style="width:80%;"><strong>{{ __('Address') }}</strong><br /> {{ __('Level 7, Wakamatsu Building, 3-3-6 Nihonbashi-Honcho, Chuo-Ku, Tokyo 103-0023 Japan') }}</li>

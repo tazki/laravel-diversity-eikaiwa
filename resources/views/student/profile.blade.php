@@ -30,7 +30,7 @@
 									@csrf
 									<div class="media mb-3">
 										<div class="js-photo-preview-holder user-avatar user-avatar-xl fileinput-button">
-											<div class="fileinput-button-label"> {{ __('Change photo') }} </div>
+											<div class="fileinput-button-label"> {{ __('Change Photo') }} </div>
 											@if(isset($rows['user']->avatar) && !empty($rows['user']->avatar))
 												<img src="{{ userFile($rows['user']->avatar, '', $rows['user']->id) }}" class="js-img-preview" alt="">
 											@else
