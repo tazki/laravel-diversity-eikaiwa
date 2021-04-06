@@ -30,6 +30,31 @@ if(!function_exists('studentActivePoints')) {
     }
 }
 
+function currentService($service_id) {
+    switch($service_id) {
+        case 3:
+            $rows['payment']['price'] = 13310;
+            $rows['payment']['price_label'] = '¥13,310';
+            $rows['payment']['points'] = 8;
+            $rows['payment']['service'] = __('Plan B');
+        break;
+        case 2:
+            $rows['payment']['price'] = 7480;
+            $rows['payment']['price_label'] = '¥7,480';
+            $rows['payment']['points'] = 4;
+            $rows['payment']['service'] = __('Plan A');
+        break;
+        default:
+            $rows['payment']['price'] = 0;
+            $rows['payment']['price_label'] = '¥0';
+            $rows['payment']['points'] = 1;
+            $rows['payment']['service'] = __('Trial');
+        break;
+    }
+
+    return $rows;
+}
+
 
 if(!function_exists('countryData')) {
     function countryData() {

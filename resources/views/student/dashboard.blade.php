@@ -21,7 +21,7 @@
 											<h2 class="metric-label"> {{ __('Total Remaining Points') }} </h2>
 											<p class="metric-value h3">
 												<sub><i class="oi oi-fork"></i></sub> <span
-													class="value">{{ $rows['total_number_of_customers'] ?? '' }}</span>
+													class="value">{{ $rows['total_remaining_points'] ?? '' }}</span>
 											</p>
 										</a>
 									</div>
@@ -30,7 +30,7 @@
 											<h2 class="metric-label"> {{ __('Total Class Taken') }} </h2>
 											<p class="metric-value h3">
 												<sub><i class="oi oi-fork"></i></sub> <span
-													class="value">{{ $rows['total_number_of_user'] ?? '' }}</span>
+													class="value">{{ $rows['total_remaining_points'] ?? '' }}</span>
 											</p>
 										</a>
 									</div>
@@ -39,7 +39,7 @@
 											<h2 class="metric-label"> {{ __('Current Subscription') }} </h2>
 											<p class="metric-value h3">
 												<sub><i class="fa fa-tasks"></i></sub> <span
-													class="value">{{ $rows['total_number_of_active_customers'] ?? '' }}</span>
+													class="value">{{ $rows['current_subscription'] ?? '' }}</span>
 											</p>
 										</a>
 									</div>

@@ -47,30 +47,12 @@ class StudentController extends Controller
     {
         $rows['user'] = User::where('id', '=', Auth::user()->id)->first();
         $rowPayment = UserPayments::where('user_id', '=', Auth::user()->id)
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('id', 'desc')
             ->get();
 
         if(isset($rowPayment[0]) && isset($rowPayment[0]->service_id)) {
-            switch($rowPayment[0]->service_id) {
-                case 3:
-                    $rows['payment']['price'] = 13310;
-                    $rows['payment']['price_label'] = '¥13,310';
-                    $rows['payment']['points'] = 8;
-                    $rows['payment']['service'] = __('Plan B');
-                break;
-                case 2:
-                    $rows['payment']['price'] = 7480;
-                    $rows['payment']['price_label'] = '¥7,480';
-                    $rows['payment']['points'] = 4;
-                    $rows['payment']['service'] = __('Plan A');
-                break;
-                default:
-                    $rows['payment']['price'] = 0;
-                    $rows['payment']['price_label'] = '¥0';
-                    $rows['payment']['points'] = 1;
-                    $rows['payment']['service'] = __('Trial');
-                break;
-            }
+            $service = currentService($rowPayment[0]->service_id);
+            $rows = array_merge($rows, $service);
 
             switch($rowPayment[0]->status) {
                 case 2:
