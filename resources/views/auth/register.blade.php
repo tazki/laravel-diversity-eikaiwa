@@ -137,7 +137,7 @@
         </div>
     </div>
 
-    <div class="form-row">
+    <div class="form-row js-continue-holder">
         <div class="col-md-6">
             <div class="form-group">
                 <a href="{{ route('page_home') }}" class="btn btn-lg btn-secondary btn-block">{{ __('Cancel') }}</a>
@@ -145,28 +145,47 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <button type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm();">{{ __('Sign Up') }}</button>
+                <button class="btn btn-lg btn-primary btn-block js-form-preview">{{ __('Continue') }}</button>
             </div>
         </div>
     </div>
 
     {{-- DISPLAY THIS ON CONFIRMATION AFTER SIGNUP --}}
     {{-- ADD class d-none to hide d-block to show --}}
-    <div class="form-row d-none">
+    <div class="form-row d-none js-confirm-holder">
         <div class="col-md-6">
             <div class="form-group">
-                <button class="btn btn-lg btn-secondary btn-block" type="button">{{ __('Back') }}</button>
+                <button class="btn btn-lg btn-secondary btn-block js-form-back" type="button">{{ __('Back') }}</button>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block">{{ __('Confirm') }}</button>
+                <button type="button" class="btn btn-lg btn-primary btn-block" onclick="validateForm();">{{ __('Confirm') }}</button>
             </div>
         </div>
     </div>
 </form>
 <script>
+$(document).ready(function() {
+    $('.js-form-preview').click(function(e) {
+        e.preventDefault();
+        $('.js-confirm-holder').removeClass('d-none');
+        $('.js-continue-holder').addClass('d-none');
+
+        $('.form-control').attr('readonly', 'readonly');
+        $('.form-control').css('background-color', '#f6f7f9');
+    });
+    $('.js-form-back').click(function(e) {
+        e.preventDefault();
+        $('.js-confirm-holder').addClass('d-none');
+        $('.js-continue-holder').removeClass('d-none');
+
+    $('.form-control').removeAttr('readonly');
+    $('.form-control').css('background-color', '#fff');
+    });
+});
+
 function validateForm() {
     grecaptcha.ready(function() {
         grecaptcha.execute("{!! env('RECAPTCHA_SITE_KEY') !!}", {action: 'submit'}).then(function(token) {
