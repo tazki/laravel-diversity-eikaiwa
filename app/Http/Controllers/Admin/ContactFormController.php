@@ -33,6 +33,20 @@ class ContactFormController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('name', function($row) {
+                    if(!empty($row->service_id)) {
+                        return '<a href="'.route('students_edit', ['id' => $row->student_id]).'">'.$row->name.'</a>';
+                    } else {
+                        return $row->name;
+                    }
+                })
+                ->addColumn('service', function($row) {
+                    if(!empty($row->service_id)) {
+                        $service = currentService($row->service_id);
+                        return $service['payment']['service'];
+                    }
+                })
+                ->rawColumns(['name','service'])
                 // ->addColumn('action', function($row) {
                 //     $btn = '<a href="'.route('teachers_edit', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
                 //     // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';

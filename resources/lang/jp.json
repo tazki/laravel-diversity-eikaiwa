@@ -158,5 +158,9 @@
     "Pending": "保留",
     "Completed": "完了",
     "Complete Payment": "お支払いは完了致しました。",
-    "Usable Points to take Class": "受講するために使えるポイント"
+    "Usable Points to take Class": "受講するために使えるポイント",
+    "Pending Upgrade Request": "プラン変更のリクエストの確認中",
+    "Upgrade": "プランの変更",
+    "Are you sure you want to upgrade plan?": "プランを変更しますがよろしいですか？",
+    "Plan Upgrade": "プランの変更"
 }

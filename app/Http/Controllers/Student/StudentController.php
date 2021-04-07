@@ -14,6 +14,7 @@ use DB;
 use App\Models\User;
 use App\Models\UserPayments;
 use App\Models\UserBookings;
+use App\Models\ContactForms;
 
 class StudentController extends Controller
 {
@@ -92,6 +93,9 @@ class StudentController extends Controller
                     'max:255',
                     Rule::unique('users','email')->ignore(Auth::user()->id),
                 ],
+                'skype_id' => ['required', 'string', 'max:255'],
+                'address' => ['required', 'string', 'max:255'],
+                'postal_code' => ['required', 'string', 'max:255'],
             ]
         );
 
@@ -122,7 +126,10 @@ class StudentController extends Controller
             'email' => $request->email,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'mobile_number' => $request->mobile_number
+            'mobile_number' => $request->mobile_number,
+            'skype_id' => $request->skype_id,
+            'address' => $request->address,
+            'postal_code' => $request->postal_code
         ];
         $condition['id'] = Auth::user()->id;
         $rowId = User::updateOrCreate($condition, $rowUserData);
@@ -184,5 +191,38 @@ class StudentController extends Controller
             'action' => 'hideModal'
         );
         return response()->json($msg);
+    }
+
+    public function planUpgrade(Request $request)
+    {
+        $row = User::where('id', '=', Auth::user()->id)->first();
+        $data['service_id'] = $request->service_id;
+        $data['student_id'] = $row->id;
+        $data['first_name'] = $row->first_name;
+        $data['last_name'] = $row->last_name;
+        $data['email'] = $row->email;
+        ContactForms::create($data);
+
+        switch($request->service_id) {
+            case 3:
+                $points = 8;
+                $price = 13310;
+            break;
+            case 2:
+                $points = 4;
+                $price = 7480;
+            break;
+            default:
+                $points = 1;
+                $price = 0;
+                $paymentData['status'] = 2;
+            break;
+        }
+        $paymentData['user_id'] = Auth::user()->id;
+        $paymentData['service_id'] = $request->service_id;
+        $paymentData['service_price'] = $price;
+        $paymentData['service_points'] = $points;
+        UserPayments::create($paymentData);
+        return back()->with('success', __('Plan Upgrade Request Sent Successful!'));
     }
 }

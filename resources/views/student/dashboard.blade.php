@@ -17,7 +17,7 @@
 							<div class="col-lg-9">
 								<div class="metric-row metric-flush">
 									<div class="col">
-										<a href="user-teams.html" class="metric metric-bordered align-items-center">
+										<a href="#" class="metric metric-bordered align-items-center">
 											<h2 class="metric-label"> {{ __('Total Remaining Points') }} </h2>
 											<p class="metric-value h3">
 												<sub><i class="oi oi-fork"></i></sub> <span
@@ -26,7 +26,7 @@
 										</a>
 									</div>
 									<div class="col">
-										<a href="user-projects.html" class="metric metric-bordered align-items-center">
+										<a href="#" class="metric metric-bordered align-items-center">
 											<h2 class="metric-label"> {{ __('Total Class Taken') }} </h2>
 											<p class="metric-value h3">
 												<sub><i class="oi oi-fork"></i></sub> <span
@@ -35,12 +35,22 @@
 										</a>
 									</div>
 									<div class="col">
-										<a href="user-tasks.html" class="metric metric-bordered align-items-center">
+										<a href="#" class="metric metric-bordered align-items-center">
 											<h2 class="metric-label"> {{ __('Current Subscription') }} </h2>
-											<p class="metric-value h3">
+											<p class="metric-value h3" style="margin-bottom:5px;">
 												<sub><i class="fa fa-tasks"></i></sub> <span
 													class="value">{{ $rows['current_subscription'] ?? '' }}</span>
 											</p>
+											
+											@if(isset($rows['has_upgrade_request']->id))
+												<span class="small">{{ __('Pending Upgrade Request') }}</span>
+											@else
+												@if($rows['service_id'] == 1)
+													<span class="btn btn-primary" data-toggle="modal" data-target="#planUpgradeModal">
+														{{ __('Upgrade') }}
+													</span>
+												@endif
+											@endif
 										</a>
 									</div>
 								</div>

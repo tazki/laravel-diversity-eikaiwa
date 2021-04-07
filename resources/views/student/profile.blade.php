@@ -93,11 +93,44 @@
 									</div>
 
 									<div class="form-group">
+										<label for="client-skype_id">Skype ID <span lass="text-danger">*</span></label>
+										<input type="text" name="skype_id" value="{{ ($rows['user']->skype_id) ? $rows['user']->skype_id :  old('skype_id') }}"
+											class="form-control @error('skype_id') is-invalid @enderror"
+											id="client-skype_id" required="">
+										@error('skype_id')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+									<div class="form-group">
 										<label for="client-mobilePhone">{{ __('Phone Number') }} <span lass="text-danger">*</span></label>
 										<input type="text" name="phone_number" value="{{ ($rows['user']->phone_number) ? $rows['user']->phone_number :  old('phone_number') }}"
 											class="form-control @error('phone_number') is-invalid @enderror"
 											id="client-mobilePhone" required="">
 										@error('phone_number')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+									<div class="form-group">
+										<label for="client-address">{{ __('Address') }} <span lass="text-danger">*</span></label>
+										<input type="text" name="address" value="{{ ($rows['user']->address) ? $rows['user']->address :  old('address') }}"
+											class="form-control @error('address') is-invalid @enderror"
+											id="client-address" required="">
+										@error('address')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+									<div class="form-group">
+										<label for="client-postal_code">{{ __('Postal Code') }} <span lass="text-danger">*</span></label>
+										<input type="text" name="postal_code" value="{{ ($rows['user']->postal_code) ? $rows['user']->postal_code :  old('postal_code') }}"
+											class="form-control @error('postal_code') is-invalid @enderror"
+											id="client-postal_code" required="">
+										@error('postal_code')
 											<span class="invalid-feedback" role="alert">
 												<strong>{{ $message }}</strong>
 											</span>

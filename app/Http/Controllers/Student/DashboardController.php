@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\UserPayments;
 use App\Models\UserBookings;
+use App\Models\ContactForms;
 
 class DashboardController extends Controller
 {
@@ -38,8 +39,11 @@ class DashboardController extends Controller
             ->get();
         if(isset($rowPayment[0]) && isset($rowPayment[0]->service_id)) {
             $service = currentService($rowPayment[0]->service_id);
+            $rows['service_id'] = $rowPayment[0]->service_id;
+            $rows['current_subscription'] = $service['payment']['service'];
         }
-        $rows['current_subscription'] = $service['payment']['service'];
+
+        $rows['has_upgrade_request'] = ContactForms::where('student_id', '=', Auth::user()->id)->first();
 
         $new_customer_registration_chart['date'] = array('2020-09', '2020-10', '2020-11', '2020-12');
         $new_customer_registration_chart['count'] = array(10, 25, 18, 11);

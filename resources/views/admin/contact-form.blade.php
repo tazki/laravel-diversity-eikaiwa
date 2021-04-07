@@ -25,6 +25,7 @@ $(function () {
     {title: "{{ __('Subject') }}", data: 'subject', name: 'subject'},
     {title: "{{ __('Message') }}", data: 'message', name: 'message'},
     {title: "{{ __('Send At') }}", data: 'updated_at', name: 'updated_at'},
+    {title: "{{ __('Service') }}", data: 'service', name: 'service'},
     // {title: "{{ __('Action') }}", data: 'action', name: 'action', orderable: false, searchable: false},
   ];
 });
