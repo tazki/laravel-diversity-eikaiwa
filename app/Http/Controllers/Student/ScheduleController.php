@@ -15,6 +15,7 @@ use Auth;
 use DB;
 use App\Models\User;
 use App\Models\UserBookings;
+use App\Models\TeacherAvailability;
 
 class ScheduleController extends Controller
 {
@@ -26,9 +27,26 @@ class ScheduleController extends Controller
             ])->select('*', DB::raw('CONCAT(mt_users.first_name, " ", mt_users.last_name) as name'))
             ->get();
         
-        $studentBooking = UserBookings::where('user_bookings.student_id', '=', Auth::user()->id)->get();
-        $bookingCount = $studentBooking->count();
-        $rows['show_booking'] = (empty($bookingCount)) ? 1 : 0;
+        $rows['teachers_availability'] = array();
+        foreach($rows['teachers'] as $item) {
+            $days = array(0,1,2,3,4,5,6);
+            $availability = TeacherAvailability::where([
+                ['teacher_id', '=', $item->id],
+                ['status', '=', 1]
+            ])->get();
+            if(is_object($availability)) {
+                foreach($availability as $item2) {
+                    $rows['teachers_availability'][$item->id]['availableDay'][$item2->id]['day'] = $item2->day;
+                    $rows['teachers_availability'][$item->id]['availableDay'][$item2->id]['start_time'] = $item2->start_time;
+                    $rows['teachers_availability'][$item->id]['availableDay'][$item2->id]['end_time'] = $item2->end_time;
+                    unset($days[$item2->day]);
+                }
+            }
+            $rows['teachers_availability'][$item->id]['notAvailableDay'] = (sizeof($days) > 0) ? json_encode($days) : '';
+        }
+        pr($rows['teachers_availability']);
+        
+        
 
         return view('student.schedule', compact('rows'));
     }
