@@ -23,6 +23,17 @@ class PageController extends Controller
      */
     public function index(Request $request)
     {
+        if($request->has('sendemail') && !empty($request->sendemail)) {
+            $to_name = 'Oliver Rivera';
+            $to_email = 'tazki04@gmail.com';
+            $data['body'] = 'body';
+            $data['name'] = 'mark';
+            Mail::send('emails.contact', $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Contact Form');
+                $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
+            });
+        }
+
         if($request->has('session_id') && !empty($request->session_id)) {
             $komojuData = KomojuApi::sessionGet($request->session_id);
             if(isset($komojuData->status) && !empty($komojuData->status)) {
