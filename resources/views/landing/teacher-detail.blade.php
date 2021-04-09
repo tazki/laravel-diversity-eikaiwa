@@ -43,6 +43,7 @@
                             <ul>
                                 @if(!empty($lang->address))
                                     <li><strong>{{ __('Address') }}</strong><br /> {{ $lang->address }}</li>
+                                @endif
                                 @if(!empty($lang->about_you))
                                     <li><strong>{{ __('About You') }}</strong><br /> {{ $lang->about_you }}</li>
                                 @endif
