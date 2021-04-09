@@ -47,9 +47,11 @@
     @foreach($rows['teachers_availability'] as $teacherId => $item)
         <span id="teacher_{{ $teacherId }}">
             <span id="notAvailableDay_{{ $teacherId }}" data-notavailableday="{{ $item['notAvailableDay'] }}"></span>
-            @foreach($item['availableDay'] as $item2)
-                <span id="day_{{ $teacherId }}_{{ $item2['day'] }}" data-start="{{ $item2['start_time'] }}" data-end="{{ $item2['end_time'] }}"></span>
-            @endforeach
+            @if(isset($item['availableDay']))
+                @foreach($item['availableDay'] as $item2)
+                    <span id="day_{{ $teacherId }}_{{ $item2['day'] }}" data-start="{{ $item2['start_time'] }}" data-end="{{ $item2['end_time'] }}"></span>
+                @endforeach
+            @endif
         </span>
     @endforeach
 @endif

@@ -44,7 +44,7 @@ class ScheduleController extends Controller
             }
             $rows['teachers_availability'][$item->id]['notAvailableDay'] = (sizeof($days) > 0) ? json_encode($days) : '';
         }
-        pr($rows['teachers_availability']);
+        // pr($rows['teachers_availability']);
         
         
 
