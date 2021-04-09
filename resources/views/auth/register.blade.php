@@ -170,11 +170,23 @@
 $(document).ready(function() {
     $('.js-form-preview').click(function(e) {
         e.preventDefault();
-        $('.js-confirm-holder').removeClass('d-none');
-        $('.js-continue-holder').addClass('d-none');
+        var error = false;
+        $('.form-control').each(function() {
+            if($(this).val() == '') {
+                error = true;
+                $(this).addClass('is-invalid');
+            }
+        });
 
-        $('.form-control').attr('readonly', 'readonly');
-        $('.form-control').css('background-color', '#f6f7f9');
+        if(!error) {
+            $('.form-control').removeClass('is-invalid');
+            $('.form-control').siblings('.invalid-feedback').remove();
+            $('.js-confirm-holder').removeClass('d-none');
+            $('.js-continue-holder').addClass('d-none');
+
+            $('.form-control').attr('readonly', 'readonly');
+            $('.form-control').css('background-color', '#f6f7f9');
+        }
     });
     $('.js-form-back').click(function(e) {
         e.preventDefault();
