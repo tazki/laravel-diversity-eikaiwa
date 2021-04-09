@@ -24,6 +24,7 @@ Route::group(['middleware'=>'language'],function ()
 {
     Route::get('/', 'PageController@index')->name('page_home');
     Route::get('teacher', 'PageController@teacher')->name('page_teacher');
+    Route::get('teacher/{id}', 'PageController@teacherDetail')->name('page_teacher_detail');
     Route::get('about-us', 'PageController@about')->name('page_about');
     Route::get('pricing', 'PageController@pricing')->name('page_pricing');
     Route::get('contact', 'PageController@contact')->name('page_contact');

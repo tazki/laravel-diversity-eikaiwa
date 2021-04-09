@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\App;
 use App\Http\CustomClass\KomojuApi;
 use App\Models\User;
 use App\Models\UserDetails;
@@ -57,8 +58,29 @@ class PageController extends Controller
             ->select('*', 
                 DB::raw('CONCAT(first_name, " ", last_name) as name'))
             ->orderBy('updated_at', 'desc')
-            ->get();        
+            ->get();
         return view('landing.teacher', compact('rows'));
+    }
+
+    public function teacherDetail($id)
+    {
+        $language_id = 1;
+        if(App::currentLocale() == 'jp') {
+            $language_id = 2;
+        }
+
+        $row = User::where('id', $id)
+            ->select('*', 
+                DB::raw('CONCAT(first_name, " ", last_name) as name'))
+            ->first();
+        if(is_object($row)) {
+            $lang = UserDetails::where([
+                ['user_id', '=', $id],
+                ['language_id', '=', $language_id]
+            ])->first();
+        }
+
+        return view('landing.teacher-detail', compact('row', 'lang'));
     }
 
     public function about()

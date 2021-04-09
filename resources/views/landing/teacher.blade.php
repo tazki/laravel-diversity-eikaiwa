@@ -32,15 +32,14 @@
 				@if(isset($rows) && is_object($rows))
 					@foreach($rows as $item)
 					<div class="col-md-3 text-center">
-						<div class="staff">
+						<a href="{{ route('page_teacher_detail', ['id' => $item->id]) }}" class="staff">
 							@if(isset($item->avatar) && !empty($item->avatar))
 								<div class="staff-img" style="background-image: url({{ userFile($item->avatar, '', $item->id) }});"></div>
 							@endif
-							<span>{{ __('English Teacher') }}</span>
+							<span style="color:#828282;">{{ __('English Teacher') }}</span>
 							<h3>{{ $item->name }}</h3>
-							{{-- <h3><a href="#">{{ $item->name }}</a></h3> --}}
 							{{-- <p>{{ __('Hello! Welcome to Diversity! Learning English doesn’t need to be stiff and strict. Talking and communicating with a teacher on a relax and enjoyable environment helps you learn English on a natural way. That being said, as a person who learned English as an official second language, I can give you advices and tips that are useful not just academically but in daily lives. As a teacher with 5 years teaching experience and current English teacher in Junior High School, I’m confident that I will be able to assist and support you in your learning.') }}</p> --}}
-						</div>
+						</a>
 					</div>
 					@endforeach
 				@endif
