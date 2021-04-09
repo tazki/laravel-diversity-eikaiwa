@@ -41,11 +41,20 @@
                     <div class="col-md-6 col-md-push-1 animate-box">
                         <div class="company-info">
                             <ul>
-                                <li><strong>{{ __('Address') }}</strong><br /> {{ $lang->address }}</li>
-                                <li><strong>{{ __('About You') }}</strong><br /> {{ $lang->about_you }}</li>
-                                <li><strong>{{ __('Hobbies') }}</strong><br /> {{ $lang->hobbies }}</li>
-                                <li><strong>{{ __('Fields of Interest') }}</strong><br /> {{ $lang->fields_of_interest }}</li>
-                                <li><strong>{{ __('English Level') }}</strong><br /> {{ $lang->english_level }}</li>
+                                @if(!empty($lang->address))
+                                    <li><strong>{{ __('Address') }}</strong><br /> {{ $lang->address }}</li>
+                                @if(!empty($lang->about_you))
+                                    <li><strong>{{ __('About You') }}</strong><br /> {{ $lang->about_you }}</li>
+                                @endif
+                                @if(!empty($lang->hobbies))
+                                    <li><strong>{{ __('Hobbies') }}</strong><br /> {{ $lang->hobbies }}</li>
+                                @endif
+                                @if(!empty($lang->fields_of_interest))
+                                    <li><strong>{{ __('Fields of Interest') }}</strong><br /> {{ $lang->fields_of_interest }}</li>
+                                @endif
+                                @if(!empty($lang->english_level))
+                                    <li><strong>{{ __('English Level') }}</strong><br /> {{ $lang->english_level }}</li>
+                                @endif
                             </ul>
                         </div>
                     </div>
