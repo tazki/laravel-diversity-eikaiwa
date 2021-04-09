@@ -32,6 +32,15 @@ class PageController extends Controller
                 $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Contact Form');
                 $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
             });
+
+            // the message
+            $msg = "First line of text\nSecond line of text";
+
+            // use wordwrap() if lines are longer than 70 characters
+            $msg = wordwrap($msg,70);
+
+            // send email
+            mail("tazki04@gmail.com","My subject",$msg);
         }
 
         if($request->has('session_id') && !empty($request->session_id)) {
