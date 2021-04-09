@@ -42,7 +42,7 @@
 													class="value">{{ $rows['current_subscription'] ?? '' }}</span>
 											</p>
 											
-											@if(isset($rows['has_upgrade_request']->id))
+											@if(isset($rows['has_upgrade_request']->id) && !empty($rows['has_upgrade_request']->id))
 												<span class="small">{{ __('Pending Upgrade Request') }}</span>
 											@else
 												@if($rows['service_id'] == 1)
