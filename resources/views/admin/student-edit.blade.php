@@ -11,6 +11,9 @@
                 <a class="nav-link show active" data-toggle="tab" href="#profile">Profile</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#subscription">Subscription</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#class-schedule">Class Schedule</a>
             </li>
             <li class="nav-item">
@@ -295,6 +298,44 @@
             </form>
         </div><!-- /.tab-pane -->
         <!-- .tab-pane -->
+        <div class="tab-pane fade" id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
+            <div class="auth-form is-fullwidth">
+                @if(isset($service['payment']) && isset($service['payment']['service']))
+                    <div class="form-group">
+                        <label class="col-md-4">{{ __('Usable Points to take Class') }}:</label>
+                        {{ $service['activePoints'] }}
+                    </div>	
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-md-4">{{ __('Current Service') }}:</label>
+                        {{ $service['payment']['service'] }}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4">{{ __('Points') }}:</label>
+                        {{ $service['payment']['points'] }}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4">{{ __('Price') }}:</label>
+                        {{ $service['payment']['price_label'] }}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4">{{ __('Status') }}:</label>
+                        {{ $service['payment']['status'] }}
+                    </div>
+            
+                    @if(isset($service['has_upgrade_request']) && isset($service['has_upgrade_request']->service_id))
+                    <div class="form-group">
+                        <label class="col-md-4">&nbsp;</label>
+                        <a href="#" data-toggle="modal" data-target="#adminPlanUpgradeModal">
+                            <span class="menu-icon fas fa-arrow-up"></span> {{ __('Upgrade Account') }}
+                            ({{ currentService($service['has_upgrade_request']->service_id)['payment']['service'] }})
+                        </a>
+                    </div>
+                    @endif
+                @endif
+            </div>
+        </div><!-- /.tab-pane -->
+        <!-- .tab-pane -->
         <div class="tab-pane fade" id="class-schedule" role="tabpanel" aria-labelledby="class-schedule-tab">
             <!-- .card -->
             <div class="card">
@@ -442,4 +483,28 @@
         </div><!-- /.tab-pane -->
     </div><!-- /.tab-content -->
 </div>
+
+@if(isset($service['has_upgrade_request']) && isset($service['has_upgrade_request']->service_id))
+    <div class="modal fade" id="adminPlanUpgradeModal" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ __('Plan Upgrade') }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ __('Are you sure you want to upgrade plan?') }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        {{ __('Cancel') }}
+                    </button>
+                    <a href="{{ route('students_upgrade_plan', ['contact_id' => $service['has_upgrade_request']->id, 'user_id' => $service['has_upgrade_request']->student_id, 'service_id' => $service['has_upgrade_request']->service_id]) }}" class="btn btn-primary">{{ __('Confirm') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 @endsection

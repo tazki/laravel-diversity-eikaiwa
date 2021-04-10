@@ -6,9 +6,12 @@ use App\Models\UserPayments;
 use App\Models\UserBookings;
 
 if(!function_exists('studentActivePoints')) {
-    function studentActivePoints() {
+    function studentActivePoints($id = '') {
+        if(empty($id)) {
+            $id = Auth::user()->id;
+        }
         $rowCompletedPayment = UserPayments::where([
-                ['user_id', '=', Auth::user()->id],
+                ['user_id', '=', $id],
                 ['status', '=', 2]
             ])
             ->orderBy('updated_at', 'desc')
@@ -20,7 +23,7 @@ if(!function_exists('studentActivePoints')) {
             }
         }
 
-        $rowCompletedClass = UserBookings::where('student_id', '=', Auth::user()->id)
+        $rowCompletedClass = UserBookings::where('student_id', '=', $id)
             ->whereIN('status', array(1,2,3))
             ->count();
 

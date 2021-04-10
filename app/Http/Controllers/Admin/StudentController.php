@@ -14,6 +14,8 @@ use Auth;
 use DB;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\UserPayments;
+use App\Models\ContactForms;
 
 class StudentController extends Controller
 {
@@ -84,6 +86,26 @@ class StudentController extends Controller
             }
         }
 
+        $rowPayment = UserPayments::where('user_id', '=', $id)
+            ->orderBy('id', 'desc')
+            ->get();
+        if(isset($rowPayment[0]) && isset($rowPayment[0]->service_id)) {
+            $service = currentService($rowPayment[0]->service_id);
+            switch($rowPayment[0]->status) {
+                case 2:
+                    $service['payment']['status'] = __('Completed');
+                break;
+                case 1:
+                    $service['payment']['status'] = __('Cancelled');
+                break;
+                default:
+                    $service['payment']['status'] = __('Pending');
+                break;
+            }
+        }
+        $service['activePoints'] = studentActivePoints($id);
+        $service['has_upgrade_request'] = ContactForms::where('student_id', '=', $id)->first();
+
         if(request()->isMethod('post')) {
             $validationSetting = array(
                 'first_name' => ['required', 'string', 'max:255'],
@@ -136,10 +158,42 @@ class StudentController extends Controller
 
                 return back()->with('success','Data updated successfully!');
             } else {
-                return back()->with('success','Teacher can not be updated');
+                return back()->with('success','Student can not be updated');
             }
         }
-        return view('admin.student-edit', compact('row', 'lang'));
+        return view('admin.student-edit', compact('row', 'lang', 'service'));
+    }
+
+    public function studentUpgradePlan(Request $request)
+    {
+        // switch($request->service_id) {
+        //     case 3:
+        //         $points = 8;
+        //         $price = 13310;
+        //     break;
+        //     case 2:
+        //         $points = 4;
+        //         $price = 7480;
+        //     break;
+        // }
+
+        // $paymentData['user_id'] = $request->user_id;
+        // $paymentData['service_id'] = $request->service_id;
+        // $paymentData['service_price'] = $price;
+        // $paymentData['service_points'] = $points;
+        // $paymentData['status'] = 2;
+        // UserPayments::create($paymentData);
+        $rowPayment = UserPayments::where('user_id', '=', $request->user_id)
+            ->orderBy('id', 'desc')
+            ->get();
+        if(isset($rowPayment[0]) && isset($rowPayment[0]->service_id)) {
+            $paymentData['status'] = 2;
+            $condition['id'] = $rowPayment[0]->id;
+            UserPayments::updateOrCreate($condition, $paymentData);
+
+            ContactForms::find($request->contact_id)->delete();
+        }
+        return back()->with('success','Plan Upgrade successfully!');
     }
 
     public function status(Request $request)
