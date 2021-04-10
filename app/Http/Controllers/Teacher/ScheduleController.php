@@ -173,6 +173,7 @@ class ScheduleController extends Controller
             Mail::send('emails.plain', $emailData, function($message) use ($to_name, $to_email) {
                 $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Class Request');
                 $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
+                $message->bcc('oliverrivera09@gmail.com', 'Oliver');
                 $message->bcc('tazki04@gmail.com', 'Mark');
             });
 
