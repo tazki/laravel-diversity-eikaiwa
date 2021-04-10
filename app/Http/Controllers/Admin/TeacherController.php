@@ -176,10 +176,10 @@ class TeacherController extends Controller
 
                 if(isset(request()->lang) && is_array(request()->lang)) {
                     foreach(request()->lang as $language_id => $lang) {
-                        UserDetails::where([
-                            ['user_id', '=', $id],
-                            ['language_id', '=', $language_id]
-                        ])->update($lang);
+                        $condition = array();
+                        $condition['user_id'] = $id;
+                        $condition['language_id'] = $language_id;
+                        UserDetails::updateOrCreate($condition, $lang);
                     }
                 }
 
