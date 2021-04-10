@@ -289,6 +289,7 @@
                                             {title: "{{ __('Day') }}", data: 'day', name: 'day'},
                                             {title: "{{ __('Start Time') }}", data: 'start_time', name: 'start_time'},
                                             {title: "{{ __('End Time') }}", data: 'end_time', name: 'end_time'},
+                                            {title: "{{ __('Status') }}", data: 'status', name: 'status'},
                                             {title: "{{ __('Action') }}", data: 'action', name: 'action', orderable: false, searchable: false},
                                         ];
                                         });
@@ -349,6 +350,18 @@
                                                 <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                        </div><!-- /form column -->
+                                    </div><!-- /form row -->
+                                    <!-- form row -->
+                                    <div class="form-row">
+                                        <!-- form column -->
+                                        <label for="end_time" class="col-md-3">Status</label> <!-- /form column -->
+                                        <!-- form column -->
+                                        <div class="col-md-9 mb-3">
+                                            <select name="status" class="form-control">
+                                                <option value="1" {!! (isset($row_availability->status) && $row_availability->status==1) ? 'selected' : '' !!}>Active</option>
+                                                <option value="0" {!! (isset($row_availability->status) && empty($row_availability->status)) ? 'selected' : '' !!}>Inactive</option>
+                                            </select>
                                         </div><!-- /form column -->
                                     </div><!-- /form row -->
 

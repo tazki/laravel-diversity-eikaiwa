@@ -245,6 +245,9 @@ class TeacherController extends Controller
             ->addColumn('day', function($row) {
                 return $this->day[$row->day];
             })
+            ->addColumn('status', function($row) {
+                return ($row->status==1) ? 'Active' : 'Inactive';
+            })
             ->addColumn('action', function($row) {
                 $btn = '<a href="'.route('teachers_edit_availability', ['id' => request()->id, 'show_tab' => 'availability', 'availability_id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
                 // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';
@@ -260,11 +263,11 @@ class TeacherController extends Controller
             $validationSetting = array(
                 'day' => ['required', 'string', 'max:255'],
                 'start_time' => ['required', 'string', 'max:255'],
-                'end_time' => ['string', 'max:255', 'after:start_time']
+                'end_time' => ['string', 'max:255', 'after:start_time'],
+                'status' => 'integer'
             );
             $cleanData = request()->validate($validationSetting);
             $cleanData['teacher_id'] = $request->id;
-            $cleanData['status'] = 1;
             $row = TeacherAvailability::create($cleanData);
             if(isset($row->id)) {
                 return redirect(route('teachers_view_availability', ['id' => $request->id, 'show_tab' => 'availability']))->with('success','Data created successfully!');
@@ -279,7 +282,8 @@ class TeacherController extends Controller
         $validationSetting = array(
             'day' => ['required', 'string', 'max:255'],
             'start_time' => ['required', 'string', 'max:255'],
-            'end_time' => ['string', 'max:255', 'after:start_time']
+            'end_time' => ['string', 'max:255', 'after:start_time'],
+            'status' => 'integer'
         );
         $cleanData = request()->validate($validationSetting);
         $condition['id'] = $id;
