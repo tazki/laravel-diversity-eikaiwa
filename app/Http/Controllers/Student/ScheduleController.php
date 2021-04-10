@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use DataTables;
+use Mail;
 use Auth;
 use DB;
 use App\Models\User;
@@ -152,7 +153,9 @@ class ScheduleController extends Controller
 
             $bookedSlots = UserBookings::where([
                 ['booking_date', '=', $request->booking_date.':00'],
-                ['teacher_id', '=', $request->teacher_id]
+                ['teacher_id', '=', $request->teacher_id],
+                ['status', '!=', 4],
+                ['status', '!=', 5]
             ])->first();
             if(is_object($bookedSlots) && isset($bookedSlots->id)) {
                 return response()->json([
@@ -176,6 +179,20 @@ class ScheduleController extends Controller
                 'booking_date' => $request->booking_date,
                 'status' => 1
             ]);
+
+            $studentRow = User::where('id', Auth::user()->id)->first();
+            $teacherRow = User::where('id', $request->teacher_id)->first();
+            $to_name = $teacherRow->first_name.' '.$teacherRow->last_name; // Teacher Name
+            $to_email = $teacherRow->email; // Teacher Email
+            $body = '<strong>Student Name:</strong> '. $studentRow->first_name.' '.$studentRow->last_name.'<br />';
+            $body .= '<strong>Skype ID:</strong> '. $studentRow->skype_id.'<br />';
+            $body .= '<strong>Booking Date:</strong> '. $request->booking_date;
+            $emailData['body'] = $body;
+            Mail::send('emails.plain', $emailData, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Class Request');
+                $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
+                $message->bcc('tazki04@gmail.com', 'Mark');
+            });
 
             $msg = array(
                 'notify' => 'inline',

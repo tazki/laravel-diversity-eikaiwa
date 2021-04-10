@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use DataTables;
 use Auth;
+use Mail;
 use DB;
 use App\Models\User;
 use App\Models\UserBookings;
@@ -136,8 +137,44 @@ class ScheduleController extends Controller
             $rowUserData = [
                 'status' => $request->status
             ];
+
+            
+            // Student Status
+            switch($request->status) {
+                case 1:
+                    $studentStatusLabel = __('Request Class Schedule');
+                break;
+                case 2:
+                    $studentStatusLabel = __('Accept Class Schedule');
+                break;
+                case 3:
+                    $studentStatusLabel = __('Class Done');
+                break;
+                case 4:
+                    $studentStatusLabel = __('Class Cancel By Student');
+                break;
+                case 5:
+                    $studentStatusLabel = __('Class Cancel By Teacher');
+                break;
+            }
+
             $condition['id'] = $request->id;
             $rowId = UserBookings::updateOrCreate($condition, $rowUserData);
+
+            $studentRow = User::where('id', $rowId->student_id)->first();
+            $teacherRow = User::where('id', Auth::user()->id)->first();
+            $to_name = $studentRow->first_name.' '.$studentRow->last_name; // Student Name
+            $to_email = $studentRow->email; // Student Email
+            $body = '<strong>Teacher Name:</strong> '. $teacherRow->first_name.' '.$teacherRow->last_name.'<br />';
+            $body .= '<strong>Skype ID:</strong> '. $teacherRow->skype_id.'<br />';
+            $body .= '<strong>Booking Date:</strong> '. $rowId->booking_date.'<br />';
+            $body .= '<strong>Booking Status:</strong> '. $studentStatusLabel;
+            $emailData['body'] = $body;
+            Mail::send('emails.plain', $emailData, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Class Request');
+                $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
+                $message->bcc('tazki04@gmail.com', 'Mark');
+            });
 
             $msg = array(
                 'notify' => 'inline',
