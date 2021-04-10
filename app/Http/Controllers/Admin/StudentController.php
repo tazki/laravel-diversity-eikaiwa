@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller; // need to add this line so this file is treated like a controller.
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-// use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Storage;
 // use Illuminate\Support\Facades\File;
 use DataTables;
@@ -89,7 +90,9 @@ class StudentController extends Controller
                 'last_name' => ['required', 'string', 'max:255'],
                 'phone_number' => ['string', 'max:255'],
                 'skype_id' => ['string', 'max:255'],
-                'avatar' => 'mimes:jpg,bmp,png'
+                'avatar' => 'mimes:jpg,bmp,png',
+                'address' => ['required', 'string', 'max:255'],
+                'postal_code' => ['required', 'string', 'max:255'],
             );
             
             if(!empty(request()->email)) {
@@ -124,10 +127,10 @@ class StudentController extends Controller
 
                 if(isset(request()->lang) && is_array(request()->lang)) {
                     foreach(request()->lang as $language_id => $lang) {
-                        UserDetails::where([
-                            ['user_id', '=', $id],
-                            ['language_id', '=', $language_id]
-                        ])->update($lang);
+                        $condition = array();
+                        $condition['user_id'] = $id;
+                        $condition['language_id'] = $language_id;
+                        UserDetails::updateOrCreate($condition, $lang);
                     }
                 }
 
@@ -136,7 +139,7 @@ class StudentController extends Controller
                 return back()->with('success','Teacher can not be updated');
             }
         }
-        return view('admin.student-edit', compact('row'));
+        return view('admin.student-edit', compact('row', 'lang'));
     }
 
     public function status(Request $request)

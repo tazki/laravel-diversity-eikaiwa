@@ -108,6 +108,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('admin/student/add', 'Admin\StudentController@add')->name('students_add');
         Route::post('admin/student/add', 'Admin\StudentController@add')->name('students_add');
         Route::get('admin/student/{id}/edit', 'Admin\StudentController@edit')->name('students_edit');
+        Route::post('admin/student/{id}/edit', 'Admin\StudentController@edit')->name('students_edit');
         // Contact Form
         Route::get('admin/contact-form', 'Admin\ContactFormController@index')->name('contact_form');
         
