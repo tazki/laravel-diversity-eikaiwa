@@ -166,25 +166,9 @@ class StudentController extends Controller
 
     public function studentUpgradePlan(Request $request)
     {
-        // switch($request->service_id) {
-        //     case 3:
-        //         $points = 8;
-        //         $price = 13310;
-        //     break;
-        //     case 2:
-        //         $points = 4;
-        //         $price = 7480;
-        //     break;
-        // }
-
-        // $paymentData['user_id'] = $request->user_id;
-        // $paymentData['service_id'] = $request->service_id;
-        // $paymentData['service_price'] = $price;
-        // $paymentData['service_points'] = $points;
-        // $paymentData['status'] = 2;
-        // UserPayments::create($paymentData);
         $rowPayment = UserPayments::where('user_id', '=', $request->user_id)
             ->orderBy('id', 'desc')
+            ->limit(1)
             ->get();
         if(isset($rowPayment[0]) && isset($rowPayment[0]->service_id)) {
             $paymentData['status'] = 2;
