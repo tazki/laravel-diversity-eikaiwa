@@ -205,12 +205,12 @@ class ScheduleController extends Controller
         }
     }
 
-    public function cancelClass()
+    public function cancelClass($id)
     {
         $rowUserData = [
             'status' => 4
         ];
-        $condition['student_id'] = Auth::user()->id;
+        $condition['id'] = $id;
         $rowId = UserBookings::updateOrCreate($condition, $rowUserData);
 
         return back()->with('success','Class Cancel successfully!');
