@@ -112,6 +112,35 @@
 	</div>
 
 	@include('includes.pricing-banner')
+
+	<div class="fh5co-company">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-push-1 animate-box">
+					<div class="company-info">
+						<h3>{{ __('What are needed for the lesson?') }}</h3>
+						<ul>
+							<li>{{ __('Phone or Computer') }}</li>
+							<li>{{ __('Internet') }}</li>
+							<li>{{ __('Skype') }}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-5 animate-box">
+					<div class="company-info">
+						<h3>{{ __('How to take a lesson?') }}</h3>
+						<ul>
+							<li><strong>{{ __('First') }}</strong><br /> {{ __('Download Skype.') }}</li>
+							<li><strong>{{ __('Second') }}</strong><br /> {{ __('Register an account.') }}</li>
+							<li><strong>{{ __('Third') }}</strong><br /> {{ __('Choose your teacher, time and date.') }}</li>
+							<li><strong>{{ __('Fourth') }}</strong><br /> {{ __('Take class on the day and time you booked.') }}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	@include('includes.register-banner')
     @include('includes.footer-landing')
 </div>
