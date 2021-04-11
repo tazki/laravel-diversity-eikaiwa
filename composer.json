@@ -16,11 +16,13 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "hashids/hashids": "^4.0",
         "ixudra/curl": "^6.21",
+        "laravel/cashier": "^12.11",
         "laravel/framework": "^8.0",
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "pusher/pusher-php-server": "^4.1",
+        "stripe/stripe-php": "^7.76",
         "yajra/laravel-datatables-oracle": "^9.10"
     },
     "require-dev": {

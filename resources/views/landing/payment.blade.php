@@ -38,6 +38,23 @@
                                 </ul>
         
                                 <form id="planAForm" action="{!! route('page_subscribe') !!}">
+                                    {{-- <input type="hidden" name="komojuToken"/>
+                                    <input type="hidden" name="id" value="{{ $row['id'] }}" />
+                                    <button id="planAFormButton" class="pricing__action">{{ __('Pay') }}</button> --}}
+
+                                    <script
+                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="pk_test_51Ib08iG8uz8FtevfCXr0xvGfyqwFEQsDBw8CJvYGoqh833mJCgNiUF2XR1mApuqxG7a1gKc4RVumemm0tGZ1vYEZ00xXOxFoTu"
+                                        data-amount="100"
+                                        data-name="Plan A"
+                                        data-description="Description"
+                                        data-image="httsp://stripe.com/img/documentation/checkout/mareketplace.png"
+                                        data-locale="auto"
+                                        data-currency="jpy">
+                                    </script>
+                                </form>                        
+                                
+                                {{-- <form id="planAForm" action="{!! route('page_subscribe') !!}">
                                     <input type="hidden" name="komojuToken"/>
                                     <input type="hidden" name="id" value="{{ $row['id'] }}" />
                                     <button id="planAFormButton" class="pricing__action">{{ __('Pay') }}</button>
@@ -66,7 +83,7 @@
         
                                     e.preventDefault();
                                 });
-                                </script>
+                                </script> --}}
                                 {{-- <a href="{{ route('page_register').'?service=2' }}" class="pricing__action">{{ __('Choose plan') }}</a> --}}
                             </div>
                         </div>
