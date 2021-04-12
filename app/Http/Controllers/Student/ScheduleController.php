@@ -165,6 +165,27 @@ class ScheduleController extends Controller
                 ]);
             }
 
+            $dayOfWeek = Carbon::parse($request->booking_date)->dayOfWeek;
+            $selectedHour = Carbon::parse($request->booking_date)->hour;
+            $availability = TeacherAvailability::where([
+                ['teacher_id', '=', $request->teacher_id],
+                ['day', '=', $dayOfWeek],
+                ['status', '=', 1]
+            ])->first();
+
+            if(isset($availability->start_time) && isset($availability->end_time)) {
+                $startTime = Carbon::parse($availability->start_time)->hour;
+                $endTime = Carbon::parse($availability->end_time)->hour;
+
+                if($selectedHour < $startTime || $selectedHour > $endTime) {
+                    return response()->json([
+                        'notify' => 'inline',
+                        'status' => 'danger',
+                        'message' => __('Teacher is not available')
+                    ]);
+                }
+            }
+
             if($request->confirm_first) {
                 return response()->json([
                     'notify' => 'inline',

@@ -170,5 +170,7 @@
     "Pending Upgrade Request": "プラン変更のリクエストの確認中",
     "Upgrade": "プランの変更",
     "Are you sure you want to upgrade plan?": "プランを変更しますがよろしいですか？",
-    "Plan Upgrade": "プランの変更"
+    "Plan Upgrade": "プランの変更",
+    "Date is not available": "日付は予約できません",
+    "Teacher is not available": "先生は利用できません"
 }
