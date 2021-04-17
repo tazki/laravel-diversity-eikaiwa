@@ -38,6 +38,9 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::get('s/payment', 'PageController@payment')->name('page_payment');
     Route::get('s/subscribe', 'PageController@subscribe')->name('page_subscribe');
+    // Stripe Payment
+    Route::get('s/subscription/{id}', 'SubscriptionController@showSubscription')->name('page_subscription');
+    Route::post('s/subscription', 'SubscriptionController@processSubscription');
 
     // Student
     Route::post('s/recaptcha', 'Student\CustomLoginController@recaptcha')->name('page_recaptcha');

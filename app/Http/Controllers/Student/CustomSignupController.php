@@ -31,32 +31,21 @@ class CustomSignupController extends Controller
         unset($cleanData['agree']);
         $user = User::create($cleanData);
         if(isset($user->id)) {
-            switch(request()->service) {
-                case 3:
-                    $points = 8;
-                    $price = 13310;
-                break;
-                case 2:
-                    $points = 4;
-                    $price = 7480;
-                break;
-                default:
-                    $points = 1;
-                    $price = 0;
-                    $paymentData['status'] = 2;
-                break;
-            }
+            $service = currentService(request()->service);
 
             $paymentData['user_id'] = $user->id;
+            $paymentData['service_price'] = $service['payment']['price'];
+            $paymentData['service_points'] = $service['payment']['points'];
             $paymentData['service_id'] = request()->service;
-            $paymentData['service_price'] = $price;
-            $paymentData['service_points'] = $points;
+            $paymentData['status'] = (request()->service == 1) ? 2 : 0;
             UserPayments::create($paymentData);
             if(request()->service == 1) {
                 // return back()->with('success','Student registered successfully!');
                 return redirect(route('page_login'));
             } elseif(in_array(request()->service, array(2,3))) {
-                return redirect(route('page_payment').'?id='.urlencode(base64_encode($user->id.'|'.request()->service)));
+                // Login User with User Instance
+                \Auth::login($user);
+                return redirect(route('page_subscription', ['id' => urlencode(base64_encode($user->id.'|'.request()->service))]));
             }
         } else {
             return back()->with('success','Failed to register this time.');

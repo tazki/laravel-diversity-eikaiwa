@@ -172,5 +172,9 @@
     "Are you sure you want to upgrade plan?": "プランを変更しますがよろしいですか？",
     "Plan Upgrade": "プランの変更",
     "Date is not available": "日付は予約できません",
-    "Teacher is not available": "先生は利用できません"
+    "Teacher is not available": "先生は利用できません",
+    "Payment": "支払い",
+    "Card Holder Name": "カード名義人",
+    "Credit or debit card": "クレジットカード／デビット",
+    "SUBMIT": "提出"
 }

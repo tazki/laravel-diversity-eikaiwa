@@ -53,8 +53,8 @@
                             <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
                             <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li>
                         </ul>
-                        {{-- <a href="{{ route('page_register').'?service=2' }}" class="pricing__action">{{ __('Choose plan') }}</a> --}}
-                        <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a>
+                        <a href="{{ route('page_register').'?service=2' }}" class="pricing__action">{{ __('Choose plan') }}</a>
+                        {{-- <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a> --}}
                     </div>
              </div>
                 </div>
@@ -79,8 +79,8 @@
                         <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
                         <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li>
                      </ul>
-                     {{-- <a href="{{ route('page_register').'?service=3' }}" class="pricing__action">{{ __('Choose plan') }}</a> --}}
-                     <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a>
+                     <a href="{{ route('page_register').'?service=3' }}" class="pricing__action">{{ __('Choose plan') }}</a>
+                     {{-- <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a> --}}
                  </div>
               </div>
            </div>
