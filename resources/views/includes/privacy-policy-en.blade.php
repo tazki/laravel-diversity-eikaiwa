@@ -78,11 +78,11 @@
 <p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">&nbsp;</p>
 <p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">We have established an email and phone number to respond to any inquiries or complaints concerning our handling of personal information.</p>
 <p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">&nbsp;</p>
-<p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">1.Email: Email us at diversityeikaiwa2021@gmail.com or at customer.support@diversityeikaiwa.com</p>
+<p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">1.&nbsp;Email: Email us at diversityeikaiwa2021@gmail.com or at customer.support@diversityeikaiwa.com</p>
 <p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">&nbsp;</p>
-<p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phone: 03 6202 7083</p>
+<p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">2.&nbsp;Phone: 03 6202 7083</p>
 <p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">&nbsp;</p>
-<p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Address: 103-0023 <span style="font-family: 游明朝, serif;">東京中央区日本橋本町３－</span>3<span style="font-family: 游明朝, serif;">－</span>6<span style="font-family: 游明朝, serif;">ワカ末ビル</span> 7 <span style="font-family: 游明朝, serif;">階</span></p>
+<p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">3.&nbsp;Address: 103-0023 <span style="font-family: 游明朝, serif;">東京中央区日本橋本町３－</span>3<span style="font-family: 游明朝, serif;">－</span>6<span style="font-family: 游明朝, serif;">ワカ末ビル</span> 7 <span style="font-family: 游明朝, serif;">階</span></p>
 <p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">&nbsp;</p>
 <p style="text-align: left; margin: 0cm 0cm 0.0001pt; font-size: 10.5pt; font-family: Calibri;">4 Representative responsible for personal information</p>
 <p><span style="font-size: 10.5pt; font-family: 游明朝, serif;">　個人情報取扱いに関する代表責任者　</span><span style="font-size: 10.5pt; font-family: Calibri;">Rivera Oliver</span></p>
