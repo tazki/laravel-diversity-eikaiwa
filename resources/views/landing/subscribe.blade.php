@@ -25,44 +25,135 @@
         .StripeElement--webkit-autofill {
             background-color: #fefde5 !important;
         }
+        .stripe-logo{
+            width: 30%;
+            text-align: center;
+        }
+
+        .subscription-section #subscribe-form{margin:49px 20px;}
+        .subscription-section #subscribe-form .form-control{
+            background-color: #ffffff;
+            background-clip: padding-box;
+            border: 1px solid #c6c9d5;
+            border-radius: 0.25rem;
+            box-shadow:inset 0 1px 0 0 rgb(34 34 48 / 5%);
+        }
+        .subscription-section #subscribe-form #card-button{
+            border-radius:0.3rem;
+        }
     </style>
-    <form action="/s/subscription" method="POST" id="subscribe-form">
-        <div class="form-group">
+
+    <div id="fh5co-pricing" class="fh5co-bg-section subscription-section">
+        <div class="container">
+            <div class="row animate-box">
+                <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+                    <h2>{{ __('Payment') }}</h2>
+                    <img src="{{ secure_asset('site/images/stripe_logo_sm.png') }}" class="stripe-logo" />
+                </div>
+            </div>
             <div class="row">
-                @foreach($plans as $plan)
-                <div class="col-md-4">
-                    <div class="subscription-option">
-                        <input type="radio" id="plan-silver" name="plan" value='{{$plan->id}}'>
-                        <label for="plan-silver">
-                            <span class="plan-price">{{$plan->currency}}{{$plan->amount}}<small> /{{$plan->interval}}</small></span>
-                            <span class="plan-name">{{$plan->product->name}}</span>
-                        </label>
+                <div class="pricing pricing--rabten">
+                    @if($service_id == 2)
+                    <div class="col-md-4 animate-box">
+                        <div class="pricing__item">
+                            <div class="wrap-price">
+                                <!-- <div class="icon icon-store"></div> -->
+                                 <h3 class="pricing__title">{{ __('Plan A') }}</h3>
+                                 <!-- <p class="pricing__sentence">Up to 5 users</p> -->
+                            </div>
+                            <div class="pricing__price">
+                                <span class="pricing__anim pricing__anim--1">
+                                    <span class="pricing__currency">¥</span>7,480
+                                </span>
+                                <span class="pricing__anim pricing__anim--2">
+                                    <span class="pricing__period">{{ __('Tax Included') }}</span>
+                                </span>
+                            </div>
+                            <div class="wrap-price">
+                                <ul class="pricing__feature-list">
+                                    <li class="pricing__feature">{{ __('4 lessons per month (Max of 2 students)') }}</li>
+                                    <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
+                    @if($service_id == 3)
+                    <div class="col-md-4 animate-box">
+                        <div class="pricing__item">
+                            <div class="wrap-price">
+                                <!-- <div class="icon icon-home2"></div> -->
+                                <h3 class="pricing__title">{{ __('Plan B') }}</h3>
+                                <!-- <p class="pricing__sentence">Unlimited users</p> -->
+                            </div>
+                            <div class="pricing__price">
+                                <span class="pricing__anim pricing__anim--1">
+                                    <span class="pricing__currency">¥</span>13,310
+                                </span>
+                                <span class="pricing__anim pricing__anim--2">
+                                    <span class="pricing__period">{{ __('Tax Included') }}</span>
+                                </span>
+                            </div>
+                            <div class="wrap-price">
+                                <ul class="pricing__feature-list">
+                                    <li class="pricing__feature">{{ __('8 lessons per month (Max of 2 students)') }}</li>
+                                    <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
+                    <div class="col-md-6 animate-box" style="background:#fff;">
+                        <form action="/s/subscription" method="POST" id="subscribe-form">
+                            @csrf
+                            <input type="hidden" name="service_id" value="{{$service_id}}" />
+                            <div class="form-group" style="display:none;">
+                                <div class="row">
+                                    @foreach($plans as $plan)
+                                    <div class="col-md-4">
+                                        <div class="subscription-option">
+                                            <input type="radio" id="plan-silver" name="plan" value='{{$plan->id}}' {!! ($plan->product->metadata->service_id == $service_id) ? 'checked="checked"' : '' !!}>
+                                            <label for="plan-silver">
+                                                <span class="plan-price">{{$plan->currency}}{{$plan->amount}}<small> / {{$plan->interval}}</small></span>
+                                                <span class="plan-name">{{$plan->product->name}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="card-holder-name">{{ __('Card Holder Name') }}</label>
+                                <input id="card-holder-name" type="text" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="card-element">{{ __('Credit or debit card') }}</label>
+                                <div id="card-element" class="form-control"></div>
+                                <!-- Used to display form errors. -->
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+                            <div class="stripe-errors"></div>
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger">
+                                    @foreach ($errors->all() as $error)
+                                    {{ $error }}<br>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <div class="form-group text-center">
+                                <button  id="card-button" data-secret="{{ $intent->client_secret }}" class="btn btn-lg btn-success btn-block">{{ __('SUBMIT') }}</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                @endforeach
             </div>
         </div>
-        <input id="card-holder-name" type="text"><label for="card-holder-name">Card Holder Name</label>
-        @csrf
-        <div class="form-row">
-            <label for="card-element">Credit or debit card</label>
-            <div id="card-element" class="form-control">
-            </div>
-            <!-- Used to display form errors. -->
-            <div id="card-errors" role="alert"></div>
-        </div>
-        <div class="stripe-errors"></div>
-        @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-            {{ $error }}<br>
-            @endforeach
-        </div>
-        @endif
-        <div class="form-group text-center">
-            <button  id="card-button" data-secret="{{ $intent->client_secret }}" class="btn btn-lg btn-success btn-block">SUBMIT</button>
-        </div>
-    </form>
+    </div>
+
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         var stripe = Stripe('{{ env('STRIPE_KEY') }}');
