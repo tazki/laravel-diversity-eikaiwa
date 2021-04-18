@@ -65,7 +65,7 @@ class PageController extends Controller
     public function teacherDetail($id)
     {
         $language_id = 1;
-        if(App::currentLocale() == 'jp') {
+        if (App::isLocale('jp')) {
             $language_id = 2;
         }
 

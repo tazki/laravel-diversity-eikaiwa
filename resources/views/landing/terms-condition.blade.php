@@ -15,7 +15,7 @@
                 <p>{{ __('Please take note that the only time we will do refunds is when technical issues arrises that would affect both teacher and student’s lesson. As a rule, you need to make a report from the day you experience issues that affect you schedule. Report should be made within 7 days or else, we won’t be able to refund it.') }}</p>
                 <br />
                 <h2>{{ __('Privacy Policy') }}</h2>
-                @if(App::currentLocale() == 'jp')
+                @if(App::isLocale('jp'))
                     @include('includes.privacy-policy-jp')
                 @else
                     @include('includes.privacy-policy-en')
