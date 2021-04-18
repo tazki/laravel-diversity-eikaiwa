@@ -14,6 +14,7 @@ use Auth;
 use DB;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\UserBookings;
 use App\Models\TeacherAvailability;
 
 class TeacherController extends Controller
@@ -290,5 +291,44 @@ class TeacherController extends Controller
         if($row = TeacherAvailability::updateOrCreate($condition, $cleanData)) {
             return redirect(route('teachers_view_availability', ['id' => $row->teacher_id, 'show_tab' => 'availability']))->with('success','Data updated successfully!');
         }
+    }
+
+    public function listClassSchedule($id)
+    {
+        $data = UserBookings::where('teacher_id', $id)
+            ->leftJoin('users', 'users.id', '=', 'user_bookings.student_id')
+            ->select(
+                'users.id',
+                'users.first_name',
+                'users.last_name',
+                'user_bookings.status',
+                'user_bookings.booking_date'
+            )
+            ->orderBy('user_bookings.booking_date', 'desc')
+            ->get();
+// pr($data);die;
+        // if no return data
+        if(empty(sizeof($data))) {
+            $data['data'] = array();
+            return $data;
+        }
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('name', function($row) {
+                return $row->first_name.' '.$row->last_name;
+            })
+            ->addColumn('status', function($row) {
+                if($row->status == 3) {
+                    return '<span class="badge badge-success">Completed</span>';
+                }
+
+                // <span class="badge badge-primary">Upcoming</span>
+                // <span class="badge badge-warning">On Going</span>
+                // 
+                // return ($row->status==1) ? 'Active' : 'Inactive';
+            })
+            ->rawColumns(['status'])
+            ->make(true);
     }
 }

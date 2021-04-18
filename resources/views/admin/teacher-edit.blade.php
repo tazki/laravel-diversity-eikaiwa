@@ -391,7 +391,7 @@
                     </div><!-- /.dropdown-menu -->
                     </div><!-- /.dropdown -->
                 </div><!-- /.card-header -->
-                <!-- .table-responsive -->
+                <!-- .table-responsive -->                
                 <div class="table-responsive">
                     <!-- .table -->
                     <table class="table">
