@@ -98,8 +98,6 @@ class DashboardController extends Controller
                 }
             }
 
-            // pr($teacher_leaderboard);//die;
-
             $rows['teacher_leaderboard'] = $teacher_leaderboard;
         }
 
