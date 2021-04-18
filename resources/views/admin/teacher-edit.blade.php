@@ -3,13 +3,22 @@
 @section('content')
 
 <div class="sidebar-section sidebar-section-fill">
-    <h1 class="page-title"><i class="fas fa-chalkboard-teacher text-muted mr-2"></i> {{ (isset($row->id)) ? __('Edit Teacher') : __('Add Teacher') }} </h1>
+    <h1 class="page-title">
+        <i class="fas fa-chalkboard-teacher text-muted mr-2"></i>
+        {{ (isset($row->id)) ? __('Edit Teacher').' ('.$row->first_name.' '.$row->last_name.')' : __('Add Teacher') }}
+    </h1>
     {{-- <p class="text-muted"> San Francisco, United States </p> --}}
     <div class="nav-scroller border-bottom">
         <!-- .nav-tabs -->
         <ul class="nav nav-tabs">
+            @if(isset($row->id))
+                <li class="nav-item">
+                    <a class="nav-link {!! (!isset($show_tab)) ? 'show active' : '' !!}" data-toggle="tab" href="#class-taken">Class Taken</a>
+                </li>
+            @endif
+
             <li class="nav-item">
-                <a class="nav-link {!! (!isset($show_tab)) ? 'show active' : '' !!}" data-toggle="tab" href="#profile">Profile</a>
+                <a class="nav-link {!! (!isset($row->id) && !isset($show_tab)) ? 'show active' : '' !!}" data-toggle="tab" href="#profile">Profile</a>
             </li>
 
             @if(isset($row->id))
@@ -19,16 +28,13 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#class-schedule">Class Schedule</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#class-taken">Class Taken</a>
-                </li>
             @endif
         </ul><!-- /.nav-tabs -->
     </div><!-- /.nav-scroller -->
     <!-- .tab-content -->
     <div class="tab-content pt-4" id="clientDetailsTabs">
         <!-- .tab-pane -->
-        <div class="tab-pane fade {!! (!isset($show_tab)) ? 'active show' : '' !!}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade {!! (!isset($row->id) && !isset($show_tab)) ? 'active show' : '' !!}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <form enctype="multipart/form-data" action="{{ (isset($row->id)) ? route('teachers_update', ['id' => $row->id]) : route('teachers_add') }}" method="POST">
                 @csrf
                 <div class="card card-fluid">
@@ -275,6 +281,39 @@
         </div><!-- /.tab-pane -->
         @if(isset($row->id))
             <!-- .tab-pane -->
+            <div class="tab-pane fade {!! (!isset($show_tab)) ? 'active show' : '' !!}" id="class-taken" role="tabpanel" aria-labelledby="class-taken-tab">
+                <!-- .card -->
+                <div class="card">
+                    <!-- .table-responsive -->                
+                    <div class="table-responsive">
+                        <!-- .table -->
+                        <table class="table">
+                        <!-- thead -->
+                        <thead>
+                            <tr>
+                                <th style="min-width:260px"> Date </th>
+                                <th> Total Hours </th>
+                            </tr>
+                        </thead><!-- /thead -->
+                        <!-- tbody -->
+                        <tbody>
+                            @if(isset($rows['class_taken']) && is_array($rows['class_taken']))
+                                @foreach($rows['class_taken'] as $date => $total_hours)
+                                <!-- tr -->
+                                <tr>
+                                    <td class="align-middle text-truncate">
+                                        {{ $date }}
+                                    </td>
+                                    <td class="align-middle"> {{ $total_hours }} </td>
+                                </tr><!-- /tr -->
+                                @endforeach
+                            @endif
+                        </tbody><!-- /tbody -->
+                        </table><!-- /.table -->
+                    </div><!-- /.table-responsive -->
+                </div><!-- /.card -->
+            </div><!-- /.tab-pane -->
+            <!-- .tab-pane -->
             <div class="tab-pane fade {!! (isset($show_tab) && $show_tab == 'availability') ? 'active show' : '' !!}" id="class-availability" role="tabpanel" aria-labelledby="class-availability-tab">
                 <div class="row">
                     <div class="col-12 col-lg-12 col-xl-7">
@@ -303,7 +342,7 @@
                     <div class="col-12 col-lg-6 col-xl-5">
                         <div class="card card-fluid">
                             <div class="card-body">
-                                <form enctype="multipart/form-data" action="{{ (isset($row_availability->id)) ? route('teachers_update_availability', ['id' => $row_availability->id]) : route('teachers_add_availability', ['id' => $row->id]) }}" method="POST">
+                                <form enctype="multipart/form-data" action="{{ (isset($rows['availability']->id)) ? route('teachers_update_availability', ['id' => $rows['availability']->id]) : route('teachers_add_availability', ['id' => $row->id]) }}" method="POST">
                                     @csrf
                                     <!-- form row -->
                                     <div class="form-row">
@@ -313,7 +352,7 @@
                                         <div class="col-md-9 mb-3">
                                             <select name="day" class="@error('day') is-invalid @enderror form-control">
                                                 @foreach($day_list as $key => $item)
-                                                    <option value="{{ $key }}" {!! ((isset($row_availability->day) && $row_availability->day!=$key) || (!isset($row_availability->day) && in_array($key, $day_selected))) ? 'disabled' : '' !!}>{{ $item }}</option>
+                                                    <option value="{{ $key }}" {!! ((isset($rows['availability']->day) && $rows['availability']->day!=$key) || (!isset($rows['availability']->day) && in_array($key, $day_selected))) ? 'disabled' : '' !!}>{{ $item }}</option>
                                                 @endforeach
                                             </select>
                                             {{--  &&  --}}
@@ -330,7 +369,7 @@
                                         <label for="start_time" class="col-md-3">Start Time</label> <!-- /form column -->
                                         <!-- form column -->
                                         <div class="col-md-9 mb-3">
-                                            <input type="text" name="start_time" id="start_time" value="{{ (isset($row_availability->start_time)) ? $row_availability->start_time : old('start_time') }}" class="@error('start_time') is-invalid @enderror form-control js-time-only"  />
+                                            <input type="text" name="start_time" id="start_time" value="{{ (isset($rows['availability']->start_time)) ? $rows['availability']->start_time : old('start_time') }}" class="@error('start_time') is-invalid @enderror form-control js-time-only"  />
                                             @error('start_time')
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -344,7 +383,7 @@
                                         <label for="end_time" class="col-md-3">End Time</label> <!-- /form column -->
                                         <!-- form column -->
                                         <div class="col-md-9 mb-3">
-                                            <input type="text" name="end_time" id="end_time" value="{{ (isset($row_availability->end_time)) ? $row_availability->end_time : old('end_time') }}" class="@error('end_time') is-invalid @enderror form-control js-time-only"  />
+                                            <input type="text" name="end_time" id="end_time" value="{{ (isset($rows['availability']->end_time)) ? $rows['availability']->end_time : old('end_time') }}" class="@error('end_time') is-invalid @enderror form-control js-time-only"  />
                                             @error('end_time')
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -359,8 +398,8 @@
                                         <!-- form column -->
                                         <div class="col-md-9 mb-3">
                                             <select name="status" class="form-control">
-                                                <option value="1" {!! (isset($row_availability->status) && $row_availability->status==1) ? 'selected' : '' !!}>Active</option>
-                                                <option value="0" {!! (isset($row_availability->status) && empty($row_availability->status)) ? 'selected' : '' !!}>Inactive</option>
+                                                <option value="1" {!! (isset($rows['availability']->status) && $rows['availability']->status==1) ? 'selected' : '' !!}>Active</option>
+                                                <option value="0" {!! (isset($rows['availability']->status) && empty($rows['availability']->status)) ? 'selected' : '' !!}>Inactive</option>
                                             </select>
                                         </div><!-- /form column -->
                                     </div><!-- /form row -->
@@ -381,146 +420,37 @@
             <div class="tab-pane fade" id="class-schedule" role="tabpanel" aria-labelledby="class-schedule-tab">
                 <!-- .card -->
                 <div class="card">
-                <!-- .card-header -->
-                <div class="card-header d-flex">
-                    <!-- .dropdown -->
-                    <div class="dropdown">
-                    <button type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter mr-1"></i> All (3) <i class="fa fa-caret-down"></i></button> <!-- .dropdown-menu -->
-                    <div class="dropdown-menu stop-propagation">
-                        <h6 id="class-schedule-tab" class="dropdown-header"> Class Schedule </h6><label class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="clientProjectFilter" value="0" checked=""> <span class="custom-control-label">All (3)</span></label> <label class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="clientProjectFilter" value="1"> <span class="custom-control-label">On Going (1)</span></label> <label class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="clientProjectFilter" value="2"> <span class="custom-control-label">Completed (2)</span></label> <label class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="clientProjectFilter" value="3"> <span class="custom-control-label">Archived (0)</span></label>
-                    </div><!-- /.dropdown-menu -->
-                    </div><!-- /.dropdown -->
-                </div><!-- /.card-header -->
-                <!-- .table-responsive -->                
-                <div class="table-responsive">
-                    <!-- .table -->
-                    <table class="table">
-                    <!-- thead -->
-                    <thead>
-                        <tr>
-                        <th style="min-width:260px"> Student Name </th>
-                        <th> Schedule </th>
-                        <th> Status </th>
-                        <th></th>
-                        </tr>
-                    </thead><!-- /thead -->
-                    <!-- tbody -->
-                    <tbody>
-                        <!-- tr -->
-                        <tr>
-                        <td class="align-middle text-truncate">
-                            <a href="#">John Doe</a>
-                        </td>
-                        <td class="align-middle"> 04/10/2021 </td>
-                        <td class="align-middle">
-                            <span class="badge badge-primary">Upcoming</span>
-                        </td>
-                        <td class="align-middle text-right">
-                            <div class="dropdown">
-                            <button type="button" class="btn btn-sm btn-icon btn-secondary" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><i class="fa fa-ellipsis-h"></i> <span class="sr-only">Actions</span></button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-arrow mr-n1"></div><button class="dropdown-item" type="button">Edit</button> <button class="dropdown-item" type="button">Delete</button>
-                            </div>
-                            </div>
-                        </td>
-                        </tr><!-- /tr -->
-                        <!-- tr -->
-                        <tr>
-                        <td class="align-middle text-truncate">
-                            <a href="#">John Doe</a>
-                        </td>
-                        <td class="align-middle"> 02/26/2021 </td>
-                        <td class="align-middle">
-                            <span class="badge badge-warning">On Going</span>
-                        </td>
-                        <td class="align-middle text-right">
-                            <div class="dropdown">
-                            <button type="button" class="btn btn-sm btn-icon btn-secondary" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><i class="fa fa-ellipsis-h"></i> <span class="sr-only">Actions</span></button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-arrow mr-n1"></div><button class="dropdown-item" type="button">Edit</button> <button class="dropdown-item" type="button">Delete</button>
-                            </div>
-                            </div>
-                        </td>
-                        </tr><!-- /tr -->
-                        <!-- tr -->
-                        <tr>
-                        <td class="align-middle text-truncate">
-                            <a href="#">Mike Smith</a>
-                        </td>
-                        <td class="align-middle"> 01/29/2021 </td>
-                        <td class="align-middle">
-                            <span class="badge badge-success">Completed</span>
-                        </td>
-                        <td class="align-middle text-right">
-                            <div class="dropdown">
-                            <button type="button" class="btn btn-sm btn-icon btn-secondary" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><i class="fa fa-ellipsis-h"></i> <span class="sr-only">Actions</span></button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-arrow mr-n1"></div><button class="dropdown-item" type="button">Edit</button> <button class="dropdown-item" type="button">Delete</button>
-                            </div>
-                            </div>
-                        </td>
-                        </tr><!-- /tr -->
-                    </tbody><!-- /tbody -->
-                    </table><!-- /.table -->
-                </div><!-- /.table-responsive -->
-                </div><!-- /.card -->
-            </div><!-- /.tab-pane -->
-            <!-- .tab-pane -->
-            <div class="tab-pane fade" id="class-taken" role="tabpanel" aria-labelledby="class-taken-tab">
-                <!-- .card -->
-                <div class="card">
-                <!-- .card-header -->
-                <div class="card-header d-flex">
-                    <h2 class="card-title mr-auto">Total Hours: 17</h2>
-                    <!-- .dropdown -->
-                    <div class="dropdown">
-                    <button type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter mr-1"></i> All (3) <i class="fa fa-caret-down"></i></button> <!-- .dropdown-menu -->
-                    <div class="dropdown-menu stop-propagation">
-                        <h6 id="class-schedule-tab" class="dropdown-header"> Month </h6><label class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="clientProjectFilter" value="0" checked=""> <span class="custom-control-label">All (3)</span></label> <label class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="clientProjectFilter" value="1"> <span class="custom-control-label">On Going (1)</span></label> <label class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="clientProjectFilter" value="2"> <span class="custom-control-label">Completed (2)</span></label> <label class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="clientProjectFilter" value="3"> <span class="custom-control-label">Archived (0)</span></label>
-                    </div><!-- /.dropdown-menu -->
-                    </div><!-- /.dropdown -->
-                </div><!-- /.card-header -->
-                <!-- .table-responsive -->
-                <div class="table-responsive">
-                    <!-- .table -->
-                    <table class="table">
-                    <!-- thead -->
-                    <thead>
-                        <tr>
-                        <th style="min-width:260px"> Student Name </th>
-                        <th> Total Hours </th>
-                        <th> Date </th>
-                        </tr>
-                    </thead><!-- /thead -->
-                    <!-- tbody -->
-                    <tbody>
-                        <!-- tr -->
-                        <tr>
-                        <td class="align-middle text-truncate">
-                            <a href="#">John Doe</a>
-                        </td>
-                        <td class="align-middle"> 10 </td>
-                        <td class="align-middle"> 01/2021 </td>
-                        </tr><!-- /tr -->
-                        <!-- tr -->
-                        <tr>
-                        <td class="align-middle text-truncate">
-                            <a href="#">John Doe</a>
-                        </td>
-                        <td class="align-middle"> 5 </td>
-                        <td class="align-middle"> 01/2021 </td>
-                        </tr><!-- /tr -->
-                        <!-- tr -->
-                        <tr>
-                        <td class="align-middle text-truncate">
-                            <a href="#">Mike Smith</a>
-                        </td>
-                        <td class="align-middle"> 2 </td>
-                        <td class="align-middle"> 01/2021 </td>
-                        </tr><!-- /tr -->
-                    </tbody><!-- /tbody -->
-                    </table><!-- /.table -->
-                </div><!-- /.table-responsive -->
+                    <!-- .table-responsive -->                
+                    <div class="table-responsive">
+                        <!-- .table -->
+                        <table class="table">
+                        <!-- thead -->
+                        <thead>
+                            <tr>
+                                <th style="min-width:260px"> Student Name </th>
+                                <th> Schedule </th>
+                                <th> Status </th>
+                            </tr>
+                        </thead><!-- /thead -->
+                        <!-- tbody -->
+                        <tbody>
+                            @if(isset($rows['class_schedule']) && is_array($rows['class_schedule']))
+                                @foreach($rows['class_schedule'] as $val)
+                                <!-- tr -->
+                                <tr>
+                                    <td class="align-middle text-truncate">
+                                        <a href="#">{{ $val['name'] ?? '' }}</a>
+                                    </td>
+                                    <td class="align-middle"> {{ $val['booking_date'] ?? '' }} </td>
+                                    <td class="align-middle">
+                                        {!! $val['status'] ?? '' !!}
+                                    </td>
+                                </tr><!-- /tr -->
+                                @endforeach
+                            @endif
+                        </tbody><!-- /tbody -->
+                        </table><!-- /.table -->
+                    </div><!-- /.table-responsive -->
                 </div><!-- /.card -->
             </div><!-- /.tab-pane -->
         @endif

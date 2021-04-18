@@ -190,14 +190,17 @@ class TeacherController extends Controller
             }
         }
 
-        $row_availability = array();
+        $rows['availability'] = array();
         if(isset(request()->availability_id))
         {
-            $row_availability = TeacherAvailability::where('id', request()->availability_id)->first();
+            $rows['availability'] = TeacherAvailability::where('id', request()->availability_id)->first();
         }
         $show_tab = request()->show_tab;
         $day_list = $this->day;
-        return view('admin.teacher-edit', compact(['row', 'lang', 'row_availability', 'show_tab', 'day_list', 'day_selected']));
+
+        $rows['class_schedule'] = self::listClassSchedule($id);
+        $rows['class_taken'] = self::listClassTaken($id);
+        return view('admin.teacher-edit', compact(['row', 'rows','lang', 'show_tab', 'day_list', 'day_selected']));
     }
 
     public function status(Request $request)
@@ -293,7 +296,7 @@ class TeacherController extends Controller
         }
     }
 
-    public function listClassSchedule($id)
+    public static function listClassSchedule($id)
     {
         $data = UserBookings::where('teacher_id', $id)
             ->leftJoin('users', 'users.id', '=', 'user_bookings.student_id')
@@ -301,34 +304,66 @@ class TeacherController extends Controller
                 'users.id',
                 'users.first_name',
                 'users.last_name',
+                'user_bookings.id as booking_id',
                 'user_bookings.status',
                 'user_bookings.booking_date'
             )
             ->orderBy('user_bookings.booking_date', 'desc')
             ->get();
-// pr($data);die;
-        // if no return data
-        if(empty(sizeof($data))) {
-            $data['data'] = array();
-            return $data;
+
+        $rows = array();
+        if(is_object($data)) {
+            foreach($data as $val) {
+                $rows[$val->booking_id]['booking_date'] = $val->booking_date;
+                $rows[$val->booking_id]['name'] = $val->first_name.' '.$val->last_name;
+
+                switch($val->status) {
+                    case 1:
+                        $rows[$val->booking_id]['status'] = '<span class="badge badge-primary">'.__('Request Class Schedule').'</span>';
+                    break;
+                    case 2:
+                        $rows[$val->booking_id]['status'] = '<span class="badge badge-primary">'.__('Accept Class Schedule').'</span>';
+                    break;
+                    case 3:
+                        $rows[$val->booking_id]['status'] = '<span class="badge badge-success">'.__('Class Done').'</span>';
+                    break;
+                    case 4:
+                        $rows[$val->booking_id]['status'] = '<span class="badge badge-danger">'.__('Class Cancel By Student').'</span>';
+                    break;
+                    case 5:
+                        $rows[$val->booking_id]['status'] = '<span class="badge badge-danger">'.__('Class Cancel By Teacher').'</span>';
+                    break;
+                }
+            }
         }
 
-        return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('name', function($row) {
-                return $row->first_name.' '.$row->last_name;
-            })
-            ->addColumn('status', function($row) {
-                if($row->status == 3) {
-                    return '<span class="badge badge-success">Completed</span>';
-                }
+        return $rows;
+    }
 
-                // <span class="badge badge-primary">Upcoming</span>
-                // <span class="badge badge-warning">On Going</span>
-                // 
-                // return ($row->status==1) ? 'Active' : 'Inactive';
-            })
-            ->rawColumns(['status'])
-            ->make(true);
+    public static function listClassTaken($id)
+    {
+        $data = UserBookings::where([
+                ['teacher_id', '=', $id],
+                ['status', '=', 3]
+            ])
+            ->select(
+                'id',
+                DB::raw('DATE_FORMAT(booking_date, "%M, %Y") as booking_date_readable')
+            )
+            ->orderBy('booking_date', 'desc')
+            ->get();
+        $rows = array();
+        if(is_object($data)) {
+            $tmpRows = array();
+            foreach($data as $val) {
+                $tmpRows[$val->booking_date_readable][$val->id] = $val->booking_date_readable;
+            }
+
+            foreach($tmpRows as $key => $val) {
+                $rows[$key] = sizeof($val);
+            }
+        }
+
+        return $rows;
     }
 }
