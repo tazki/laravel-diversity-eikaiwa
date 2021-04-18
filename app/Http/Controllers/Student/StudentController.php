@@ -67,11 +67,15 @@ class StudentController extends Controller
                 break;
             }
 
-            if(!empty($rowPayment[0]->payment_data)) {
-                $payment_data = json_decode($rowPayment[0]->payment_data);
-                if($rowPayment[0]->status == 0) {
-                    $rows['payment']['session_url'] = $payment_data->session_url;
-                }
+            // if(!empty($rowPayment[0]->payment_data)) {
+            //     $payment_data = json_decode($rowPayment[0]->payment_data);
+            //     if($rowPayment[0]->status == 0) {
+            //         $rows['payment']['session_url'] = $payment_data->session_url;
+            //     }
+            // }
+
+            if(empty($rowPayment[0]->status)) {
+                $rows['has_upgrade_request'] = $rowPayment[0]->service_id;
             }
         }
 
@@ -196,13 +200,13 @@ class StudentController extends Controller
     public function planUpgrade(Request $request)
     {
         $service = currentService($request->service_id);
-        $row = User::where('id', '=', Auth::user()->id)->first();
-        $data['service_id'] = $request->service_id;
-        $data['student_id'] = $row->id;
-        $data['first_name'] = $row->first_name;
-        $data['last_name'] = $row->last_name;
-        $data['email'] = $row->email;
-        ContactForms::create($data);
+        // $row = User::where('id', '=', Auth::user()->id)->first();
+        // $data['service_id'] = $request->service_id;
+        // $data['student_id'] = $row->id;
+        // $data['first_name'] = $row->first_name;
+        // $data['last_name'] = $row->last_name;
+        // $data['email'] = $row->email;
+        // ContactForms::create($data);
 
         $paymentData['user_id'] = Auth::user()->id;
         $paymentData['service_price'] = $service['payment']['price'];
@@ -210,11 +214,6 @@ class StudentController extends Controller
         $paymentData['service_id'] = $request->service_id;
         $paymentData['status'] = ($request->service_id == 1) ? 2 : 0;
         UserPayments::create($paymentData);
-        return back()->with('success', __('Plan Upgrade Request Sent Successful!'));
+        return redirect(route('page_subscription', ['id' => urlencode(base64_encode(Auth::user()->id.'|'.$request->service_id))]));
     }
-
-    // public function cancelSubscription(Request $request)
-    // {
-        // Auth::user()->subscription('default')->cancelNow();
-    // }
 }
