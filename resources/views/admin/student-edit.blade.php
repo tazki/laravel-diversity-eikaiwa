@@ -13,12 +13,12 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#subscription">Subscription</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#class-schedule">Class Schedule</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#class-taken">Class Taken</a>
-            </li>
+            </li> --}}
         </ul><!-- /.nav-tabs -->
     </div><!-- /.nav-scroller -->
     <!-- .tab-content -->
