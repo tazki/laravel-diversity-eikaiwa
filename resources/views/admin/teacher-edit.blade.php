@@ -307,6 +307,8 @@
                                     <td class="align-middle"> {{ $total_hours }} </td>
                                 </tr><!-- /tr -->
                                 @endforeach
+                            @else
+                                <tr class="odd"><td valign="top" colspan="2" class="dataTables_empty">No data available in table</td></tr>
                             @endif
                         </tbody><!-- /tbody -->
                         </table><!-- /.table -->
@@ -447,6 +449,8 @@
                                     </td>
                                 </tr><!-- /tr -->
                                 @endforeach
+                            @else
+                                <tr class="odd"><td valign="top" colspan="3" class="dataTables_empty">No data available in table</td></tr>
                             @endif
                         </tbody><!-- /tbody -->
                         </table><!-- /.table -->
