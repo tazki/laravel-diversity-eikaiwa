@@ -219,18 +219,27 @@
 											{{ $rows['payment']['status'] }}
 										</div>
 
-										@if(Auth::user()->subscribed('default') && !Auth::user()->subscription('default')->cancelled())
-										<div class="form-group">
-											<label class="col-md-4">&nbsp;</label>
-											<span class="btn btn-danger" data-toggle="modal" data-target="#planCancelModal">
-												<span class="menu-icon fas fa-trash"></span> {{ __('Cancel Subscription') }}
-											</span>
-										</div>
-										@else
+										@if(isset($rows['has_upgrade_request']) && !empty($rows['has_upgrade_request']))
 											<div class="form-group">
 												<label class="col-md-4">&nbsp;</label>
-												{{ __('Cancelled Subscription') }}
+												<a href="{!! route('page_subscription', ['id' => urlencode(base64_encode(Auth::user()->id.'|'.$rows['has_upgrade_request']))]) !!}" target="_blank">
+													<span class="menu-icon fas fa-credit-card"></span> {{ __('Complete Payment') }}
+												</a>
 											</div>
+										@else
+											@if(Auth::user()->subscribed('default') && !Auth::user()->subscription('default')->cancelled())
+											<div class="form-group">
+												<label class="col-md-4">&nbsp;</label>
+												<span class="btn btn-danger" data-toggle="modal" data-target="#planCancelModal">
+													<span class="menu-icon fas fa-trash"></span> {{ __('Cancel Subscription') }}
+												</span>
+											</div>
+											@else
+												<div class="form-group">
+													<label class="col-md-4">&nbsp;</label>
+													{{ __('Cancelled Subscription') }}
+												</div>
+											@endif
 										@endif
 
 										{{-- @if(isset($rows['payment']['session_url']))

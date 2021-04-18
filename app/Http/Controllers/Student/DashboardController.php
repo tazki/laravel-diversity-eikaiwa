@@ -41,9 +41,11 @@ class DashboardController extends Controller
             $service = currentService($rowPayment[0]->service_id);
             $rows['service_id'] = $rowPayment[0]->service_id;
             $rows['current_subscription'] = $service['payment']['service'];
-        }
 
-        $rows['has_upgrade_request'] = ContactForms::where('student_id', '=', Auth::user()->id)->first();
+            if(empty($rowPayment[0]->status)) {
+                $rows['has_upgrade_request'] = 1;
+            }
+        }
 
         $new_customer_registration_chart['date'] = array('2020-09', '2020-10', '2020-11', '2020-12');
         $new_customer_registration_chart['count'] = array(10, 25, 18, 11);
