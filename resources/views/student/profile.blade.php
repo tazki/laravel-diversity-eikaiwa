@@ -219,14 +219,28 @@
 											{{ $rows['payment']['status'] }}
 										</div>
 
-										@if(isset($rows['payment']['session_url']))
+										@if(Auth::user()->subscribed('default') && !Auth::user()->subscription('default')->cancelled())
+										<div class="form-group">
+											<label class="col-md-4">&nbsp;</label>
+											<span class="btn btn-danger" data-toggle="modal" data-target="#planCancelModal">
+												<span class="menu-icon fas fa-trash"></span> {{ __('Cancel Subscription') }}
+											</span>
+										</div>
+										@else
+											<div class="form-group">
+												<label class="col-md-4">&nbsp;</label>
+												{{ __('Cancelled Subscription') }}
+											</div>
+										@endif
+
+										{{-- @if(isset($rows['payment']['session_url']))
 										<div class="form-group">
 											<label class="col-md-4">&nbsp;</label>
 											<a href="{{ $rows['payment']['session_url'] }}" target="_blank">
 												<span class="menu-icon fas fa-credit-card"></span> {{ __('Complete Payment') }}
 											</a>
 										</div>
-										@endif
+										@endif --}}
 									@endif
 								</div>
                             </div>

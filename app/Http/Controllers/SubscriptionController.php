@@ -79,4 +79,28 @@ class SubscriptionController extends Controller
 
         return redirect('s/dashboard');
     }
+
+    public function cancelSubscription(Request $request)
+    {
+        $user = Auth::user();
+        try {
+            $user->subscription('default')->cancel();
+        } catch (\Exception $e) {
+            return back()->withErrors(['message' => 'Error cancelling subscription. ' . $e->getMessage()]);
+        }
+
+        return back()->with('success','Subscription Cancel successfully');
+    }
+
+    public function resumeSubscription(Request $request)
+    {
+        $user = Auth::user();
+        try {
+            $user->subscription('default')->resume();
+        } catch (\Exception $e) {
+            return back()->withErrors(['message' => 'Error resuming subscription. ' . $e->getMessage()]);
+        }
+
+        return back()->with('success','Subscription Resume successfully');
+    }
 }

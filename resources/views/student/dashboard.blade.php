@@ -4,12 +4,12 @@
 		<div class="page">
 			<div class="page-inner">
 				<header class="page-title-bar">
-						<div class="d-flex flex-column flex-md-row">
-								<p class="lead">
-										<span class="font-weight-bold">{{ __('Hi') }}, {{ Auth::user()->first_name ?? '' }}.</span> <span
-												class="d-block text-muted">{{ __('Here’s what’s happening with your account today.') }}</span>
-								</p>
-						</div>
+					<div class="d-flex flex-column flex-md-row">
+						<p class="lead">
+							<span class="font-weight-bold">{{ __('Hi') }}, {{ Auth::user()->first_name ?? '' }}.</span> <span
+								class="d-block text-muted">{{ __('Here’s what’s happening with your account today.') }}</span>
+						</p>
+					</div>
 				</header>
 				<div class="page-section">
 					<div class="section-block">

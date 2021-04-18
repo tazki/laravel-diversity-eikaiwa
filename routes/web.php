@@ -57,6 +57,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('s/schedule_add', 'Student\ScheduleController@add')->name('student_schedule_add');
         Route::post('s/schedule_add', 'Student\ScheduleController@add')->name('student_schedule_add');
         Route::delete('s/schedule/{id}/cancel-class', 'Student\ScheduleController@cancelClass')->name('student_schedule_cancel_class');
+        Route::get('s/subscription-cancel', 'SubscriptionController@cancelSubscription')->name('student_cancel_subscription');
+        Route::get('s/subscription-resume', 'SubscriptionController@resumeSubscription')->name('student_resume_subscription');
     });
 
     // Teacher

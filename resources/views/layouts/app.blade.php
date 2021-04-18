@@ -17,5 +17,6 @@
     @include('modals.notify-delete')
     @include('modals.notify-delete-ajax')
     @include('modals.notify-plan-upgrade')
+    @include('modals.notify-plan-cancel')
 </body>
 </html>
