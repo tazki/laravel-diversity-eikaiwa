@@ -28,39 +28,86 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $total_number_of_user = User::where('user_type', 'student')->get();
-        $rows['total_number_of_user'] = $total_number_of_user->count();
-        // $total_number_of_active_customers = Organization::where('status', '=', 1)->get();
-        $rows['total_number_of_active_customers'] = $total_number_of_user->count();//$total_number_of_active_customers->count();
+        $rows['total_number_of_user'] = User::where('user_type', 'student')->count();
+        $rows['total_number_of_booking'] = UserBookings::count();
+        $rows['total_number_of_completed_class'] = UserBookings::where('status', 3)->count();
+        $rows['total_number_of_active_customers'] = $total_number_of_active_customers = User::where([
+                ['users.user_type', '=', 'student'],
+                ['subscriptions.stripe_status', '=', 'active']
+            ])
+            ->leftJoin('subscriptions', 'subscriptions.user_id', '=', 'users.id')
+            ->count(DB::raw('DISTINCT mt_users.id'));
 
-        $total_number_of_class = UserBookings::get();
-        $rows['total_number_of_class'] = $total_number_of_class->count();
-        // $new_customer_registration = DB::table('organizations')
-        //     ->select(
-        //         DB::raw('DATE_FORMAT(mt_organizations.created_at, "%d %b") as created_at')
-        //     )
-        //     ->orderByRaw('mt_organizations.created_at ASC')
-        //     ->whereMonth('organizations.created_at', Carbon::now()->month)
-        //     ->get();
-        // if(is_object($new_customer_registration)) {
-        //     $new_customer_registration_chart = array();
-        //     $new_customer_registration_chart_partial = array();
-        //     foreach($new_customer_registration as $item) {
-        //         $new_customer_registration_chart_partial[$item->created_at][] = $item->created_at;
-        //     }
-        //     foreach($new_customer_registration_chart_partial as $key => $val) {
-        //         $new_customer_registration_chart['date'][] = $key;
-        //         $new_customer_registration_chart['count'][] = sizeof($val);
-        //     }
+        $studentRows = User::where('user_type', 'student')
+            ->select(
+                DB::raw('DATE_FORMAT(created_at, "%Y-%m") as register_at')
+            )
+            ->get();
+        if(is_object($studentRows)) {
+            $new_customer_registration = array();
+            $new_customer_registration_chart = array();
+            foreach($studentRows as $key => $row) {
+                $new_customer_registration[$row->register_at][$key] = $key;
+            }
 
-        //     if(isset($new_customer_registration_chart['date'])) {
-                $new_customer_registration_chart['date'] = array('2020-09', '2020-10', '2020-11', '2020-12');
-                $new_customer_registration_chart['count'] = array(10, 25, 18, 11);
-                $rows['new_customer_registration']['date'] = json_encode($new_customer_registration_chart['date']);
-                $rows['new_customer_registration']['count'] = json_encode($new_customer_registration_chart['count']);
-        //     }
-        // }
+            if(is_array($new_customer_registration) && sizeof($new_customer_registration) > 0) {
+                $count = 0;
+                foreach($new_customer_registration as $date => $val) {
+                    $new_customer_registration_chart['date'][$count] = $date;
+                    $new_customer_registration_chart['count'][$count] = sizeof($val);
+                    $count++;
+                }
 
+                $rows['new_customer_registration']['date'] = 0;
+                $rows['new_customer_registration']['count'] = 0;
+                if(isset($new_customer_registration_chart['date'])) {
+                    $rows['new_customer_registration']['date'] = json_encode($new_customer_registration_chart['date']);
+                    $rows['new_customer_registration']['count'] = json_encode($new_customer_registration_chart['count']);
+                }
+            }
+        }
+
+        $teacherRows = User::where('user_type', 'teacher')
+            ->whereIn('user_bookings.status', [3,4,5])
+            ->select(
+                'users.id',
+                'users.first_name',
+                'users.last_name',
+                'users.avatar',
+                'user_bookings.status'
+            )
+            ->leftJoin('user_bookings', 'user_bookings.teacher_id', '=', 'users.id')
+            ->get();
+        if(is_object($teacherRows)) {
+            $teacher_leaderboard = array();
+            foreach($teacherRows as $key => $row) {
+                $teacher_leaderboard[$row->id]['id'] = $row->id;
+                $teacher_leaderboard[$row->id]['name'] = $row->first_name.' '.$row->last_name;
+                $teacher_leaderboard[$row->id]['avatar'] = userFile($row->avatar, '', $row->id);
+                $teacher_leaderboard[$row->id]['booking_status'][$row->status][] = $row->status;
+                $teacher_leaderboard[$row->id]['total_booking'][] = $row->status;
+            }
+
+            foreach($teacher_leaderboard as $key => $row) {
+                $totalBooking = sizeof($row['total_booking']);
+                $teacher_leaderboard[$key]['total_booking'] = $totalBooking;
+
+                foreach($row['booking_status'] as $skey => $srow) {
+                    $teacher_leaderboard[$key]['booking_status_count'][$skey] = sizeof($srow);
+                    $teacher_leaderboard[$key]['booking_status_percent'][$skey] = (sizeof($srow) / $totalBooking) * 100;
+                }
+            }
+
+            // pr($teacher_leaderboard);//die;
+
+            $rows['teacher_leaderboard'] = $teacher_leaderboard;
+        }
+
+        $rows['bookingStatusColor'] = array(
+            '3' => 'purple',
+            '4' => 'teal',
+            '5' => 'red'
+        );
         return view('admin.dashboard', compact('rows'));
     }
 }
