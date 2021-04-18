@@ -297,7 +297,7 @@
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
-                            @if(isset($rows['class_taken']) && is_array($rows['class_taken']))
+                            @if(isset($rows['class_taken']) && is_array($rows['class_taken']) && sizeof($rows['class_taken']) > 0)
                                 @foreach($rows['class_taken'] as $date => $total_hours)
                                 <!-- tr -->
                                 <tr>
@@ -436,7 +436,7 @@
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
-                            @if(isset($rows['class_schedule']) && is_array($rows['class_schedule']))
+                            @if(isset($rows['class_schedule']) && is_array($rows['class_schedule']) && sizeof($rows['class_schedule']) > 0)
                                 @foreach($rows['class_schedule'] as $val)
                                 <!-- tr -->
                                 <tr>
