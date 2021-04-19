@@ -33,7 +33,7 @@
       {title: "{{ __('Email') }}", data: 'email', name: 'email'},
       // {title: "{{ __('Total Class Hours') }}", data: 'service', name: 'service'},
       {title: "{{ __('Last Update') }}", data: 'updated_at', name: 'updated_at'},
-      // {title: "{{ __('Status') }}", data: 'status', name: 'status'},
+      {title: "{{ __('Status') }}", data: 'status', name: 'status'},
       {title: "{{ __('Action') }}", data: 'action', name: 'action', orderable: false, searchable: false},
     ];
   });
