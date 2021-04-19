@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use DataTables;
 use Auth;
 use DB;
-use App\Organization;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -100,7 +100,7 @@ class UserController extends Controller
             'status' => $status
         ];
         $condition['id'] = $request->id;
-        Organization::updateOrCreate($condition, $clientData);
+        User::updateOrCreate($condition, $clientData);
 
         $msg = array(
             'status'  => 'success',
