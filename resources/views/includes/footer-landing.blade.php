@@ -28,7 +28,7 @@
             <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
                 <h3>{{ __('Legal') }}</h3>
                 <ul class="fh5co-footer-links">
-                    <li><a href="{{ route('page_terms') }}">{{ __('Terms and Condition') }}</a></li>
+                    <li><a href="{{ route('page_terms') }}">{{ __('Terms and conditions / Privacy policy') }}</a></li>
                 </ul>
             </div>
         </div>

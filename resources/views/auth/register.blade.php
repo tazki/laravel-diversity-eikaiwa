@@ -3,6 +3,13 @@
 @section('content')
 <form method="POST" id="registerForm" action="{{ route('page_register') }}" class="auth-form">
     @csrf
+    <div class="confirm-title form-row d-none">
+        <div class="col-md-12">
+            <div class="form-group">
+                <h5>{{ __('Please check the information before proceeding') }}</h5>
+            </div>
+        </div>
+    </div>
 
     <div class="form-row">
         <div class="col-md-6">
@@ -187,11 +194,14 @@ $(document).ready(function() {
             $('.form-control').attr('readonly', 'readonly');
             $('.form-control').css('background-color', '#f6f7f9');
         }
+
+        $('.confirm-title').removeClass('d-none');
     });
     $('.js-form-back').click(function(e) {
         e.preventDefault();
         $('.js-confirm-holder').addClass('d-none');
         $('.js-continue-holder').removeClass('d-none');
+        $('.confirm-title').addClass('d-none');
 
     $('.form-control').removeAttr('readonly');
     $('.form-control').css('background-color', '#fff');
