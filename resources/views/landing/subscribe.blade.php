@@ -112,15 +112,17 @@
                             <div class="form-group" style="display:none;">
                                 <div class="row">
                                     @foreach($plans as $plan)
-                                    <div class="col-md-4">
-                                        <div class="subscription-option">
-                                            <input type="radio" id="plan-silver" name="plan" value='{{$plan->id}}' {!! ($plan->product->metadata->service_id == $service_id) ? 'checked="checked"' : '' !!}>
-                                            <label for="plan-silver">
-                                                <span class="plan-price">{{$plan->currency}}{{$plan->amount}}<small> / {{$plan->interval}}</small></span>
-                                                <span class="plan-name">{{$plan->product->name}}</span>
-                                            </label>
+                                        @if(isset($plan->product->metadata) && isset($plan->product->metadata->service_id))
+                                        <div class="col-md-4">
+                                            <div class="subscription-option">
+                                                <input type="radio" id="plan-silver" name="plan" value='{{$plan->id}}' {!! ($plan->product->metadata->service_id == $service_id) ? 'checked="checked"' : '' !!}>
+                                                <label for="plan-silver">
+                                                    <span class="plan-price">{{$plan->currency}}{{$plan->amount}}<small> / {{$plan->interval}}</small></span>
+                                                    <span class="plan-name">{{$plan->product->name}}</span>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>
