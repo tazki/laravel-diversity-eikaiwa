@@ -141,6 +141,24 @@
 		</div>
 	</div>
 
+	<div class="fh5co-company fh5co-bg-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-md-push-1 animate-box">
+					<div class="company-info">
+						<h3>{{ __('Class flow ( May depend on what are the student’s needs and level )') }}</h3>
+						<ul>
+							<li>1. {{ __('Warm-up') }}</li>
+							<li>2. {{ __('Topic discussion') }}</li>
+							<li>3. {{ __('Practice') }}</li>
+							<li>4. {{ __('Question time/ End of class') }}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	@include('includes.register-banner')
     @include('includes.footer-landing')
 </div>
