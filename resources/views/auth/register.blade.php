@@ -186,6 +186,7 @@ $(document).ready(function() {
         });
 
         if(!error) {
+            $('.confirm-title').removeClass('d-none');
             $('.form-control').removeClass('is-invalid');
             $('.form-control').siblings('.invalid-feedback').remove();
             $('.js-confirm-holder').removeClass('d-none');
@@ -194,8 +195,6 @@ $(document).ready(function() {
             $('.form-control').attr('readonly', 'readonly');
             $('.form-control').css('background-color', '#f6f7f9');
         }
-
-        $('.confirm-title').removeClass('d-none');
     });
     $('.js-form-back').click(function(e) {
         e.preventDefault();
