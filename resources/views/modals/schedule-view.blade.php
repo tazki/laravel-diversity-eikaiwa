@@ -13,7 +13,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="task-assign">{{ __('Teacher') }} <span class="text-danger">*</span></label>
-                        <select name="teacher_id" id="js-booking-teacher" class="custom-select form-control" id="task-assign">{{-- js-task-assign  --}}
+                        <select disabled name="teacher_id" id="js-booking-teacher" class="custom-select form-control" id="task-assign">{{-- js-task-assign  --}}
                             <option value=""></option>
                             @if(isset($rows['teachers']))
                                 @foreach($rows['teachers'] as $teacher)
@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <label for="task-due-date">{{ __('Booking Date') }} <span class="text-danger">*</span></label>
-                        <input type="text" name="booking_date" id="js-booking-date" class="js-input-flatpickr form-control" placeholder="Select Date">
+                        <input disabled type="text" name="booking_date" id="js-booking-date" class="js-input-flatpickr form-control" placeholder="Select Date">
                     </div>
                     <div class="form-group">
                         <label for="task-due-date">{{ __('Status') }}</label>

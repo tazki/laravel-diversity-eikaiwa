@@ -2,30 +2,11 @@
 
 @section('content')
 <div class="page schedule has-sidebar has-sidebar-fixed has-sidebar-expand-xl">
-    {{-- <div class="page-inner page-inner-fill"> --}}
-        <div class="board">
+    <div class="board">
         <div class="card">
-                <div id="js-schedule-calendar-client"></div>
-            </div>
+            <div id="js-schedule-calendar-client"></div>
         </div>
-    {{-- </div> --}}
-    {{-- <div class="page-sidebar page-sidebar-fixed">
-        <div class="sidebar-section-fill p-3">
-            <h5> Task </h5>
-            <div class="mb-1">
-                <span class="badge badge-primary task-schedule-overdue">Overdue</span>
-            </div>
-            <div class="mb-1">
-                <span class="badge badge-primary task-schedule-week-ago">Week ago</span>
-            </div>
-            <div class="mb-1">
-                <span class="badge badge-primary task-schedule-progress">Progress</span>
-            </div>
-            <div class="mb-1">
-                <span class="badge badge-primary task-schedule-done">Done</span>
-            </div>
-        </div>
-    </div> --}}
+    </div>
 
     @if(studentActivePoints() > 0)
         <a href="#" class="js-btn-add fab btn btn-primary btn-floated"
@@ -37,10 +18,6 @@
                 <span class="fa fa-plus"></span>
         </a>
     @endif
-    {{-- <a href="" class="js-btn-add btn btn-primary btn-floated"
-        title="{{ __('Create Booking') }}">
-        <span class="fa fa-plus"></span> --}}
-    {{-- </a> --}}
 </div>
 
 @include('modals.schedule')

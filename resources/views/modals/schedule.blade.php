@@ -26,10 +26,13 @@
                         <label for="task-due-date">{{ __('Booking Date') }} <span class="text-danger">*</span></label>
                         <input type="text" name="booking_date" id="jsBookingDate" class="form-control" placeholder="Select Date">
                     </div>
+                    <div class="form-group">
+                        <label for="task-time">{{ __('Booking Time') }} <span class="text-danger">*</span></label>
+                        <select name="booking_time" id="jsBookingTime" class="form-control">
+                            <option value="">Select Time</option>
+                        </select>
+                    </div>
                     <div class="modal-footer px-0">
-                        {{-- @if(isset($rows['client']->id))
-                            <input type="hidden" name="client_id" value="{{ $rows['client']->id }}" />
-                        @endif --}}
                         <input type="hidden" name="confirm_first" class="js-input-confirm" value="1" />
                         <button type="button" class="js-btn-cancel btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
                         <button type="button" class="js-btn-confirm btn btn-primary" onClick="ajaxForm(this); return false;">{{ __('Next') }}</button>
@@ -73,10 +76,10 @@
             // locale: "ja",
             disableMobile: "true",
             altInput: true,
-            altFormat: "F j, Y H:i",
-            dateFormat: "Y-m-d H:i:s",
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
             minDate: "today",
-            enableTime: true,
+            enableTime: false,
             time_24hr: true,
             // minTime: "8:00",
             // maxTime: "22:00",
@@ -119,11 +122,20 @@
                 // else{
                     console.log(startTime);
                     console.log(endTime);
-                    console.log(date.getDay());
-                    jsBookingDate.set("defaultHour", startTime);
-                    jsBookingDate.set("minTime", startTime);
-                    jsBookingDate.set("maxTime", endTime);
+                    // console.log(date.getDay());
+                    // jsBookingDate.set("defaultHour", startTime);
+                    // jsBookingDate.set("minTime", startTime);
+                    // jsBookingDate.set("maxTime", endTime);                    
                 // }
+
+                var jsBookingTimeOption = '';
+                for(i=startTime; i<=endTime; i++) {
+                    start = i + ':00';
+                    end = (parseInt(i) + 1) + ':00';
+                    console.log(start + ' - ' + end);
+                    jsBookingTimeOption += '<option value="' + i + ':00">'+start + ' - ' + end + '</option>';
+                }
+                $('#jsBookingTime').html(jsBookingTimeOption);
             }
         });
     });
