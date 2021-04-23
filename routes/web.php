@@ -117,6 +117,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('admin/student/{service_id}/{contact_id}/upgrade-plan/{user_id}', 'Admin\StudentController@studentUpgradePlan')->name('students_upgrade_plan');
         // Contact Form
         Route::get('admin/contact-form', 'Admin\ContactFormController@index')->name('contact_form');
-        
+        // Payment
+        Route::get('admin/payment', 'Admin\PaymentController@index')->name('payment_list');
     });
 });
