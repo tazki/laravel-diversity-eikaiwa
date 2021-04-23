@@ -29,33 +29,6 @@ class PaymentController extends Controller
                 })
                 ->orderBy('user_payments.updated_at', 'desc')
                 ->get();
-            // $data = User::where([
-            //         ['users.user_type', '=', 'student'],
-            //         // ['user_payments.status', '=', 2]
-            //     ])
-            //     ->where(function ($query) {
-            //         $query->select(
-            //                 'user_payments.updated_at',
-            //                 'user_payments.service_id',
-            //                 'user_payments.user_id'
-            //             )
-            //             ->from('user_payments')
-            //             ->whereColumn('user_payments.user_id', 'users.id')
-            //             ->where('user_payments.status', '=', 2)
-            //             ->orderByDesc('user_payments.updated_at')
-            //             ->limit(1);
-            //     })
-            //     ->select(DB::raw('CONCAT(first_name, " ", last_name) as name'),
-            //         // 'user_payments.updated_at',
-            //         // 'user_payments.service_id',
-            //         // 'user_payments.user_id',
-            //         'users.id'
-            //     )
-            //     // ->leftJoin('subscriptions', 'subscriptions.user_id', '=', 'users.id')
-            //     // ->leftJoin('user_payments', 'user_payments.user_id', '=', 'users.id')
-            //     // ->orderBy('user_payments.updated_at', 'desc')
-            //     // ->distinct('users.id')
-            //     ->get();
 
             // if no return data
             if(empty(sizeof($data))) {
@@ -85,12 +58,6 @@ class PaymentController extends Controller
                     }
                 })
                 ->rawColumns(['first_name','service'])
-                // ->addColumn('action', function($row) {
-                //     $btn = '<a href="'.route('teachers_edit', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
-                //     // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';
-                //     return $btn;
-                // })
-                // ->rawColumns(['action'])
                 ->make(true);
         }
 
