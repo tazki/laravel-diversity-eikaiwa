@@ -45,7 +45,7 @@
 											@if(isset($rows['has_upgrade_request']) && !empty($rows['has_upgrade_request']))
 												<span class="small">{{ __('Pending Upgrade Request') }}</span>
 											@else
-												@if($rows['service_id'] == 1)
+												@if(isset($rows['service_id']) && $rows['service_id'] == 1)
 													<span class="btn btn-primary" data-toggle="modal" data-target="#planUpgradeModal">
 														{{ __('Upgrade') }}
 													</span>
