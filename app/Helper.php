@@ -35,6 +35,12 @@ if(!function_exists('studentActivePoints')) {
 
 function currentService($service_id) {
     switch($service_id) {
+        case 4:
+            $rows['payment']['price'] = 5799;
+            $rows['payment']['price_label'] = '¥5,799';
+            $rows['payment']['points'] = 4;
+            $rows['payment']['service'] = __('Special Plan');
+        break;
         case 3:
             $rows['payment']['price'] = 13310;
             $rows['payment']['price_label'] = '¥13,310';

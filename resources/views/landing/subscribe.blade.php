@@ -53,6 +53,32 @@
             </div>
             <div class="row">
                 <div class="pricing pricing--rabten">
+                    @if($service_id == 4)
+                    <div class="col-md-4 animate-box">
+                        <div class="pricing__item">
+                            <div class="wrap-price" style="padding-bottom:0;">
+                                <h3 class="pricing__title">{{ __('Special Plan') }}</h3>
+                                <p class="pricing__sentence" style="margin-bottom:0;">{{ __('(Until May 31)') }}</p>
+                            </div>
+                            <div class="pricing__price">
+                                <span class="pricing__anim pricing__anim--1">
+                                    <span class="pricing__currency">¥</span>5,799
+                                </span>
+                                <span class="pricing__anim pricing__anim--2">
+                                    <span class="pricing__period">{{ __('Tax Included') }}</span>
+                                </span>
+                            </div>
+                            <div class="wrap-price">
+                                <ul class="pricing__feature-list">
+                                    <li class="pricing__feature">{{ __('4 lesson') }}</li>
+                                    <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li>
+                                    <li class="pricing__feature">{{ __('Register now and only pay ¥5,799 every month!') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
                     @if($service_id == 2)
                     <div class="col-md-4 animate-box">
                         <div class="pricing__item">
