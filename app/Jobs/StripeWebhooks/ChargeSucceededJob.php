@@ -36,6 +36,7 @@ class ChargeSucceededJob implements ShouldQueue
                 ['service_id', '=', $service_id],
                 ['status', '=', 0]
             ])->first();
+
             if($rowPayment) {
                 $rowPaymentData['status'] = 2;
                 $condition['id'] = $rowPayment->id;
