@@ -216,7 +216,7 @@
 										</div>
 										<div class="form-group">
 											<label class="col-md-4">{{ __('Status') }}:</label>
-											@if(!empty(Auth::user()->stripe_id))
+											@if(!empty(Auth::user()->stripe_id) && isset($rows['has_upgrade_request']) && !empty($rows['has_upgrade_request']))
 												{{ __('Pending Payment Validation') }}
 											@else
 												{{ $rows['payment']['status'] }}
