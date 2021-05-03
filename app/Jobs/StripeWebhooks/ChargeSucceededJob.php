@@ -12,7 +12,7 @@ use Spatie\WebhookClient\Models\WebhookCall;
 use App\Models\User;
 use App\Models\UserPayments;
 
-class HandleChargeSucceededJob implements ShouldQueue
+class ChargeSucceededJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
