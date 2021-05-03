@@ -38,8 +38,8 @@ class ScheduleController extends Controller
             if(is_object($availability)) {
                 foreach($availability as $item2) {
                     $rows['teachers_availability'][$item->id]['availableDay'][$item2->id]['day'] = $item2->day;
-                    $rows['teachers_availability'][$item->id]['availableDay'][$item2->id]['start_time'] = $item2->start_time;
-                    $rows['teachers_availability'][$item->id]['availableDay'][$item2->id]['end_time'] = $item2->end_time;
+                    $rows['teachers_availability'][$item->id]['availableDay'][$item2->id]['start_time'] = str_replace(':00', '', $item2->start_time);
+                    $rows['teachers_availability'][$item->id]['availableDay'][$item2->id]['end_time'] = str_replace(':00', '', $item2->end_time);
                     unset($days[$item2->day]);
                 }
             }
@@ -139,7 +139,8 @@ class ScheduleController extends Controller
             $validator = Validator::make($request->all(),
                 [
                     'teacher_id' => 'required',
-                    'booking_date' => 'required'
+                    'booking_date' => 'required',
+                    'booking_time' => 'required'
                 ]
             );
 
@@ -152,7 +153,7 @@ class ScheduleController extends Controller
             }
 
             $bookedSlots = UserBookings::where([
-                ['booking_date', '=', $request->booking_date.':00'],
+                ['booking_date', '=', $request->booking_date.' '.$request->booking_time.':00'],
                 ['teacher_id', '=', $request->teacher_id],
                 ['status', '!=', 4],
                 ['status', '!=', 5]
@@ -166,7 +167,8 @@ class ScheduleController extends Controller
             }
 
             $dayOfWeek = Carbon::parse($request->booking_date)->dayOfWeek;
-            $selectedHour = Carbon::parse($request->booking_date)->hour;
+            // $selectedHour = Carbon::parse($request->booking_date)->hour;
+            $selectedHour = $request->booking_time;
             $availability = TeacherAvailability::where([
                 ['teacher_id', '=', $request->teacher_id],
                 ['day', '=', $dayOfWeek],
@@ -197,7 +199,7 @@ class ScheduleController extends Controller
             $row = UserBookings::create([
                 'teacher_id' => $request->teacher_id,
                 'student_id' => Auth::user()->id,
-                'booking_date' => $request->booking_date,
+                'booking_date' => $request->booking_date.' '.$request->booking_time,
                 'status' => 1
             ]);
 

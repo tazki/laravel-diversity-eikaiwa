@@ -39,9 +39,9 @@
     <div class="form-row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="client-address">{{ __('Address') }} <span class="text-danger">*</span></label>
-                <input type="text" name="address" value="{{ old('address') }}" class="form-control @error('address') is-invalid @enderror" id="client-address" required="">
-                @error('address')
+                <label for="client-postal_code">{{ __('Postal Code') }} <span class="text-danger">*</span></label>
+                <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control @error('postal_code') is-invalid @enderror" id="client-postal_code" required="">
+                @error('postal_code')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -50,9 +50,9 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="client-postal_code">{{ __('Postal Code') }} <span class="text-danger">*</span></label>
-                <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control @error('postal_code') is-invalid @enderror" id="client-postal_code" required="">
-                @error('postal_code')
+                <label for="client-address">{{ __('Address') }} <span class="text-danger">*</span></label>
+                <input type="text" name="address" value="{{ old('address') }}" class="form-control @error('address') is-invalid @enderror" id="client-address" required="">
+                @error('address')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -123,7 +123,8 @@
         <label for="client-service">{{ __('Service') }} <span class="text-danger">*</span></label>
         <select name="service" class="custom-select" id="client-service" data-toggle="select2" data-placeholder="Select service">
             <option value="1">{{ __('Trial') }}</option>
-            <option value="2" {!! (isset($row['service']) && $row['service']==2) ? 'selected="selected"' : '' !!}>{{ __('Plan A') }}</option>
+            <option value="4" {!! (isset($row['service']) && $row['service']==4) ? 'selected="selected"' : '' !!}>{{ __('Special Plan') }}</option>
+            {{-- <option value="2" {!! (isset($row['service']) && $row['service']==2) ? 'selected="selected"' : '' !!}>{{ __('Plan A') }}</option> --}}
             <option value="3" {!! (isset($row['service']) && $row['service']==3) ? 'selected="selected"' : '' !!}>{{ __('Plan B') }}</option>
         </select>
     </div>
@@ -186,6 +187,7 @@ $(document).ready(function() {
         });
 
         if(!error) {
+            $('.confirm-title').removeClass('d-none');
             $('.form-control').removeClass('is-invalid');
             $('.form-control').siblings('.invalid-feedback').remove();
             $('.js-confirm-holder').removeClass('d-none');
@@ -194,8 +196,6 @@ $(document).ready(function() {
             $('.form-control').attr('readonly', 'readonly');
             $('.form-control').css('background-color', '#f6f7f9');
         }
-
-        $('.confirm-title').removeClass('d-none');
     });
     $('.js-form-back').click(function(e) {
         e.preventDefault();

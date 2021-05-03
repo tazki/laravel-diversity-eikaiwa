@@ -31,22 +31,46 @@
                      <a href="{{ route('page_register') }}" class="pricing__action">{{ __('Choose plan') }}</a>
                  </div>
               </div>
+            </div>
+            <div class="col-md-4 animate-box">
+                <div class="pricing__item">
+                    <div class="wrap-price" style="padding-bottom:0;">
+                        <h3 class="pricing__title">{{ __('Special Plan') }}</h3>
+                        <p class="pricing__sentence" style="margin-bottom:0;">{{ __('(Until May 31)') }}</p>
+                    </div>
+                    <div class="pricing__price">
+                        <span class="pricing__anim pricing__anim--1">
+                            <span class="pricing__currency">¥</span>5,799
+                        </span>
+                        <span class="pricing__anim pricing__anim--2">
+                            <span class="pricing__period">{{ __('Tax Included') }}</span>
+                        </span>
+                    </div>
+                    <div class="wrap-price">
+                        <ul class="pricing__feature-list">
+                            <li class="pricing__feature">{{ __('4 lesson') }}</li>
+                            <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li>
+                            <li class="pricing__feature">{{ __('Register now and only pay ¥5,799 every month!') }}</li>
+                        </ul>
+                        <a href="{{ route('page_register').'?service=4' }}" class="pricing__action">{{ __('Choose plan') }}</a>
+                    </div>
                 </div>
-                <div class="col-md-4 animate-box">
-                    <div class="pricing__item">
-                        <div class="wrap-price">
-                            <!-- <div class="icon icon-store"></div> -->
-                             <h3 class="pricing__title">{{ __('Plan A') }}</h3>
-                             <!-- <p class="pricing__sentence">Up to 5 users</p> -->
-                        </div>
-                     <div class="pricing__price">
+            </div>
+            {{-- <div class="col-md-4 animate-box">
+                <div class="pricing__item">
+                    <div class="wrap-price">
+                        <!-- <div class="icon icon-store"></div> -->
+                        <h3 class="pricing__title">{{ __('Plan A') }}</h3>
+                        <!-- <p class="pricing__sentence">Up to 5 users</p> -->
+                    </div>
+                    <div class="pricing__price">
                         <span class="pricing__anim pricing__anim--1">
                             <span class="pricing__currency">¥</span>7,480
                         </span>
                         <span class="pricing__anim pricing__anim--2">
                             <span class="pricing__period">{{ __('Tax Included') }}</span>
                         </span>
-                     </div>
+                    </div>
                     <div class="wrap-price">
                         <ul class="pricing__feature-list">
                             <li class="pricing__feature">{{ __('4 lessons per month (Max of 2 students)') }}</li>
@@ -54,11 +78,10 @@
                             <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li>
                         </ul>
                         <a href="{{ route('page_register').'?service=2' }}" class="pricing__action">{{ __('Choose plan') }}</a>
-                        {{-- <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a> --}}
                     </div>
-             </div>
                 </div>
-                <div class="col-md-4 animate-box">
+            </div> --}}
+            <div class="col-md-4 animate-box">
               <div class="pricing__item">
                   <div class="wrap-price">
                       <!-- <div class="icon icon-home2"></div> -->

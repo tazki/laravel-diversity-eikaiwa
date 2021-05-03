@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\UserPayments;
+use Mail;
 
 class CustomSignupController extends Controller
 {
@@ -39,10 +40,21 @@ class CustomSignupController extends Controller
             $paymentData['service_id'] = request()->service;
             $paymentData['status'] = (request()->service == 1) ? 2 : 0;
             UserPayments::create($paymentData);
+
+            $to_email =  $cleanData['email'];
+            $to_name = $cleanData['first_name'].' '.$cleanData['last_name'];
+            $emailData['name'] = $to_name;
+            Mail::send('emails.signup', $emailData, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject('アカウント登録完了のお知らせ(ダイバーシティ英会話)');
+                $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
+                $message->bcc('oliverrivera09@gmail.com', 'Oliver');
+                $message->bcc('tazki04@gmail.com', 'Mark');
+            });
+
             if(request()->service == 1) {
                 // return back()->with('success','Student registered successfully!');
                 return redirect(route('page_login'));
-            } elseif(in_array(request()->service, array(2,3))) {
+            } elseif(in_array(request()->service, array(2,3,4))) {
                 // Login User with User Instance
                 \Auth::login($user);
                 return redirect(route('page_subscription', ['id' => urlencode(base64_encode($user->id.'|'.request()->service))]));
