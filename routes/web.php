@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::stripeWebhooks('stripe-webhook');
+
 Route::get('setlocale/{locale}',function($lang) 
 {
     \Session::put('locale',$lang);
