@@ -33,12 +33,23 @@ class ChargeSucceededJob implements ShouldQueue
             ->orderBy('id', 'desc')
             ->get();
             if(isset($rowPayment[0]) && isset($rowPayment[0]->service_id)) {
-                $service = currentService($rowPayment[0]->service_id);
-                if($rowPayment[0]->status == 2) {
+                $service_id = $rowPayment[0]->service_id;
+
+                $rowPayment = UserPayments::where([
+                    ['user_id', '=', $user->id],
+                    ['service_id', '=', $service_id],
+                    ['status', '=', 0]
+                ])->first();
+                if($rowPayment) {
+                    $rowPaymentData['status'] = 2;
+                    $condition['id'] = $rowPayment->id;
+                    UserPayments::updateOrCreate($condition, $rowPaymentData);
+                } else {
+                    $service = currentService($service_id);
                     $paymentData['user_id'] = $user->id;
                     $paymentData['service_price'] = $service['payment']['price'];
                     $paymentData['service_points'] = $service['payment']['points'];
-                    $paymentData['service_id'] = $rowPayment[0]->service_id;
+                    $paymentData['service_id'] = $service_id;
                     $paymentData['status'] = 2;
                     UserPayments::create($paymentData);
                 }
