@@ -21,8 +21,8 @@
                 <div class="col-xs-4">
                     <div id="fh5co-logo">
                         <a href="{{ route('page_home') }}">
-                            <img src="{{ secure_asset('site/images/logo.png') }}" alt="img" style="height: 55px; display: inline-block; margin-top: -10px;">
-                            <span>Diversity Eikaiwa</span>
+                            <img class="d-sm-none d-md-block" src="{{ secure_asset('site/images/logo-dark.png') }}" alt="img" style="height:100px; display: inline-block; margin-top: -10px; margin-bottom:-10px;">
+                            <span style="font-size:95%;">{{ __('Diversity Eikaiwa') }}</span>
                         </a>
                     </div>
                 </div>
