@@ -66,16 +66,17 @@ class SubscriptionController extends Controller
         }
 
         // Update Subscription Status to Active
-        if($user->subscribed('default')) {
-            $rowPayment = UserPayments::where([
-                ['user_id', '=', $user->id],
-                ['service_id', '=', $request->service_id],
-                ['status', '=', 0]
-            ])->first();
-            $rowPaymentData['status'] = 2;
-            $condition['id'] = $rowPayment->id;
-            $row = UserPayments::updateOrCreate($condition, $rowPaymentData);
-        }
+        // if($user->subscribed('default')) {
+        //     $rowPayment = UserPayments::where([
+        //         ['user_id', '=', $user->id],
+        //         ['service_id', '=', $request->service_id],
+        //         ['status', '=', 0]
+        //     ])->first();
+
+        //     $rowPaymentData['status'] = 2;
+        //     $condition['id'] = $rowPayment->id;
+        //     $row = UserPayments::updateOrCreate($condition, $rowPaymentData);
+        // }
 
         return redirect('s/dashboard');
     }

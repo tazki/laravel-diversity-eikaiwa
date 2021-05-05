@@ -216,16 +216,22 @@
 										</div>
 										<div class="form-group">
 											<label class="col-md-4">{{ __('Status') }}:</label>
-											{{ $rows['payment']['status'] }}
+											@if(!empty(Auth::user()->stripe_id) && isset($rows['has_upgrade_request']) && !empty($rows['has_upgrade_request']))
+												{{ __('Pending Payment Validation') }}
+											@else
+												{{ $rows['payment']['status'] }}
+											@endif
 										</div>
 
 										@if(isset($rows['has_upgrade_request']) && !empty($rows['has_upgrade_request']))
+											@if(empty(Auth::user()->stripe_id))
 											<div class="form-group">
 												<label class="col-md-4">&nbsp;</label>
 												<a href="{!! route('page_subscription', ['id' => urlencode(base64_encode(Auth::user()->id.'|'.$rows['has_upgrade_request']))]) !!}" target="_blank">
 													<span class="menu-icon fas fa-credit-card"></span> {{ __('Complete Payment') }}
 												</a>
 											</div>
+											@endif
 										@else
 											@if(Auth::user()->subscribed('default') && !Auth::user()->subscription('default')->cancelled())
 											<div class="form-group">

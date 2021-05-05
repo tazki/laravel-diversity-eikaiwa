@@ -43,7 +43,11 @@
 											</p>
 											
 											@if(isset($rows['has_upgrade_request']) && !empty($rows['has_upgrade_request']))
-												<span class="small">{{ __('Pending Upgrade Request') }}</span>
+												@if(!empty(Auth::user()->stripe_id))
+													<span class="small">{{ __('Pending Payment Validation') }}</span>
+												@else
+													<span class="small">{{ __('Pending Upgrade Request') }}</span>
+												@endif
 											@else
 												@if(isset($rows['service_id']) && $rows['service_id'] == 1)
 													<span class="btn btn-primary" data-toggle="modal" data-target="#planUpgradeModal">
