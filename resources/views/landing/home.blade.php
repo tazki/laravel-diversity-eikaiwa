@@ -102,8 +102,13 @@
 		<div class="container">
 			<div class="col-md-6 animate-box">
 				<h2>{{ __('Why choose us?') }}</h2>
-				<p>{{ __('At Diversity, we are focusing on developing our teachers, materials and understanding our students needs which is the foundation of our teaching method. One of the advantages of Diversity is that all teachers are living in Japan or had lived in Japan which makes them understand the culture and how they can teach English to the Japanese people.') }}</p>
-				<p>{{ __('In addition, we will provide exclusive seminars for our students which other English service provider don’t give. These seminars will focus on building your confidence and other skills that you can use for a lifetime.') }}</p>
+				<p>{{ __('At Diversity Eikaiwa, most teachers have years of teaching experience and good track record. We are always giving our best to exceed student’s expectation by giving tailored lesson to them.') }}</p>
+				<h4>{{ __('How can we help you?') }}</h4>
+				<ul style="padding-left:19px;">
+					<li>{{ __('We will provide lessons based on your needs and goals such as increasing your score in TOEIC, TOFEL or want to improve your communication skills in daily or business setting.') }}</li>
+					<li>{{ __('We will Provide free consultation through our support if needed by our student(s). (please feel free to message us through our email.)') }}</li>
+					<li>{{ __('We will provide exclusive seminars (To be announced through email) that you can use for a lifetime. Examples are presentation, public speaking and other interesting topics will be discussed by experts') }}</li>
+				</ul>
 			</div>
 			<div class="col-md-6">
 				<img class="img-responsive" src="{{ secure_asset('site/images/whychooseus.jpg') }}" alt="Diversity Eikaiwa">
@@ -114,9 +119,20 @@
 	<div class="fh5co-company fh5co-bg-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-9 col-md-push-1 animate-box">
+				<div class="col-md-7 col-md-push-1 animate-box">
 					<div class="company-info">
-						<h3>{{ __('Class flow ( May depend on what are the student’s needs and level )') }}</h3>
+						<h3>{{ __('Additional perks of being a Diversity’s student') }}</h3>
+						<ul>
+							<li>1. {{ __('Free consultation') }}</li>
+							<li>2. {!! __('Free exclusive seminars for our students <br>(Students will receive announcements through email)') !!}</li>
+							<li>3. {{ __('Lesson materials') }}</li>
+							<li>4. {{ __('You can take lessons by using points. There is no expiration date for your points.') }}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4 animate-box">
+					<div class="company-info">
+						<h3>{{ __('Class flow (May depend on what are the student’s needs and level)') }}</h3>
 						<ul>
 							<li>1. {{ __('Warm-up') }}</li>
 							<li>2. {{ __('Topic discussion') }}</li>
