@@ -105,7 +105,7 @@
 				<p>{{ __('At Diversity Eikaiwa, most teachers have years of teaching experience and good track record. We are always giving our best to exceed student’s expectation by giving tailored lesson to them.') }}</p>
 				<h4>{{ __('How can we help you?') }}</h4>
 				<ul style="padding-left:19px;">
-					<li>{{ __('We will provide lessons based on your needs and goals such as increasing your score in TOEIC, TOFEL or want to improve your communication skills in daily or business setting.') }}</li>
+					<li>{{ __('We will provide lessons based on your needs and goals such as increasing your score in TOEIC, TOEFL or want to improve your communication skills in daily or business setting.') }}</li>
 					<li>{{ __('We will Provide free consultation through our support if needed by our student(s). (please feel free to message us through our email.)') }}</li>
 					<li>{{ __('We will provide exclusive seminars (To be announced through email) that you can use for a lifetime. Examples are presentation, public speaking and other interesting topics will be discussed by experts') }}</li>
 				</ul>
