@@ -18,15 +18,15 @@
     <div class="top-menu">
         <div class="container">
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-sm-4">
                     <div id="fh5co-logo">
                         <a href="{{ route('page_home') }}">
                             <img class="d-sm-none d-md-block" src="{{ secure_asset('site/images/logo-dark.png') }}" alt="img" style="height:100px; display: inline-block; margin-top: -10px; margin-bottom:-10px;">
-                            <span style="font-size:95%;">{{ __('Diversity Eikaiwa') }}</span>
+                            <span style="font-size:73%;">{{ __('Diversity Eikaiwa') }}</span>
                         </a>
                     </div>
                 </div>
-                <div class="col-xs-8 text-right menu-1">
+                <div class="col-xs-8 text-right menu-1" style="margin-top: 19px;">
                     <ul>
                         <li><a href="{{ route('page_home') }}">{{ __('Home') }}</a></li>
                         <li {{ (request()->is('teacher')) ? 'class="active"' : '' }}><a href="{{ route('page_teacher') }}">{{ __('Teacher') }}</a></li>
