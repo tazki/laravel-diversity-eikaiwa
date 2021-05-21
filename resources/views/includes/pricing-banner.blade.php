@@ -25,8 +25,8 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
-                        <li class="pricing__feature">{{ __('Free trial Lesson') }}</li>
-                        <li class="pricing__feature" style="height:91px;">{{ __('1 point = 1 lesson') }}</li>
+                        <li class="pricing__feature" style="height:91px;">{{ __('Free trial Lesson') }}</li>
+                        {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                      </ul>
                      <a href="{{ route('page_register') }}" class="pricing__action">{{ __('Choose plan') }}</a>
                  </div>
@@ -49,7 +49,7 @@
                     <div class="wrap-price">
                         <ul class="pricing__feature-list">
                             <li class="pricing__feature">{{ __('4 lesson') }}</li>
-                            <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li>
+                            {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                             <li class="pricing__feature">{{ __('Register now and only pay ¥5,799 every month!') }}</li>
                         </ul>
                         <a href="{{ route('page_register').'?service=4' }}" class="pricing__action">{{ __('Choose plan') }}</a>
@@ -98,9 +98,9 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
-                        <li class="pricing__feature">{{ __('8 lessons per month (Max of 2 students)') }}</li>
-                        <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
-                        <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li>
+                        {{-- <li class="pricing__feature">{{ __('8 lessons per month') }}</li> --}}
+                        <li class="pricing__feature" style="height:91px;">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
+                        {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                      </ul>
                      <a href="{{ route('page_register').'?service=3' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                      {{-- <a class="pricing__action" disabled>{{ __('Coming Soon') }}</a> --}}
