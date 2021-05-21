@@ -15,9 +15,9 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>{{ __('At Diversity Eikaiwa, we prioritize our Teachers and Students') }}</h1>
-								{{-- <h2>Brought to you by <a href="" target="_blank">diversity eikaiwa</a></h2> --}}
-								<p><a class="btn btn-primary btn-lg" href="{{ route('page_register') }}">{{ __('Start Learning Now!') }}</a></p>
+			   					<h1>{{ __('Let talk English online') }}</h1>
+								<h2>{{ __('Man to Man lesson') }}</h2>
+								<p><a class="btn btn-primary btn-lg" href="{{ route('page_register') }}">{{ __('Free class') }}</a></p>
 			   				</div>
 			   			</div>
 			   		</div>

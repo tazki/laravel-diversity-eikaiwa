@@ -36,7 +36,7 @@
 .pricing__action {
 	color: inherit;
 	border: none;
-	background: none;
+	background: #FFA500;
 	width: 100%;
 }
 
@@ -150,9 +150,9 @@
 	letter-spacing: 1px;
 	margin-top: auto;
 	padding: 1.4em 1em;
-	color: rgba(0,0,0,.8);
+	color: #F7F7F7;
 	border-radius: 1px;
-	border: 2px solid rgba(0,0,0,.8);
+	border: 2px solid #F7F7F7);
 	/*background: #2D6CDF;*/
 	-webkit-transition: background-color 0.3s;
 	transition: background-color 0.3s;
