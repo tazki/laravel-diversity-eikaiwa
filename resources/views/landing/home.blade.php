@@ -9,7 +9,7 @@
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
-		   	<li style="background-image: url({{ secure_asset('site/images/img_bg_1.jpg') }} );">
+		   	<li style="background-image: url({{ secure_asset('site/images/img_home_bg_1.jpg') }} );">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="row">
