@@ -15,7 +15,7 @@
 		   			<div class="row">
 			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
 			   				<div class="slider-text-inner">
-			   					<h1>{{ __('Let talk English online') }}</h1>
+			   					<h1>{{ __('Let\'s talk English online') }}</h1>
 								<h2>{{ __('Man to Man lesson') }}</h2>
 								<p><a class="btn btn-primary btn-lg" href="{{ route('page_register') }}">{{ __('Free class') }}</a></p>
 			   				</div>
@@ -111,7 +111,7 @@
 				</ul>
 			</div>
 			<div class="col-md-6">
-				<img class="img-responsive" src="{{ secure_asset('site/images/whychooseus.jpg') }}" alt="Diversity Eikaiwa">
+				<img class="img-responsive" src="{{ secure_asset('site/images/whychooseus_2.png') }}" alt="Diversity Eikaiwa">
 			</div>
 		</div>
 	</div>

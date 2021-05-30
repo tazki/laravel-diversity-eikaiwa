@@ -25,7 +25,7 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
-                        <li class="pricing__feature" style="height:91px;">{{ __('Free trial Lesson') }}</li>
+                        <li class="pricing__feature" style="height:128px;">{{ __('Free trial Lesson') }}</li>
                         {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                      </ul>
                      <a href="{{ route('page_register') }}" class="pricing__action">{{ __('Choose plan') }}</a>
@@ -49,6 +49,7 @@
                     <div class="wrap-price">
                         <ul class="pricing__feature-list">
                             <li class="pricing__feature">{{ __('4 lesson') }}</li>
+                            <li class="pricing__feature">{{ __('5,799 1 lesson 1,449') }}</li>
                             {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                             <li class="pricing__feature">{{ __('Register now and only pay ¥5,799 every month!') }}</li>
                         </ul>
@@ -99,7 +100,8 @@
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
                         {{-- <li class="pricing__feature">{{ __('8 lessons per month') }}</li> --}}
-                        <li class="pricing__feature" style="height:91px;">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
+                        <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
+                        <li class="pricing__feature" style="height:91px;">{{ __('13,310 1 lesson 1,664') }}</li>
                         {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                      </ul>
                      <a href="{{ route('page_register').'?service=3' }}" class="pricing__action">{{ __('Choose plan') }}</a>
