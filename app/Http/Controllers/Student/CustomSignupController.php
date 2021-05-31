@@ -54,7 +54,7 @@ class CustomSignupController extends Controller
             if(request()->service == 1) {
                 // return back()->with('success','Student registered successfully!');
                 return redirect(route('page_login'));
-            } elseif(in_array(request()->service, array(2,3,4))) {
+            } elseif(in_array(request()->service, array(2,3,4,5))) {
                 // Login User with User Instance
                 \Auth::login($user);
                 return redirect(route('page_subscription', ['id' => urlencode(base64_encode($user->id.'|'.request()->service))]));

@@ -53,6 +53,32 @@
             </div>
             <div class="row">
                 <div class="pricing pricing--rabten">
+                    @if($service_id == 5)
+                    <div class="col-md-4 animate-box">
+                        <div class="pricing__item">
+                            <div class="wrap-price" style="padding-bottom:0;">
+                                <h3 class="pricing__title">{{ __('Special Plan') }}</h3>
+                                <p class="pricing__sentence" style="margin-bottom:0;">{{ __('(Until June 30)') }}</p>
+                            </div>
+                            <div class="pricing__price">
+                                <span class="pricing__anim pricing__anim--1">
+                                    <span class="pricing__currency">¥</span>8,899
+                                </span>
+                                <span class="pricing__anim pricing__anim--2">
+                                    <span class="pricing__period">{{ __('Tax Included') }}</span>
+                                </span>
+                            </div>
+                            <div class="wrap-price">
+                                <ul class="pricing__feature-list">
+                                    <li class="pricing__feature">{{ __('2x free trial lesson') }}</li>
+                                    <li class="pricing__feature">{{ __('8,899 1 lesson 1,112') }}</li>
+                                    <li class="pricing__feature">{{ __('Register now and only pay ¥8,899 every month!') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
                     @if($service_id == 4)
                     <div class="col-md-4 animate-box">
                         <div class="pricing__item">
@@ -84,8 +110,8 @@
                         <div class="pricing__item">
                             <div class="wrap-price">
                                 <!-- <div class="icon icon-store"></div> -->
-                                 <h3 class="pricing__title">{{ __('Plan A') }}</h3>
-                                 <!-- <p class="pricing__sentence">Up to 5 users</p> -->
+                                <h3 class="pricing__title">{{ __('Plan A') }}</h3>
+                                <!-- <p class="pricing__sentence">Up to 5 users</p> -->
                             </div>
                             <div class="pricing__price">
                                 <span class="pricing__anim pricing__anim--1">
@@ -97,8 +123,8 @@
                             </div>
                             <div class="wrap-price">
                                 <ul class="pricing__feature-list">
-                                    <li class="pricing__feature">{{ __('4 lessons per month (Max of 2 students)') }}</li>
                                     <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
+                                    <li class="pricing__feature">{{ __('7,480 1 lesson 1,870') }}</li>
                                 </ul>
                             </div>
                         </div>

@@ -123,9 +123,9 @@
         <label for="client-service">{{ __('Service') }} <span class="text-danger">*</span></label>
         <select name="service" class="custom-select" id="client-service" data-toggle="select2" data-placeholder="Select service">
             <option value="1">{{ __('Trial') }}</option>
-            <option value="4" {!! (isset($row['service']) && $row['service']==4) ? 'selected="selected"' : '' !!}>{{ __('Special Plan') }}</option>
-            {{-- <option value="2" {!! (isset($row['service']) && $row['service']==2) ? 'selected="selected"' : '' !!}>{{ __('Plan A') }}</option> --}}
-            <option value="3" {!! (isset($row['service']) && $row['service']==3) ? 'selected="selected"' : '' !!}>{{ __('Plan B') }}</option>
+            <option value="5" {!! (isset($row['service']) && $row['service']==5) ? 'selected="selected"' : '' !!}>{{ __('Special Plan') }}</option>
+            <option value="2" {!! (isset($row['service']) && $row['service']==2) ? 'selected="selected"' : '' !!}>{{ __('Plan A') }}</option>
+            {{-- <option value="3" {!! (isset($row['service']) && $row['service']==3) ? 'selected="selected"' : '' !!}>{{ __('Plan B') }}</option> --}}
         </select>
     </div>
 
