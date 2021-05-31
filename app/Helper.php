@@ -62,7 +62,7 @@ function currentService($service_id) {
         default:
             $rows['payment']['price'] = 0;
             $rows['payment']['price_label'] = '¥0';
-            $rows['payment']['points'] = 1;
+            $rows['payment']['points'] = 2;
             $rows['payment']['service'] = __('Trial');
         break;
     }

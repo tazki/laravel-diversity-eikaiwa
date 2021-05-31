@@ -70,9 +70,8 @@
                             </div>
                             <div class="wrap-price">
                                 <ul class="pricing__feature-list">
-                                    <li class="pricing__feature">{{ __('2x free trial lesson') }}</li>
-                                    <li class="pricing__feature">{{ __('8,899 1 lesson 1,112') }}</li>
-                                    <li class="pricing__feature">{{ __('Register now and only pay ¥8,899 every month!') }}</li>
+                                    <li class="pricing__feature">{{ __('1,112円 per lesson') }}</li>
+                                    <li class="pricing__feature">{{ __('Register now and pay only 8,899円 every month!') }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -97,7 +96,6 @@
                             <div class="wrap-price">
                                 <ul class="pricing__feature-list">
                                     <li class="pricing__feature">{{ __('4 lesson') }}</li>
-                                    <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li>
                                     <li class="pricing__feature">{{ __('Register now and only pay ¥5,799 every month!') }}</li>
                                 </ul>
                             </div>
