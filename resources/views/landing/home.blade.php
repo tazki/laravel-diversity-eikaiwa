@@ -17,7 +17,7 @@
 			   				<div class="slider-text-inner">
 			   					<h1>{{ __('Let\'s talk English online') }}</h1>
 								<h2>{{ __('Man to Man lesson') }}</h2>
-								<p><a class="btn btn-primary btn-lg" href="{{ route('page_register') }}">{{ __('Free class') }}</a></p>
+								<p><a class="btn btn-primary btn-lg" href="{{ route('page_register') }}">{{ __('2x free trial lesson') }}</a></p>
 			   				</div>
 			   			</div>
 			   		</div>
