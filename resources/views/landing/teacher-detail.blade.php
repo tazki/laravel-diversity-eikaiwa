@@ -51,7 +51,7 @@
                                     <li><strong>{{ __('Hobbies') }}</strong><br /> {{ $lang->hobbies }}</li>
                                 @endif
                                 @if(!empty($lang->fields_of_interest))
-                                    <li><strong>{{ __('Fields of Interest') }}</strong><br /> {{ $lang->fields_of_interest }}</li>
+                                    <li><strong>{{ __('Availability') }}</strong><br /> {{ $lang->fields_of_interest }}</li>
                                 @endif
                                 @if(!empty($lang->english_level))
                                     <li><strong>{{ __('English Level') }}</strong><br /> {{ $lang->english_level }}</li>

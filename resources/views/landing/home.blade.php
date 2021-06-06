@@ -150,13 +150,19 @@
 			<div class="row">
 				<div class="col-md-6 col-md-push-1 animate-box">
 					<div class="company-info">
-						<h3>{{ __('How to take a lesson?') }}</h3>
-						<ul>
-							<li><strong>{{ __('First') }}</strong><br /> {{ __('Download Skype.') }}</li>
-							<li><strong>{{ __('Second') }}</strong><br /> {{ __('Register an account.') }}</li>
-							<li><strong>{{ __('Third') }}</strong><br /> {{ __('Choose your teacher, time and date.') }}</li>
-							<li><strong>{{ __('Fourth') }}</strong><br /> {{ __('Take class on the day and time you booked.') }}</li>
-						</ul>
+						<h3>{{ __('How to take a lesson') }}</h3>
+						@if(App::isLocale('jp'))
+							<img class="img-responsive" src="{{ secure_asset('site/images/how-to-take-lesson-diagram.jpg') }}" alt="Diversity Eikaiwa">
+						@else
+							<ul>
+								<li><strong>{{ __('Step 1') }}</strong><br /> {{ __('Register account.') }}</li>
+								<li><strong>{{ __('Step 2') }}</strong><br /> {{ __('Choose a Teacher') }}</li>
+								<li><strong>{{ __('Step 3') }}</strong><br /> {{ __('Reserve a class') }}</li>
+								<li><strong>{{ __('Step 4') }}</strong><br /> {{ __('Take a class (Skype)') }}</li>
+								<li><strong>{{ __('Step 5') }}</strong><br /> {{ __('Choose monthly plan after the lesson') }}</li>
+								<li><strong>{{ __('Step 6') }}</strong><br /> {{ __('Register in the monthly plan and take lesson anytime') }}</li>
+							</ul>
+						@endif
 					</div>
 				</div>
 				<div class="col-md-5 animate-box">

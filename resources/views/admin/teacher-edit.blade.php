@@ -222,7 +222,7 @@
                         </div><!-- /form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="interest_en" class="col-md-3">Interest (English)</label> <!-- /form column -->
+                        <label for="interest_en" class="col-md-3">Availability (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
                             <input type="text" name="lang[1][fields_of_interest]" id="interest_en" value="{{ (isset($lang[1]['fields_of_interest'])) ? $lang[1]['fields_of_interest'] : '' }}" class="form-control"  />
@@ -230,7 +230,7 @@
                         </div><!-- /form row -->
                         <div class="form-row">
                         <!-- form column -->
-                        <label for="interest_jp" class="col-md-3">Interest (Japanese)</label> <!-- /form column -->
+                        <label for="interest_jp" class="col-md-3">Availability (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
                             <input type="text" name="lang[2][fields_of_interest]" id="interest_jp" value="{{ (isset($lang[2]['fields_of_interest'])) ? $lang[2]['fields_of_interest'] : '' }}" class="form-control"  />
