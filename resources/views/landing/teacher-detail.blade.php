@@ -45,7 +45,7 @@
                                     <li><strong>{{ __('Address') }}</strong><br /> {{ $lang->address }}</li>
                                 @endif
                                 @if(!empty($lang->about_you))
-                                    <li><strong>{{ __('About You') }}</strong><br /> {{ $lang->about_you }}</li>
+                                    <li><strong>{{ __('About You') }}</strong><br /> {!! nl2br($lang->about_you) !!}</li>
                                 @endif
                                 @if(!empty($lang->hobbies))
                                     <li><strong>{{ __('Hobbies') }}</strong><br /> {{ $lang->hobbies }}</li>

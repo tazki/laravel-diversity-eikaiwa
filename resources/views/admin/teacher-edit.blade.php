@@ -258,7 +258,7 @@
                         <label for="about_you_en" class="col-md-3">About You (English)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <textarea name="lang[1][about_you]" class="form-control" id="about_you_en">{{ (isset($lang[1]['about_you'])) ? $lang[1]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                            <textarea name="lang[1][about_you]" class="form-control" id="about_you_en" rows="12">{{ (isset($lang[1]['about_you'])) ? $lang[1]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <!-- form row -->
@@ -267,7 +267,7 @@
                         <label for="about_you_jp" class="col-md-3">About You (Japanese)</label> <!-- /form column -->
                         <!-- form column -->
                         <div class="col-md-9 mb-3">
-                            <textarea name="lang[2][about_you]" class="form-control" id="about_you_jp">{{ (isset($lang[2]['about_you'])) ? $lang[2]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
+                            <textarea name="lang[2][about_you]" class="form-control" id="about_you_jp" rows="12">{{ (isset($lang[2]['about_you'])) ? $lang[2]['about_you'] : '' }}</textarea> <small class="text-muted">Appears on your profile page, 300 chars max.</small>
                         </div><!-- /form column -->
                         </div><!-- /form row -->
                         <hr>
