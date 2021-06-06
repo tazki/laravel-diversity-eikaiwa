@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller; // need to add this line so this file is treated like a controller.
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -49,6 +50,7 @@ class CustomSignupController extends Controller
                 $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
                 $message->bcc('oliverrivera09@gmail.com', 'Oliver');
                 $message->bcc('tazki04@gmail.com', 'Mark');
+                $message->attach(Storage::disk('public')->path('マイページガイド.pdf'));
             });
 
             if(request()->service == 1) {
