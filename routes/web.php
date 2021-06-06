@@ -116,6 +116,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::post('admin/student/add', 'Admin\StudentController@add')->name('students_add');
         Route::get('admin/student/{id}/edit', 'Admin\StudentController@edit')->name('students_edit');
         Route::post('admin/student/{id}/edit', 'Admin\StudentController@edit')->name('students_edit');
+        Route::delete('admin/student/{id}/destroy', 'Admin\StudentController@destroy')->name('students_delete');
         Route::get('admin/student/{service_id}/{contact_id}/upgrade-plan/{user_id}', 'Admin\StudentController@studentUpgradePlan')->name('students_upgrade_plan');
         // Contact Form
         Route::get('admin/contact-form', 'Admin\ContactFormController@index')->name('contact_form');

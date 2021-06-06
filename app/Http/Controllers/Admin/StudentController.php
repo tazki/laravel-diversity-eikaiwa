@@ -49,10 +49,9 @@ class StudentController extends Controller
                     </div>';
                 })
                 ->addColumn('action', function($row) {
-                    return '<a href="'.route('students_edit', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
-                    // $btn = '<a href="'.route('teachers_edit', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
-                    // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';
-                    // return $btn;
+                    $btn = '<a href="'.route('students_edit', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
+                    $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="'.route('students_delete', ['id' => $row->id]).'" href="#"><i class="far fa-trash-alt"></i></a>';
+                    return $btn;
                 })
                 ->rawColumns(['status','action'])
                 ->make(true);
@@ -162,6 +161,12 @@ class StudentController extends Controller
             }
         }
         return view('admin.student-edit', compact('row', 'lang', 'service'));
+    }
+
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+        return back()->with('success', __('Data deleted successfully!'));
     }
 
     public function studentUpgradePlan(Request $request)
