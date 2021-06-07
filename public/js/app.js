@@ -656,12 +656,12 @@ $(document).on('theme:init', function () {
     }, duration);
     return false;
   });
-  $(window).keydown(function (event) {
-    if (event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
+  // $(window).keydown(function (event) {
+  //   if (event.keyCode == 13) {
+  //     event.preventDefault();
+  //     return false;
+  //   }
+  // });
   $('body').on('change', '#forgot-role', function () {
     var url = $(this).val();
     console.log(url);

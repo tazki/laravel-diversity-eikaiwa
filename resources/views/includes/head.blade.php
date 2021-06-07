@@ -42,4 +42,4 @@
 <script src="{{ secure_asset('vendor/swiper/swiper.min.js') }}"></script>
 <script src="{{ secure_asset('js/theme.js') }}"></script>
 <script src="{{ secure_asset('vendor/aos/aos.js') }}"></script>
-<script src="{{ secure_asset('js/app.js?v=1595329618') }}"></script>
+<script src="{{ secure_asset('js/app.js?v=1595329619') }}"></script>
