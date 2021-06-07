@@ -169,9 +169,22 @@
 					<div class="company-info">
 						<h3>{{ __('What are needed for the lesson?') }}</h3>
 						<ul>
-							<li>{{ __('Phone or Computer') }}</li>
-							<li>{{ __('Internet') }}</li>
-							<li>{{ __('Skype') }}</li>
+							<li>
+								{{ __('Phone or Computer') }}
+								<br />
+								<img class="img-responsive" style="width:40px; display:inline-block;" src="{{ secure_asset('site/images/need_phone.png') }}" alt="Diversity Eikaiwa">
+								<img class="img-responsive" style="width:50px; display:inline-block;" src="{{ secure_asset('site/images/need_laptop.png') }}" alt="Diversity Eikaiwa">								
+							</li>
+							<li>
+								{{ __('Internet') }}
+								<br />
+								<img class="img-responsive" style="width:40px;" src="{{ secure_asset('site/images/need_wifi.png') }}" alt="Diversity Eikaiwa">
+							</li>
+							<li>
+								{{ __('Skype') }}
+								<br />
+								<img class="img-responsive" style="width:38px;" src="{{ secure_asset('site/images/need_skype.png') }}" alt="Diversity Eikaiwa">
+							</li>
 						</ul>
 					</div>
 				</div>
