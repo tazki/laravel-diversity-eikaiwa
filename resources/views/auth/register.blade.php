@@ -39,6 +39,31 @@
     <div class="form-row">
         <div class="col-md-6">
             <div class="form-group">
+                <label for="client-first-name-furigana">{{ __('First Name (Furigana)') }} <span class="text-danger">*</span></label>
+                <input type="text" name="first_name_furigana" value="{{ old('first_name_furigana') }}" class="form-control @error('first_name_furigana') is-invalid @enderror" id="client-first-name-furigana" required="">
+                @error('first_name_furigana')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="client-last-name-furigana">{{ __('Last Name (Furigana)') }} <span class="text-danger">*</span></label>
+                <input type="text" name="last_name_furigana" value="{{ old('last_name_furigana') }}" class="form-control @error('last_name_furigana') is-invalid @enderror" id="client-last-name-furigana" required="">
+                @error('last_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
                 <label for="client-postal_code">{{ __('Postal Code') }} <span class="text-danger">*</span></label>
                 <input type="text" name="postal_code" value="{{ old('postal_code') }}" class="form-control @error('postal_code') is-invalid @enderror" id="client-postal_code" required="">
                 @error('postal_code')

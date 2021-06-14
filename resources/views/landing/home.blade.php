@@ -148,6 +148,16 @@
 	<div class="fh5co-company">
 		<div class="container">
 			<div class="row">
+				<div class="col-md-12 animate-box">
+					<iframe width="100%" height="415" src="https://www.youtube.com/embed/Dpv0_NVXNdQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+	</div>		
+
+	<div class="fh5co-company">
+		<div class="container">
+			<div class="row">
 				<div class="col-md-6 col-md-push-1 animate-box">
 					<div class="company-info">
 						<h3>{{ __('How to take a lesson') }}</h3>
