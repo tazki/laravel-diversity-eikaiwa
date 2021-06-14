@@ -109,6 +109,8 @@ class StudentController extends Controller
             $validationSetting = array(
                 'first_name' => ['required', 'string', 'max:255'],
                 'last_name' => ['required', 'string', 'max:255'],
+                'first_name_furigana' => ['required', 'string', 'max:255'],
+                'last_name_furigana' => ['required', 'string', 'max:255'],
                 'phone_number' => ['string', 'max:255'],
                 'skype_id' => ['string', 'max:255'],
                 'avatar' => 'mimes:jpg,bmp,png',

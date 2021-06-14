@@ -133,6 +133,34 @@
                                 <!-- form row -->
                                 <div class="form-row">
                                     <!-- form column -->
+                                    <label for="first_name_furigana" class="col-md-3">First Name (Furigana)</label> <!-- /form column -->
+                                    <!-- form column -->
+                                    <div class="col-md-9 mb-3">
+                                        <input type="text" name="first_name_furigana" id="first_name_furigana" value="{{ (isset($row->first_name_furigana)) ? $row->first_name_furigana : old('first_name_furigana') }}" class="@error('first_name_furigana') is-invalid @enderror form-control"  />
+                                        @error('first_name_furigana')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div><!-- /form column -->
+                                </div><!-- /form row -->
+                                <!-- form row -->
+                                <div class="form-row">
+                                    <!-- form column -->
+                                    <label for="last_name_furigana" class="col-md-3">Last Name (Furigana)</label> <!-- /form column -->
+                                    <!-- form column -->
+                                    <div class="col-md-9 mb-3">
+                                        <input type="text" name="last_name_furigana" id="last_name_furigana" value="{{ (isset($row->last_name_furigana)) ? $row->last_name_furigana : old('last_name_furigana') }}" class="@error('last_name_furigana') is-invalid @enderror form-control"  />
+                                        @error('last_name_furigana')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div><!-- /form column -->
+                                </div><!-- /form row -->
+                                <!-- form row -->
+                                <div class="form-row">
+                                    <!-- form column -->
                                     <label for="skype_id" class="col-md-3">Skype ID</label> <!-- /form column -->
                                     <!-- form column -->
                                     <div class="col-md-9 mb-3">

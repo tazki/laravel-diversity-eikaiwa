@@ -90,6 +90,8 @@ class StudentController extends Controller
             [
                 'first_name' => ['required', 'string', 'max:255'],
                 'last_name' => ['required', 'string', 'max:255'],
+                'first_name_furigana' => ['required', 'string', 'max:255'],
+                'last_name_furigana' => ['required', 'string', 'max:255'],
                 'phone_number' => ['required', 'string', 'max:255'],
                 'email' => [
                     'required',
@@ -130,6 +132,8 @@ class StudentController extends Controller
             'email' => $request->email,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
             'mobile_number' => $request->mobile_number,
             'skype_id' => $request->skype_id,
             'address' => $request->address,
