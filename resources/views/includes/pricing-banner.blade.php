@@ -33,11 +33,11 @@
                  </div>
               </div>
             </div>
-            {{-- <div class="col-md-4 animate-box">
+            <div class="col-md-4 animate-box">
                 <div class="pricing__item">
                     <div class="wrap-price" style="padding-bottom:0;">
-                        <h3 class="pricing__title">{{ __('Special Plan') }}</h3>
-                        <p class="pricing__sentence" style="margin-bottom:0;">{{ __('(Until May 31)') }}</p>
+                        <h3 class="pricing__title">{{ __('Summer plan') }}</h3>
+                        <p class="pricing__sentence" style="margin-bottom:0;">{{ __('(Until July 23rd)') }}</p>
                     </div>
                     <div class="pricing__price">
                         <span class="pricing__anim pricing__anim--1">
@@ -49,15 +49,15 @@
                     </div>
                     <div class="wrap-price">
                         <ul class="pricing__feature-list">
-                            <li class="pricing__feature">{{ __('4 lesson') }}</li>
-                            <li class="pricing__feature">{{ __('5,799 1 lesson 1,449') }}</li>
+                            <li class="pricing__feature">{{ __('4x lesson 5,799円') }}</li>
+                            <li class="pricing__feature">{{ __('1 lesson 1,450円') }}</li>
                             <li class="pricing__feature">{{ __('Register now and only pay ¥5,799 every month!') }}</li>
                         </ul>
                         <a href="{{ route('page_register').'?service=4' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                     </div>
                 </div>
-            </div> --}}
-            <div class="col-md-4 animate-box">
+            </div>
+            {{-- <div class="col-md-4 animate-box">
                 <div class="pricing__item">
                     <div class="wrap-price">
                         <!-- <div class="icon icon-store"></div> -->
@@ -80,8 +80,8 @@
                         <a href="{{ route('page_register').'?service=2' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 animate-box">
+            </div> --}}
+            {{-- <div class="col-md-4 animate-box">
                 <div class="pricing__item">
                     <div class="wrap-price" style="padding-bottom:0;">
                         <h3 class="pricing__title">{{ __('Special Plan') }}</h3>
@@ -103,8 +103,8 @@
                         <a href="{{ route('page_register').'?service=5' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                     </div>
                 </div>
-            </div>
-            {{-- <div class="col-md-4 animate-box">
+            </div> --}}
+            <div class="col-md-4 animate-box">
               <div class="pricing__item">
                   <div class="wrap-price">
                       <!-- <div class="icon icon-home2"></div> -->
@@ -127,7 +127,7 @@
                      <a href="{{ route('page_register').'?service=3' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                  </div>
               </div>
-           </div> --}}
+           </div>
         </div>
         </div>
     </div>
