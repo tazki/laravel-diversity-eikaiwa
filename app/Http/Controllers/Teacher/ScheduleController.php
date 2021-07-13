@@ -138,7 +138,14 @@ class ScheduleController extends Controller
                 'status' => $request->status
             ];
 
-            
+            $condition['id'] = $request->id;
+            $rowId = UserBookings::updateOrCreate($condition, $rowUserData);
+
+            $studentRow = User::where('id', $rowId->student_id)->first();
+            $teacherRow = User::where('id', Auth::user()->id)->first();
+
+            $subject = 'Diversity Eikaiwa - Class Request';
+
             // Student Status
             switch($request->status) {
                 case 1:
@@ -146,6 +153,10 @@ class ScheduleController extends Controller
                 break;
                 case 2:
                     $studentStatusLabel = __('Accept Class Schedule');
+                    $subject = 'レッスン予約完了メール(ダイバーシティ英会話)';
+                    $body = $studentRow->first_name.' '.$studentRow->last_name.' 様<br />';
+                    $body .= 'ダイバーシティ英会話のオンラインレッスン予約サービスをご利用いただきありがとうございます。<br />';
+                    $body .= '以下の通り、レッスンの予約を確定しました。<br /><br />';
                 break;
                 case 3:
                     $studentStatusLabel = __('Class Done');
@@ -155,23 +166,23 @@ class ScheduleController extends Controller
                 break;
                 case 5:
                     $studentStatusLabel = __('Class Cancel By Teacher');
+                    $subject = 'レッスン予約キャンセルメール(ダイバーシティ英会話)';
+                    $body = $studentRow->first_name.' '.$studentRow->last_name.' 様<br />';
+                    $body .= 'ダイバーシティ英会話のオンラインレッスン予約サービスをご利用いただきありがとうございます。<br />';
+                    $body .= '以下の通り、レッスンの予約が確定できませんでした。お手数をお掛けしますが、別の日時で予約をお願い致します。<br /><br />';
                 break;
             }
 
-            $condition['id'] = $request->id;
-            $rowId = UserBookings::updateOrCreate($condition, $rowUserData);
-
-            $studentRow = User::where('id', $rowId->student_id)->first();
-            $teacherRow = User::where('id', Auth::user()->id)->first();
             $to_name = $studentRow->first_name.' '.$studentRow->last_name; // Student Name
             $to_email = $studentRow->email; // Student Email
-            $body = '<strong>Teacher Name:</strong> '. $teacherRow->first_name.' '.$teacherRow->last_name.'<br />';
-            $body .= '<strong>Skype ID:</strong> '. $teacherRow->skype_id.'<br />';
-            $body .= '<strong>Booking Date:</strong> '. $rowId->booking_date.'<br />';
-            $body .= '<strong>Booking Status:</strong> '. $studentStatusLabel;
+
+            $body .= '<strong>Teacher Name(先生の名前):</strong> '. $teacherRow->first_name.' '.$teacherRow->last_name.'<br />';
+            $body .= '<strong>Skype ID(スカイプID:</strong> '.$teacherRow->skype_id.'<br />';
+            $body .= '<strong>Booking Date(予約日時):</strong>'.$rowId->booking_date.'<br />';
+            $body .= '<strong>Booking Status(予約状況):</strong>'.$studentStatusLabel.'<br />';
             $emailData['body'] = $body;
-            Mail::send('emails.plain', $emailData, function($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject('Diversity Eikaiwa - Class Request');
+            Mail::send('emails.plain', $emailData, function($message) use ($to_name, $to_email, $subject) {
+                $message->to($to_email, $to_name)->subject($subject);
                 $message->from(env('MAIL_USERNAME'), 'Diversity Eikaiwa Mailer');
                 $message->bcc('oliverrivera09@gmail.com', 'Oliver');
                 $message->bcc('tazki04@gmail.com', 'Mark');
