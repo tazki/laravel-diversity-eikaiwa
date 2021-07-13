@@ -3,7 +3,14 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="studentScheduleFormModalLabel" class="modal-title text-center w-100">{{ __('Create Class Booking') }}</h5>
+                <div class="row w-100">
+                    <div class="col-12">
+                        <h5 id="studentScheduleFormModalLabel" class="modal-title text-center w-100">{{ __('Create Class Booking') }}</h5>
+                    </div>
+					<div class="col-12">
+                        <h6 class="text-center w-100">{{ __('Please wait for the reservation email from the teacher') }}</h6>
+                    </div>
+                </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
