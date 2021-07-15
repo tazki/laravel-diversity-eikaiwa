@@ -17,7 +17,7 @@
 										<div class="col-lg-9">
 												<div class="metric-row metric-flush">
 														<div class="col">
-																<a href="user-teams.html" class="metric metric-bordered align-items-center">
+																<a class="metric metric-bordered align-items-center">
 																		<h2 class="metric-label"> {{ __('Total Class of the Month') }} </h2>
 																		<p class="metric-value h3">
 																				<sub><i class="oi oi-fork"></i></sub> <span
@@ -26,7 +26,7 @@
 																</a>
 														</div>
 														<div class="col">
-																<a href="user-projects.html" class="metric metric-bordered align-items-center">
+																<a class="metric metric-bordered align-items-center">
 																		<h2 class="metric-label"> {{ __('Total Class') }} </h2>
 																		<p class="metric-value h3">
 																				<sub><i class="oi oi-fork"></i></sub> <span
