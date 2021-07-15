@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller; // need to add this line so this file is treated like a controller.
 use Illuminate\Http\Request;
-// use App\Client;
+use App\Models\UserBookings;
+use Carbon\Carbon;
 use Auth;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -25,11 +27,20 @@ class DashboardController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        $new_customer_registration_chart['date'] = array('2020-09', '2020-10', '2020-11', '2020-12');
-        $new_customer_registration_chart['count'] = array(10, 25, 18, 11);
-        $rows['new_customer_registration']['date'] = json_encode($new_customer_registration_chart['date']);
-        $rows['new_customer_registration']['count'] = json_encode($new_customer_registration_chart['count']);
+    {   
+        $rows = array();
+        $rows['total_class'] = UserBookings::where([
+            ['teacher_id', '=', Auth::user()->id],
+            ['status', '=', 3]
+        ])
+        ->count('*');
+        
+        $rows['total_class_of_the_month'] = UserBookings::where([
+                ['teacher_id', '=', Auth::user()->id],
+                ['status', '=', 3]
+            ])
+            ->whereRaw('DATE_FORMAT(booking_date, "%m-%Y")', Carbon::today()->format('m-Y'))
+            ->count('*');
 
         return view('teacher.dashboard', compact('rows'));
     }

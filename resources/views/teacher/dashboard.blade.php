@@ -21,7 +21,7 @@
 																		<h2 class="metric-label"> {{ __('Total Class of the Month') }} </h2>
 																		<p class="metric-value h3">
 																				<sub><i class="oi oi-fork"></i></sub> <span
-																						class="value">{{ $rows['total_number_of_customers'] ?? '' }}</span>
+																						class="value">{{ $rows['total_class_of_the_month'] ?? '' }}</span>
 																		</p>
 																</a>
 														</div>
@@ -30,7 +30,7 @@
 																		<h2 class="metric-label"> {{ __('Total Class') }} </h2>
 																		<p class="metric-value h3">
 																				<sub><i class="oi oi-fork"></i></sub> <span
-																						class="value">{{ $rows['total_number_of_user'] ?? '' }}</span>
+																						class="value">{{ $rows['total_class'] ?? '' }}</span>
 																		</p>
 																</a>
 														</div>
@@ -65,53 +65,4 @@
 	<footer class="app-footer">
 		<div class="copyright">2021 ©  copyright DIVERSITY EIKAIWA</div>
 	</footer>
-	<script src="{{ secure_asset('vendor/easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
-	<script src="{{ secure_asset('vendor/chart.js/Chart.min.js') }}"></script>
-	<script>
-			let data = {
-				labels: {!! $rows['new_customer_registration']['date'] !!},
-				datasets: [{
-					backgroundColor: Looper.getColors('brand').indigo,
-					borderColor: Looper.getColors('brand').indigo,
-					data: {!! $rows['new_customer_registration']['count'] ?? '' !!}
-				}]
-			};
-			let canvas = $('#completion-tasks')[0].getContext('2d');
-			let chart = new Chart(canvas, {
-					type: 'bar',
-					data: data,
-					options: {
-							responsive: true,
-							legend: {
-									display: false
-							},
-							title: {
-									display: false
-							},
-							scales: {
-									xAxes: [{
-											gridLines: {
-													display: true,
-													drawBorder: false,
-													drawOnChartArea: false
-											},
-											ticks: {
-													maxRotation: 0,
-													maxTicksLimit: 3
-											}
-									}],
-									yAxes: [{
-											gridLines: {
-													display: true,
-													drawBorder: false
-											},
-											ticks: {
-													beginAtZero: true,
-													stepSize: 100
-											}
-									}]
-							}
-					}
-			});
-	</script>
 @endsection
