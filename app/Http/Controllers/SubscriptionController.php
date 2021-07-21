@@ -58,9 +58,11 @@ class SubscriptionController extends Controller
         $user->addPaymentMethod($paymentMethod);
         $plan = $request->input('plan');
         try {
-            $user->newSubscription('default', $plan)->create($paymentMethod, [
-                'email' => $user->email
-            ]);
+            $user->newSubscription('default', $plan)
+                ->withPromotionCode('promo_1JDdVVG8uz8FtevfyY0oXnYf')
+                ->create($paymentMethod, [
+                    'email' => $user->email
+                ]);
         } catch (\Exception $e) {
             return back()->withErrors(['message' => 'Error creating subscription. ' . $e->getMessage()]);
         }
