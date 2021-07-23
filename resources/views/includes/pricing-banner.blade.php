@@ -25,7 +25,7 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
-                        <li class="pricing__feature" style="height:165px;">{{ __('2x free trial lesson') }}</li>
+                        <li class="pricing__feature" style="height:128px;">{{ __('2x free trial lesson') }}</li>
                         {{-- <li class="pricing__feature">{{ __('Free trial Lesson') }}</li> --}}
                         {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                      </ul>
@@ -33,7 +33,7 @@
                  </div>
               </div>
             </div>
-            <div class="col-md-4 animate-box">
+            {{-- <div class="col-md-4 animate-box">
                 <div class="pricing__item">
                     <div class="wrap-price" style="padding-bottom:0;">
                         <h3 class="pricing__title">{{ __('Summer plan') }}</h3>
@@ -57,8 +57,8 @@
                         <a href="{{ route('page_register').'?service=4' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                     </div>
                 </div>
-            </div>
-            {{-- <div class="col-md-4 animate-box">
+            </div> --}}
+            <div class="col-md-4 animate-box">
                 <div class="pricing__item">
                     <div class="wrap-price">
                         <!-- <div class="icon icon-store"></div> -->
@@ -81,7 +81,7 @@
                         <a href="{{ route('page_register').'?service=2' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                     </div>
                 </div>
-            </div> --}}
+            </div>
             {{-- <div class="col-md-4 animate-box">
                 <div class="pricing__item">
                     <div class="wrap-price" style="padding-bottom:0;">
@@ -123,7 +123,7 @@
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
                         <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
-                        <li class="pricing__feature" style="height:128px;">{{ __('13,310 1 lesson 1,664') }}</li>
+                        <li class="pricing__feature" style="height:91px;">{{ __('13,310 1 lesson 1,664') }}</li>
                      </ul>
                      <a href="{{ route('page_register').'?service=3' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                  </div>
