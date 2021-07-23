@@ -25,7 +25,7 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
-                        <li class="pricing__feature" style="height:128px;">{{ __('2x free trial lesson') }}</li>
+                        <li class="pricing__feature" style="height:165px;">{{ __('2x free trial lesson') }}</li>
                         {{-- <li class="pricing__feature">{{ __('Free trial Lesson') }}</li> --}}
                         {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                      </ul>
@@ -75,6 +75,7 @@
                     </div>
                     <div class="wrap-price">
                         <ul class="pricing__feature-list">
+                            <li class="pricing__feature">{{ __('50% Off on 1st Month Subscription') }}</li>
                             <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
                             <li class="pricing__feature" style="height:91px;">{{ __('7,480 1 lesson 1,870') }}</li>
                         </ul>
@@ -122,6 +123,7 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
+                        <li class="pricing__feature">{{ __('50% Off on 1st Month Subscription') }}</li>
                         <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
                         <li class="pricing__feature" style="height:91px;">{{ __('13,310 1 lesson 1,664') }}</li>
                      </ul>

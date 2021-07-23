@@ -114,7 +114,7 @@
                             </div>
                             <div class="pricing__price">
                                 <span class="pricing__anim pricing__anim--1">
-                                    <span class="pricing__currency">¥</span>7,480
+                                    <span class="pricing__currency">¥</span>{!! 7480 * .5 !!}
                                 </span>
                                 <span class="pricing__anim pricing__anim--2">
                                     <span class="pricing__period">{{ __('Tax Included') }}</span>
@@ -122,6 +122,7 @@
                             </div>
                             <div class="wrap-price">
                                 <ul class="pricing__feature-list">
+                                    <li class="pricing__feature">{{ __('50% Off on 1st Month Subscription') }}</li>
                                     <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
                                     <li class="pricing__feature">{{ __('7,480 1 lesson 1,870') }}</li>
                                 </ul>
@@ -140,7 +141,7 @@
                             </div>
                             <div class="pricing__price">
                                 <span class="pricing__anim pricing__anim--1">
-                                    <span class="pricing__currency">¥</span>13,310
+                                    <span class="pricing__currency">¥</span>{!! 13310 * .5 !!}
                                 </span>
                                 <span class="pricing__anim pricing__anim--2">
                                     <span class="pricing__period">{{ __('Tax Included') }}</span>
@@ -148,6 +149,7 @@
                             </div>
                             <div class="wrap-price">
                                 <ul class="pricing__feature-list">
+                                    <li class="pricing__feature">{{ __('50% Off on 1st Month Subscription') }}</li>
                                     <li class="pricing__feature">{{ __('8 lessons per month (Max of 2 students)') }}</li>
                                     <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
                                 </ul>
