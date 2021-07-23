@@ -3,7 +3,7 @@
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
                 <h2>{{ __('Plan & Pricing') }}</h2>
-                {{-- <p>{{ __('50% off if you register on the same day after trial lesson.') }}</p> --}}
+                <p>{{ __('Monthly Subscription') }}</p>
             </div>
         </div>
         <div class="row">
