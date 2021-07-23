@@ -17,9 +17,11 @@
             </div>
             @if(request()->is('s/login') || request()->is('/'))
                 <p>{{ __('Don’t have an account yet?') }} <a href="{{ route('page_register') }}">{{ __('Create One') }}</a></p>
+                <h3>{{ __('Login') }}</h3>
             @endif
             @if(request()->is('s/signup') || request()->is('/'))
                 <p>{{ __('Have an account?') }} <a href="{{ route('page_login') }}">{{ __('Login') }}</a></p>
+                <h3>{{ __('Account Registration') }}</h3>
             @endif
         </header>
         @yield('content')

@@ -14,8 +14,8 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     {{ __('Cancel') }}
                 </button>
-                <a href="{{ route('student_plan_upgrade', ['service_id' => 4]) }}" class="btn btn-primary">{{ __('Summer plan') }}</a>
-                {{-- <a href="{{ route('student_plan_upgrade', ['service_id' => 2]) }}" class="btn btn-primary">{{ __('Plan A') }}</a> --}}
+                {{-- <a href="{{ route('student_plan_upgrade', ['service_id' => 4]) }}" class="btn btn-primary">{{ __('Summer plan') }}</a> --}}
+                <a href="{{ route('student_plan_upgrade', ['service_id' => 2]) }}" class="btn btn-primary">{{ __('Plan A') }}</a>
                 <a href="{{ route('student_plan_upgrade', ['service_id' => 3]) }}" class="btn btn-primary">{{ __('Plan B') }}</a>
             </div>
         </div>
