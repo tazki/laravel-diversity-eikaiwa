@@ -122,9 +122,10 @@
                             </div>
                             <div class="wrap-price">
                                 <ul class="pricing__feature-list">
-                                    <li class="pricing__feature">{{ __('50% Off on 1st Month Subscription') }}</li>
-                                    <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
-                                    <li class="pricing__feature">{{ __('7,480 1 lesson 1,870') }}</li>
+                                    <li class="pricing__feature">{{ __('4 lessons a month') }}</li>
+                                    <li class="pricing__feature">{{ __('Regular price ¥ 7,480 (tax included)') }}</li>
+                                    <li class="pricing__feature">{{ __('Campaign price ¥ 3,740 (tax included)') }}</li>
+                                    <li class="pricing__feature">{{ __('Note: price will go back to full price from second month onwards.') }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -149,9 +150,10 @@
                             </div>
                             <div class="wrap-price">
                                 <ul class="pricing__feature-list">
-                                    <li class="pricing__feature">{{ __('50% Off on 1st Month Subscription') }}</li>
-                                    <li class="pricing__feature">{{ __('8 lessons per month (Max of 2 students)') }}</li>
-                                    <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
+                                    <li class="pricing__feature">{{ __('8 lessons a month') }}</li>
+                                    <li class="pricing__feature">{{ __('Regular price ¥ 13,310 (tax included)') }}</li>
+                                    <li class="pricing__feature">{{ __('Campaign price ¥ 6,655 (tax included)') }}</li>
+                                    <li class="pricing__feature">{{ __('Note: price will go back to full price from second month onwards.') }}</li>
                                 </ul>
                             </div>
                         </div>

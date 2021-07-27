@@ -4,6 +4,8 @@
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
                 <h2>{{ __('Plan & Pricing') }}</h2>
                 <p>{{ __('Monthly Subscription') }}</p>
+                <h3>{{ __('August campaign') }}</h3>
+                <h4>{{ __('Register now and get 50% off on your plan for the first month.') }}</h4>
             </div>
         </div>
         <div class="row">
@@ -25,7 +27,7 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
-                        <li class="pricing__feature" style="height:165px;">{{ __('2x free trial lesson') }}</li>
+                        <li class="pricing__feature" style="height:247px;">{{ __('2x free trial lesson') }}</li>
                         {{-- <li class="pricing__feature">{{ __('Free trial Lesson') }}</li> --}}
                         {{-- <li class="pricing__feature">{{ __('1 point = 1 lesson') }}</li> --}}
                      </ul>
@@ -75,9 +77,10 @@
                     </div>
                     <div class="wrap-price">
                         <ul class="pricing__feature-list">
-                            <li class="pricing__feature">{{ __('50% Off on 1st Month Subscription') }}</li>
-                            <li class="pricing__feature">{{ __('45 minutes lesson 4x 7,480 yen') }}</li>
-                            <li class="pricing__feature" style="height:91px;">{{ __('7,480 1 lesson 1,870') }}</li>
+                            <li class="pricing__feature">{{ __('4 lessons a month') }}</li>
+                            <li class="pricing__feature">{{ __('Regular price ¥ 7,480 (tax included)') }}</li>
+                            <li class="pricing__feature">{{ __('Campaign price ¥ 3,740 (tax included)') }}</li>
+                            <li class="pricing__feature">{{ __('Note: price will go back to full price from second month onwards.') }}</li>
                         </ul>
                         <a href="{{ route('page_register').'?service=2' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                     </div>
@@ -123,9 +126,10 @@
                  </div>
                  <div class="wrap-price">
                      <ul class="pricing__feature-list">
-                        <li class="pricing__feature">{{ __('50% Off on 1st Month Subscription') }}</li>
-                        <li class="pricing__feature">{{ __('45 minutes lesson 8x 13,310 yen') }}</li>
-                        <li class="pricing__feature" style="height:91px;">{{ __('13,310 1 lesson 1,664') }}</li>
+                        <li class="pricing__feature">{{ __('8 lessons a month') }}</li>
+                        <li class="pricing__feature">{{ __('Regular price ¥ 13,310 (tax included)') }}</li>
+                        <li class="pricing__feature">{{ __('Campaign price ¥ 6,655 (tax included)') }}</li>
+                        <li class="pricing__feature">{{ __('Note: price will go back to full price from second month onwards.') }}</li>
                      </ul>
                      <a href="{{ route('page_register').'?service=3' }}" class="pricing__action">{{ __('Choose plan') }}</a>
                  </div>
