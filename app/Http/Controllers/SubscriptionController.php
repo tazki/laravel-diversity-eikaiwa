@@ -59,7 +59,7 @@ class SubscriptionController extends Controller
         $plan = $request->input('plan');
         try {
             $user->newSubscription('default', $plan)
-                ->withPromotionCode('promo_1JDdVVG8uz8FtevfyY0oXnYf')
+                ->withPromotionCode(env('STRIPE_PROMOTION_CODE'))
                 ->create($paymentMethod, [
                     'email' => $user->email
                 ]);
