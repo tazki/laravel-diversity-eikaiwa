@@ -77,4 +77,4 @@ $('#simply-countdown-losange').simplyCountdown({
 });
 </script>
 <script src="https://www.google.com/recaptcha/api.js?render={!! env('RECAPTCHA_SITE_KEY') !!}"></script>
-<script src="https://multipay.komoju.com"></script>
+{{-- <script src="https://multipay.komoju.com"></script> --}}
