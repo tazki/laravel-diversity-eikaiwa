@@ -4,7 +4,7 @@
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
                 <h2>{{ __('Plan & Pricing') }}</h2>
                 <p>{{ __('Monthly Subscription') }}</p>
-                <h3 style="font-weight:bold; color:#ff0000;">{{ __('August campaign') }}</h3>
+                {{-- <h3 style="font-weight:bold; color:#ff0000;">{{ __('August campaign') }}</h3> --}}
                 <h4 style="font-weight:bold; color:#ff0000;">{{ __('Register now and get 50% off on your plan for the first month.') }}</h4>
             </div>
         </div>
