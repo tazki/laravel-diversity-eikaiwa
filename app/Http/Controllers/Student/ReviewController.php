@@ -42,13 +42,11 @@ class ReviewController extends Controller
                 ->addColumn('review', function($row) {
                     $stars = '';
                     for($i=1; $i<=5; $i++) {
-                        $stars .= '<span class="rating rating-green">
-                            <label for="booking_'.$row->id.'"><i class="fa fa-star" aria-hidden="true"></i></label>
-                            <input id="booking_'.$row->id.$i.'" type="checkbox" value="1" />
-                        </span>';
+                        $stars .= '<i class="fa fa-star text-yellow"></i>';
+                        // <i class="far fa-star text-yellow"></i>
                     }
 
-                    return '<div class="rating-block">'.$stars.'</div>';
+                    return '<div class="my-1">'.$stars.'</div>';
                 })
                 ->addColumn('action', function($row) {
                     $btn = '<a href="'.route('teachers_edit', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'"><i class="fa fa-pencil-alt"></i></a>';
