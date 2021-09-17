@@ -38,6 +38,12 @@
                             <span class="menu-text">{{ __('Schedule') }}</span>
                         </a>
                     </li>
+                    <li class="menu-item {{ (request()->is('s/review') || request()->is('s/review/*')) ? 'has-active' : '' }}">
+                        <a href="{{ route('student_review') }}" class="menu-link">
+                            <span class="menu-icon fas fa-comments"></span>
+                            <span class="menu-text">{{ __('Teacher Reviews') }}</span>
+                        </a>
+                    </li>
                     {{-- <li class="menu-item {{ (request()->is('s/subscription')) ? 'has-active' : '' }}">
                         <a href="{{ url('s/subscription') }}" class="menu-link">
                             <span class="menu-icon fas fa-credit-card"></span>

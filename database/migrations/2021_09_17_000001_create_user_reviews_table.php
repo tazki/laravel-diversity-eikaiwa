@@ -17,6 +17,7 @@ class CreateUserReviewsTable extends Migration
             $table->id();
             $table->bigInteger('student_id')->default(0);
             $table->bigInteger('teacher_id')->default(0);
+            $table->bigInteger('booking_id')->default(0);
             $table->string('review_title')->nullable();
             $table->text('review_content')->nullable();
             $table->integer('review_rating')->default(0);
