@@ -56,8 +56,9 @@ class ReviewController extends Controller
                 ->rawColumns(['review','action'])
                 ->make(true);
         }
-
-        return view('student.review');
+        
+        $row = array();
+        return view('student.review', compact('row'));
     }
 
     public function calendar(Request $request)
