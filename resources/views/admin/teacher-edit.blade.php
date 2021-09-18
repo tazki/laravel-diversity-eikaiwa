@@ -28,6 +28,9 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#class-schedule">Class Schedule</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#class-reviews">Reviews</a>
+                </li>
             @endif
         </ul><!-- /.nav-tabs -->
     </div><!-- /.nav-scroller -->
@@ -446,6 +449,52 @@
                                     <td class="align-middle"> {{ $val['booking_date'] ?? '' }} </td>
                                     <td class="align-middle">
                                         {!! $val['status'] ?? '' !!}
+                                    </td>
+                                </tr><!-- /tr -->
+                                @endforeach
+                            @else
+                                <tr class="odd"><td valign="top" colspan="3" class="dataTables_empty">No data available in table</td></tr>
+                            @endif
+                        </tbody><!-- /tbody -->
+                        </table><!-- /.table -->
+                    </div><!-- /.table-responsive -->
+                </div><!-- /.card -->
+            </div><!-- /.tab-pane -->
+            <div class="tab-pane fade" id="class-reviews" role="tabpanel" aria-labelledby="class-reviews-tab">
+                <!-- .card -->
+                <div class="card">
+                    <!-- .table-responsive -->                
+                    <div class="table-responsive">
+                        <!-- .table -->
+                        <table class="table">
+                        <!-- thead -->
+                        <thead>
+                            <tr>
+                                <th style="min-width:260px"> Student Name </th>
+                                <th> Booking Date </th>
+                                <th> Rating </th>
+                                <th> Title </th>
+                                <th> Content </th>
+                            </tr>
+                        </thead><!-- /thead -->
+                        <!-- tbody -->
+                        <tbody>
+                            @if(isset($rows['reviews']) && is_array($rows['reviews']) && sizeof($rows['reviews']) > 0)
+                                @foreach($rows['reviews'] as $val)
+                                <!-- tr -->
+                                <tr>
+                                    <td class="align-middle text-truncate">
+                                        <a href="#">{{ $val['name'] ?? '' }}</a>
+                                    </td>
+                                    <td class="align-middle"> {{ $val['booking_date'] ?? '' }} </td>
+                                    <td class="align-middle">
+                                        {!! (isset($val['stars'])) ? $val['stars'] : '' !!}
+                                    </td>
+                                    <td class="align-middle">
+                                        {!! (isset($val['review_title'])) ? $val['review_title'] : '' !!}
+                                    </td>
+                                    <td class="align-middle">
+                                        {!! (isset($val['review_content'])) ? $val['review_content'] : '' !!}
                                     </td>
                                 </tr><!-- /tr -->
                                 @endforeach

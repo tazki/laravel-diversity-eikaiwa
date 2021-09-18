@@ -59,7 +59,6 @@ class ReviewController extends Controller
                         $icon = '<i class="fa fa-pencil-alt"></i>';
                     }
                     $btn = '<a href="'.route('student_review_add', ['id' => $row->id]).'" class="btn btn-sm btn-icon btn-secondary" title="'.__('Edit').'">'.$icon.'</a>';
-                    // $btn .= '<a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="" href="#"><i class="far fa-trash-alt"></i></a>';
                     return $btn;
                 })
                 ->rawColumns(['review','action'])
@@ -119,7 +118,7 @@ class ReviewController extends Controller
         $cleanData = request()->validate($validationSetting);
         $condition['id'] = $id;
         if($row = UserReviews::updateOrCreate($condition, $cleanData)) {
-            return redirect(route('student_review', ['id' => $row->teacher_id]))->with('success','Data updated successfully!');
+            return redirect(route('student_review_add', ['id' => $row->id]))->with('success','Data updated successfully!');
         }
     }
 }

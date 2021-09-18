@@ -200,6 +200,7 @@ class TeacherController extends Controller
 
         $rows['class_schedule'] = self::listClassSchedule($id);
         $rows['class_taken'] = self::listClassTaken($id);
+        $rows['reviews'] = self::listReviews($id);
         return view('admin.teacher-edit', compact(['row', 'rows','lang', 'show_tab', 'day_list', 'day_selected']));
     }
 
@@ -337,5 +338,52 @@ class TeacherController extends Controller
         }
 
         return $rows;
+    }
+
+    public static function listReviews($id)
+    {
+        $data = DB::table('user_bookings')
+            ->select(
+                'user_bookings.*',
+                'user_reviews.review_title',
+                'user_reviews.review_content',
+                'user_reviews.review_rating',
+                DB::raw('mt_user_reviews.id as review_id'),
+                DB::raw('DATE_FORMAT(mt_user_bookings.booking_date, "%Y-%m-%d") as ymd_booking_date'),
+                DB::raw('DATE_FORMAT(mt_user_bookings.booking_date, "%M %d, %Y %H:%i") as label_booking_date'),
+                DB::raw('CONCAT(mt_users.first_name, " ", mt_users.last_name) as student_name'),
+            )
+            ->leftJoin('users', 'users.id', '=', 'user_bookings.student_id')
+            ->leftJoin('user_reviews', 'user_reviews.booking_id', '=', 'user_bookings.id')
+            ->where('user_bookings.teacher_id', $id)
+            ->where('user_bookings.status', 3)
+            ->orderByRaw('mt_user_bookings.created_at DESC')
+            ->get();
+        $rows = array();
+        if (is_object($data)) {
+            foreach ($data as $val) {
+                $rows[$val->id]['booking_date'] = $val->label_booking_date;
+                $rows[$val->id]['name'] = $val->student_name;
+                $rows[$val->id]['review_title'] = $val->review_title;
+                $rows[$val->id]['review_content'] = $val->review_content;
+
+                $stars = '';
+                for ($i=1; $i<=5; $i++) {
+                    if ($val->review_rating >= $i) {
+                        $stars .= '<i class="fa fa-star text-yellow"></i>';
+                    } else {
+                        $stars .= '<i class="far fa-star text-yellow"></i>';
+                    }
+                }
+                
+                if (!empty($val->review_rating)) {
+                    $rows[$val->id]['stars'] = '<div class="my-1">'.$stars.'</div>';
+                } else {
+                    $rows[$val->id]['stars'] = 'No Rating Yet';
+                }
+            }
+
+            return $rows;
+        }
     }
 }
