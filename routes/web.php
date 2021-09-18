@@ -63,6 +63,9 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('s/subscription-resume', 'SubscriptionController@resumeSubscription')->name('student_resume_subscription');
 
         Route::get('s/review', 'Student\ReviewController@index')->name('student_review');
+        Route::get('s/review/{id}/add', 'Student\ReviewController@add')->name('student_review_add');
+        Route::post('s/review/store', 'Student\ReviewController@store')->name('student_review_store');
+        Route::post('s/review/{id}/update', 'Student\ReviewController@update')->name('student_review_update');
     });
 
     // Teacher
