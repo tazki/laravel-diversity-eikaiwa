@@ -34,7 +34,7 @@
                           <!-- form row -->
                           <div class="form-row">
                               <!-- form column -->
-                              <label class="col-md-3">Teacher Name</label> <!-- /form column -->
+                              <label class="col-md-3">{{ __('Teacher Name') }}</label> <!-- /form column -->
                               <!-- form column -->
                               <div class="col-md-9 mb-3">
                                 <input type="text" value="{!! (isset($row->teacher_name)) ? $row->teacher_name : '' !!}" class="form-control" readonly="readonly">
@@ -43,7 +43,7 @@
                           <!-- form row -->
                           <div class="form-row">
                               <!-- form column -->
-                              <label class="col-md-3">Booking Date</label> <!-- /form column -->
+                              <label class="col-md-3">{{ __('Booking Date') }}</label> <!-- /form column -->
                               <!-- form column -->
                               <div class="col-md-9 mb-3">
                                 <input type="text" value="{!! (isset($row->label_booking_date)) ? $row->label_booking_date : '' !!}" class="form-control" readonly="readonly">
@@ -52,7 +52,7 @@
                           <!-- form row -->
                           <div class="form-row">
                               <!-- form column -->
-                              <label for="review_title" class="col-md-3">Title</label> <!-- /form column -->
+                              <label for="review_title" class="col-md-3">{{ __('Title') }}</label> <!-- /form column -->
                               <!-- form column -->
                               <div class="col-md-9 mb-3">
                                 <input type="text" name="review_title" id="review_title" value="{!! (isset($row->review_title)) ? $row->review_title : '' !!}" class="form-control">
@@ -61,7 +61,7 @@
                           <!-- form row -->
                           <div class="form-row">
                               <!-- form column -->
-                              <label for="review_content" class="col-md-3">Comment *</label> <!-- /form column -->
+                              <label for="review_content" class="col-md-3">>{{ __('Comment') }} *</label> <!-- /form column -->
                               <!-- form column -->
                               <div class="col-md-9 mb-3">
                                 <textarea name="review_content" id="review_content" value="" class="@error('review_content') is-invalid @enderror form-control">{!! (isset($row->review_content)) ? $row->review_content : '' !!}</textarea>
@@ -70,7 +70,7 @@
                           <!-- form row -->
                           <div class="form-row">
                             <!-- form column -->
-                            <label for="day" class="col-md-3">Rating *</label> <!-- /form column -->
+                            <label for="day" class="col-md-3">{{ __('Rating') }} *</label> <!-- /form column -->
                             <!-- form column -->
                             <div class="col-md-9 mb-3">
                               <select name="review_rating" class="form-control">
@@ -100,9 +100,9 @@
 <script type="text/javascript">
 $(function () {
   window.dataTableSet = [
-    {title: "{{ __('Name') }}", data: 'teacher_name', name: 'teacher_name'},
+    {title: "{{ __('Teacher Name') }}", data: 'teacher_name', name: 'teacher_name'},
     {title: "{{ __('Booking Date') }}", data: 'booking_date', name: 'booking_date'},
-    {title: "{{ __('Review') }}", data: 'review', name: 'review'},
+    {title: "{{ __('Reviews') }}", data: 'review', name: 'review'},
     {title: "{{ __('Action') }}", data: 'action', name: 'action', orderable: false, searchable: false},
   ];
 });
