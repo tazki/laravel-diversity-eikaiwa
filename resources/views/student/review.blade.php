@@ -61,7 +61,7 @@
                           <!-- form row -->
                           <div class="form-row">
                               <!-- form column -->
-                              <label for="review_content" class="col-md-3">>{{ __('Comment') }} *</label> <!-- /form column -->
+                              <label for="review_content" class="col-md-3">{{ __('Comment') }} *</label> <!-- /form column -->
                               <!-- form column -->
                               <div class="col-md-9 mb-3">
                                 <textarea name="review_content" id="review_content" value="" class="@error('review_content') is-invalid @enderror form-control">{!! (isset($row->review_content)) ? $row->review_content : '' !!}</textarea>
