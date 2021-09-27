@@ -57,6 +57,7 @@ class PageController extends Controller
             ->leftJoin('users', 'users.id', '=', 'user_reviews.student_id')
             ->leftJoin('user_bookings', 'user_bookings.id', '=', 'user_reviews.booking_id')
             ->where('user_bookings.status', 3)
+            ->where('user_reviews.review_rating', '>=', 4)
             ->orderByRaw('mt_user_reviews.created_at DESC')
             ->get();
 
