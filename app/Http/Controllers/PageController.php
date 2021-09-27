@@ -46,7 +46,21 @@ class PageController extends Controller
             }
         }
 
-        return view('landing.home');
+        $rows['reviews'] = DB::table('user_reviews')
+            ->select(
+                // 'user_bookings.*',
+                'user_reviews.review_title',
+                'user_reviews.review_content',
+                'user_reviews.review_rating',
+                DB::raw('CONCAT(mt_users.first_name, " ", mt_users.last_name) as student_name'),
+            )
+            ->leftJoin('users', 'users.id', '=', 'user_reviews.student_id')
+            ->leftJoin('user_bookings', 'user_bookings.id', '=', 'user_reviews.booking_id')
+            ->where('user_bookings.status', 3)
+            ->orderByRaw('mt_user_reviews.created_at DESC')
+            ->get();
+
+        return view('landing.home', compact('rows'));
     }
 
     public function teacher()

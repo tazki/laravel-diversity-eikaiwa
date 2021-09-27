@@ -201,6 +201,38 @@
 			</div>
 		</div>
 	</div>
+	
+	@if(isset($rows['reviews']) && is_object($rows['reviews']) && sizeof($rows['reviews']) > 0)
+		<div id="fh5co-testimonial" style="background-image: url({!! secure_asset('site/images/school.jpg') !!});">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row animate-box">
+					<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+						<h2><span>{{ __('Testimonials') }}</span></h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<div class="row animate-box">
+							<div class="owl-carousel owl-carousel-fullwidth">
+								@foreach($rows['reviews'] as $val)
+									<div class="item">
+										<div class="testimony-slide active text-center">
+											{{-- <div class="user" style="background-image: url(images/person1.jpg);"></div> --}}
+											<span>{{ $val->student_name }}<br><small>{{ __('Student') }}</small></span>
+											<blockquote>
+												<p>&ldquo;{{ $val->review_content }}&rdquo;</p>
+											</blockquote>
+										</div>
+									</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	@endif
 
 	@include('includes.pricing-banner')
 

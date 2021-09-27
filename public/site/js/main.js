@@ -266,10 +266,10 @@
 		var owl = $('.owl-carousel-fullwidth');
 		owl.owlCarousel({
 			items: 1,
-			loop: true,
 			margin: 0,
 			nav: false,
-			dots: true,
+			dots: ($(".owl-carousel .item").length > 1) ? true: false,
+    		loop:($(".owl-carousel .item").length > 1) ? true: false,
 			smartSpeed: 800,
 			autoHeight: true
 		});
