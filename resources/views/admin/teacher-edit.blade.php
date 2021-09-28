@@ -29,7 +29,7 @@
                     <a class="nav-link" data-toggle="tab" href="#class-schedule">Class Schedule</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#class-reviews">Reviews</a>
+                    <a class="nav-link {!! (isset($show_tab) && $show_tab == 'reviews') ? 'show active' : '' !!}" data-toggle="tab" href="#class-reviews">Reviews</a>
                 </li>
             @endif
         </ul><!-- /.nav-tabs -->
@@ -460,7 +460,7 @@
                     </div><!-- /.table-responsive -->
                 </div><!-- /.card -->
             </div><!-- /.tab-pane -->
-            <div class="tab-pane fade" id="class-reviews" role="tabpanel" aria-labelledby="class-reviews-tab">
+            <div class="tab-pane fade {!! (isset($show_tab) && $show_tab == 'reviews') ? 'active show' : '' !!}" id="class-reviews" role="tabpanel" aria-labelledby="class-reviews-tab">
                 <!-- .card -->
                 <div class="card">
                     <!-- .table-responsive -->                
@@ -475,6 +475,7 @@
                                 <th> Rating </th>
                                 <th> Title </th>
                                 <th> Content </th>
+                                <th> Action </th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
@@ -495,6 +496,11 @@
                                     </td>
                                     <td class="align-middle">
                                         {!! (isset($val['review_content'])) ? $val['review_content'] : '' !!}
+                                    </td>
+                                    <td class="align-middle">
+                                        @if(!empty($val['review_id']))
+                                            <a class="js-btn-delete btn btn-sm btn-icon btn-secondary " data-toggle="modal" data-target="#deleteModal" data-deleteurl="{!! route('teachers_delete_reviews', ['id' => $val['review_id'], 'teacher_id' => $row->id]) !!}" href="#"><i class="far fa-trash-alt"></i></a>
+                                        @endif
                                     </td>
                                 </tr><!-- /tr -->
                                 @endforeach

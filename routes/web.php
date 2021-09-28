@@ -114,7 +114,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('admin/teacher/{id}/edit/{show_tab}', 'Admin\TeacherController@update')->name('teachers_view_availability');
         Route::get('admin/teacher/{id}/availability', 'Admin\TeacherController@listAvailability')->name('teachers_list_availability');
         Route::post('admin/teacher/{id}/add-availability', 'Admin\TeacherController@addAvailability')->name('teachers_add_availability');
-        Route::post('admin/teacher/{id}/update-availability', 'Admin\TeacherController@updateAvailability')->name('teachers_update_availability');
+        Route::post('admin/teacher/{id}/update-availability', 'Admin\TeacherController@updateAvailability')->name('teachers_update_availability');        
+        Route::delete('admin/teacher/{id}/{teacher_id}/destroy-review', 'Admin\TeacherController@destroyReviews')->name('teachers_delete_reviews');
         // Student
         Route::get('admin/students', 'Admin\StudentController@index')->name('students_list');
         Route::get('admin/student/add', 'Admin\StudentController@add')->name('students_add');

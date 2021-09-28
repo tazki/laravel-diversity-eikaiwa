@@ -4,17 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller; // need to add this line so this file is treated like a controller.
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Storage;
-// use Illuminate\Support\Facades\File;
 use DataTables;
-use Auth;
 use DB;
 use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\UserBookings;
+use App\Models\UserReviews;
 use App\Models\TeacherAvailability;
 
 class TeacherController extends Controller
@@ -357,11 +354,13 @@ class TeacherController extends Controller
             ->leftJoin('user_reviews', 'user_reviews.booking_id', '=', 'user_bookings.id')
             ->where('user_bookings.teacher_id', $id)
             ->where('user_bookings.status', 3)
+            ->where('user_reviews.review_rating', '!=', '')
             ->orderByRaw('mt_user_bookings.created_at DESC')
             ->get();
         $rows = array();
         if (is_object($data)) {
             foreach ($data as $val) {
+                $rows[$val->id]['review_id'] = $val->review_id;
                 $rows[$val->id]['booking_date'] = $val->label_booking_date;
                 $rows[$val->id]['name'] = $val->student_name;
                 $rows[$val->id]['review_title'] = $val->review_title;
@@ -385,5 +384,11 @@ class TeacherController extends Controller
 
             return $rows;
         }
+    }
+
+    public function destroyReviews($id, $teacher_id)
+    {
+        UserReviews::find($id)->delete();
+        return redirect(route('teachers_view_availability', ['id' => $teacher_id, 'show_tab' => 'reviews']))->with('success','Data updated successfully!');
     }
 }
