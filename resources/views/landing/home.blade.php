@@ -145,7 +145,7 @@
 		</div>
 	</div>
 
-	<div class="fh5co-company">
+	{{-- <div class="fh5co-company">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 animate-box">
@@ -153,7 +153,7 @@
 				</div>
 			</div>
 		</div>
-	</div>		
+	</div>		 --}}
 
 	<div class="fh5co-company">
 		<div class="container">
