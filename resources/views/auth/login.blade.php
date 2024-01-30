@@ -56,22 +56,23 @@
 <script>
 function validateForm() {
     grecaptcha.ready(function() {
-        grecaptcha.execute("{!! env('RECAPTCHA_SITE_KEY') !!}", {action: 'submit'}).then(function(token) {
-            $.ajax({
-                url: "{{ route('page_recaptcha') }}",
-                type: "POST",
-                dataType: 'json',
-                data : {"_token":"{{ csrf_token() }}", "token":token}
-            }).done(function (data) {
-                console.log(data);
-                if(data.success == true) {
-                    document.getElementById("loginForm").submit();
-                } else {
-                    alert('Robots detected need to reload page');
-                    location.reload();
-                }
-            });
-        });
+        document.getElementById("loginForm").submit();
+        // grecaptcha.execute("{!! env('RECAPTCHA_SITE_KEY') !!}", {action: 'submit'}).then(function(token) {
+        //     $.ajax({
+        //         url: "{{ route('page_recaptcha') }}",
+        //         type: "POST",
+        //         dataType: 'json',
+        //         data : {"_token":"{{ csrf_token() }}", "token":token}
+        //     }).done(function (data) {
+        //         console.log(data);
+        //         if(data.success == true) {
+        //             document.getElementById("loginForm").submit();
+        //         } else {
+        //             alert('Robots detected need to reload page');
+        //             location.reload();
+        //         }
+        //     });
+        // });
     });
 }
 </script>

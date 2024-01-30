@@ -39,7 +39,7 @@ class DashboardController extends Controller
                 ['teacher_id', '=', Auth::user()->id],
                 ['status', '=', 3]
             ])
-            ->whereRaw('DATE_FORMAT(booking_date, "%m-%Y")', Carbon::today()->format('m-Y'))
+            // ->whereRaw('DATE_FORMAT(booking_date, "%m-%Y")', Carbon::today()->format('m-Y'))
             ->count('*');
 
         return view('teacher.dashboard', compact('rows'));

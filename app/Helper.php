@@ -33,7 +33,7 @@ if(!function_exists('studentActivePoints')) {
     }
 }
 
-function currentService($service_id) {
+function currentService($service_id = 0) {
     switch($service_id) {
         case 5:
             $rows['payment']['price'] = 8899;
@@ -114,7 +114,7 @@ if(!function_exists('fileUpload')) {
 }
 
 if(!function_exists('userFile')) {
-	function userFile($file, $return='', $userId) {
+	function userFile($file='', $return='', $userId='') {
         $subfolder = '';
         if(isset($userId)) {
             $subfolder = 'user-'.$userId;
